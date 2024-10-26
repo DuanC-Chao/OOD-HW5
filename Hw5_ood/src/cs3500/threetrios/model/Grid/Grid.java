@@ -1,73 +1,111 @@
 package cs3500.threetrios.model.Grid;
 
-import cs3500.threetrios.model.Card.Card;
-import cs3500.threetrios.model.Cells.CardCell;
-import cs3500.threetrios.model.Cells.CellType;
-import cs3500.threetrios.model.Cells.Hole;
+import cs3500.threetrios.model.Card.ICard;
+import cs3500.threetrios.model.Cells.RegularCardCell;
 import cs3500.threetrios.model.Cells.ICell;
-import java.util.List;
-public class Grid implements IGrid{
+import cs3500.threetrios.model.Cells.RegularHole;
+import cs3500.threetrios.model.Exception.CouldNotPlaceCardException;
+
+/**
+ * The Functional class of Grid.
+ * <p>
+ * Class Invariant:
+ * 1, Field grid is always a Matrix, not a jagged array in any form
+ * 2, the Number of the Cells in grid is always odd
+ */
+public class Grid implements IGrid {
+
+  /**
+   * The actual grid, as a 2D array.
+   */
   private final ICell[][] grid;
-  private final int rows;
-  private final int cols;
 
-  // Class invariant: The number of CardCells must always be odd.
-  public Grid(int rows, int cols, List<List<CellType>> cellTypes) {
-    this.rows = rows;
-    this.cols = cols;
-    grid = new ICell[rows][cols];
+  /**
+   * The constructor of Grid.
+   * Takes two Arrays of int to place holes, takes the form as below:
+   * If we have grid like:
+   * [Hole][Card][Hole]
+   * [Card][Hole][Hole]
+   * We will have holes_col and hole_row like:
+   * holes_col: [0, 1, 2, 2]
+   * holes_row: [1, 0, 0, 1]
+   *
+   * @param cols      The cols of the grid, in 0-Based form.
+   * @param rows      The rows of the grid, in 0-Based form.
+   * @param holes_col The col coordinates of all holes to place.
+   * @param holes_row The row coordinates of all holes to place.
+   * @throws IllegalArgumentException If (cols + 1) * (rows + 1) is even
+   * @throws IllegalArgumentException If cols < 0 or/and rows < 0
+   * @throws IllegalArgumentException If coordinates in holes_col or/and holes_row
+   *                                  Exceeded col and/or row, or < 0.
+   */
+  public Grid(int cols, int rows, int[] holes_col, int[] holes_row) {
 
-    int cardCellCount = 0; // Track the number of CardCells
+    if (cols == 0 || rows == 0) {
+      throw new IllegalArgumentException("col and row must be greater than 0");
+    }
 
-    for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < cols; col++) {
-        if (cellTypes.get(row).get(col) == CellType.CARD_CELL) {
-          grid[row][col] = new CardCell();
-          cardCellCount++;
-        } else {
-          grid[row][col] = new Hole();
+    if ((cols + 1) * (rows + 1) % 2 == 0) {
+      throw new IllegalArgumentException("Total Cell number must be odd");
+    }
+
+    // Follow the form of [cols][rows]
+    grid = new ICell[cols][rows];
+
+    for (int i = 0; i < holes_col.length; i++) {
+      int col = holes_col[i];
+      int row = holes_row[i];
+
+      // Check if hole coordinate valid
+      if (col < 0 || col >= cols || row < 0 || row >= rows) {
+        throw new IllegalArgumentException("Hole coordinates are out of grid bounds");
+      }
+
+      grid[col][row] = new RegularHole();
+    }
+
+    for (int col = 0; col < cols; col++) {
+      for (int row = 0; row < rows; row++) {
+        if (grid[col][row] == null) {
+          grid[col][row] = new RegularCardCell();
         }
       }
     }
 
-    // Enforce class invariant
-    if (cardCellCount % 2 == 0) {
-      throw new IllegalArgumentException("The grid must have an odd number of card cells.");
+  }
+
+  @Override
+  public int getRowNumber() {
+    return grid[0].length;
+  }
+
+  @Override
+  public int getColNumber() {
+    return grid.length;
+  }
+
+  @Override
+  public ICell[][] getGrid() {
+    return grid;
+  }
+
+  @Override
+  public ICard getCard(int col, int row) {
+
+    if(col < 0 || col >= getColNumber() || row < 0 || row >= getRowNumber()) {
+      throw new IllegalArgumentException();
     }
+
+    return grid[col][row].getCard();
   }
 
   @Override
-  public int getRows() {
-    return rows;
-  }
+  public void placeCard(int col, int row, ICard card) throws CouldNotPlaceCardException {
 
-  @Override
-  public int getCols() {
-    return cols;
-  }
+    if(col < 0 || col >= getColNumber() || row < 0 || row >= getRowNumber()) {
+      throw new IllegalArgumentException();
+    }
 
-  @Override
-  public boolean isCellEmpty(int row, int col) {
-    return false;
-  }
-
-  @Override
-  public CellType getCellType(int row, int col) {
-    return null;
-  }
-
-  @Override
-  public Card getCard(int row, int col) {
-    return null;
-  }
-
-  @Override
-  public void placeCard(Card card, int row, int col) {
-
-  }
-
-  @Override
-  public boolean isValidMove(int row, int col) {
-    return false;
+    grid[col][row].setCard(card);
   }
 }

@@ -3,6 +3,7 @@ package cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.Card.ICard;
 import cs3500.threetrios.model.Cells.ICell;
 import cs3500.threetrios.model.Exception.CouldNotPlaceCardException;
+import cs3500.threetrios.model.Rule.ICombatRule;
 
 /**
  * The Interface represents a Grid.
@@ -12,7 +13,7 @@ import cs3500.threetrios.model.Exception.CouldNotPlaceCardException;
  * [0, maxRow] -> Top left corner
  * [maxCol, maxRow] -> Top right corner
  */
-public interface IGrid{
+public interface IGrid {
 
   /**
    * Gets the total number of rows of the grid, start from 1.
@@ -30,6 +31,8 @@ public interface IGrid{
 
   /**
    * Get the grid as a ICell 2D array.
+   * The grid returned is serialized and Deep-Copied.
+   * Changes on the resulted grid will never affect the prototype.
    * @return A 2D array, as the grid.
    */
   public ICell[][] getGrid();
@@ -57,5 +60,13 @@ public interface IGrid{
    * @throws CouldNotPlaceCardException If the cell wished to place card to is hole, or is full.
    */
   public void placeCard(int col, int row, ICard card) throws CouldNotPlaceCardException;
+
+  /**
+   * Takes coordinate of starting card and a rule, start filpping with the rule.
+   * @param col the col of start card, 0-based.
+   * @param row the row of start card, 0-based.
+   * @param rule The rule wished to use.
+   */
+  public void filp(int col, int row, ICombatRule rule);
 
 }

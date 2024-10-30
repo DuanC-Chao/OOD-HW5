@@ -7,6 +7,5 @@ public enum GameStatus {
   GAME_NOT_STARTED,
   GAME_IN_PROGRESS,
   PLAYER_ONE_WIN,
-  PLAYER_TWO_WIN,
-  DRAW;
+  PLAYER_TWO_WIN;
 }

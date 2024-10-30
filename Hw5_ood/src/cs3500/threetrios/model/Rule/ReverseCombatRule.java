@@ -1,5 +1,6 @@
 package cs3500.threetrios.model.Rule;
 
+import cs3500.threetrios.model.Cells.ICell;
 import cs3500.threetrios.model.Enums.CardNumber;
 
 /**
@@ -11,5 +12,10 @@ public class ReverseCombatRule implements ICombatRule {
   @Override
   public int compare(CardNumber num1, CardNumber num2) {
     return num2.compareTo(num1);
+  }
+
+  @Override
+  public void flip(ICell[][] grid, int row, int col) {
+
   }
 }

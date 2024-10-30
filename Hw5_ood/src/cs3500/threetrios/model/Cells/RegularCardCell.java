@@ -1,6 +1,7 @@
 package cs3500.threetrios.model.Cells;
 
 import cs3500.threetrios.model.Card.ICard;
+import cs3500.threetrios.model.Enums.CellType;
 import cs3500.threetrios.model.Exception.CouldNotPlaceCardException;
 
 /**
@@ -20,6 +21,14 @@ public class RegularCardCell implements ICell {
 
   }
 
+  /**
+   * The clone constructor.
+   * @param card The card.
+   */
+  public RegularCardCell(ICard card) {
+    this.card = card;
+  }
+
   @Override
   public ICard getCard() {
     return card;
@@ -36,5 +45,13 @@ public class RegularCardCell implements ICell {
     this.card = card;
   }
 
+  @Override
+  public CellType getType() {
+    return CellType.CARD_CELL;
+  }
 
+  @Override
+  public ICell makeClone() {
+    return new RegularCardCell(this.card.makeClone());
+  }
 }

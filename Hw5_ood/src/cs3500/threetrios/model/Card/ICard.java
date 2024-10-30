@@ -1,16 +1,15 @@
 package cs3500.threetrios.model.Card;
 
-import java.util.UUID;
-
+import cs3500.threetrios.model.Enums.EPlayer;
 import cs3500.threetrios.model.Enums.CardNumber;
 import cs3500.threetrios.model.Enums.Direction;
-import cs3500.threetrios.model.Enums.Faction;
+import cs3500.threetrios.model.Player.ICloneable;
 import cs3500.threetrios.model.Rule.ICombatRule;
 
 /**
  * Represent a Card in the game.
  */
-public interface ICard {
+public interface ICard extends ICloneable<ICard> {
 
   /**
    * Set the Numbers for the card.
@@ -31,13 +30,6 @@ public interface ICard {
   void setCardName(String name);
 
   /**
-   * Takes a Fiction and set it as Card's fiction.
-   *
-   * @param faction The fiction wished to set.
-   */
-  void setFaction(Faction faction);
-
-  /**
    * Compare Self with Other, compares the corresponding numbers.
    * Which, EAST to WEST, NORTH to SOUTH.
    * If self > other: return 1
@@ -55,9 +47,39 @@ public interface ICard {
   int compare(ICard other, Direction direction, ICombatRule rule);
 
   /**
-   * Takes an IPlayer's UUID, and set it as the Card's owner id.
-   *
-   * @param owner The UUID of the owner.
+   * Takes a card belong enum, and set it as the owner of the card.
+   * @param owner The owner as a CardBelong.
    */
-  void setOwner(UUID owner);
+  void setOwner(EPlayer owner);
+
+  /**
+   * Return the owner of the card, as a card belong.
+   * @return The owner as CardBelong.
+   * @throws IllegalStateException If owner is null.
+   */
+  EPlayer getOwner();
+
+  /**
+   * Return the north number of the card.
+   * @return The north number.
+   */
+  CardNumber getNorth();
+
+  /**
+   * Return the south number of the card.
+   * @return The south number.
+   */
+  CardNumber getSouth();
+
+  /**
+   * Return the west number of the card.
+   * @return The west number.
+   */
+  CardNumber getWest();
+
+  /**
+   * Return the East number of the card.
+   * @return The Est number.
+   */
+  CardNumber getEast();
 }

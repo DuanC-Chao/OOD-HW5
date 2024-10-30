@@ -11,7 +11,6 @@ public class CardFactory {
    * A factory method, takes variables and return a constructed RegularCard.
    *
    * @param name    The name of the card.
-   * @param faction The faction of the card.
    * @param north   The north number of the card.
    * @param south   The south number of the card.
    * @param west    The west number of the card.
@@ -19,9 +18,9 @@ public class CardFactory {
    * @return A constructed RegularCard.
    * @throws IllegalArgumentException If any number (north, south, etc.) is not a valid CardNumber.
    */
-  public static RegularCard createRegularCard(String name, String faction,
-                                              int north, int south,
-                                              int west, int east) {
+  public static RegularCard createRegularCard(String name,
+                                              String north, String south,
+                                              String east, String west) {
     RegularCard card = new RegularCard();
 
     CardNumber[] cardNumbers = new CardNumber[4];
@@ -35,9 +34,6 @@ public class CardFactory {
 
     card.setCardName(name);
 
-    // For now, not implementing faction
-    card.setFaction(null);
-
     return card;
   }
 
@@ -46,10 +42,18 @@ public class CardFactory {
    *
    * @param cardNumbers The array to store result.
    * @param index       The index to store result.
-   * @param number      The number to map.
+   * @param strNum      The number to map.
+   * @throws IllegalArgumentException If strNum could not be converted in to int.
    */
   public static void getCardNumberMapping(CardNumber[] cardNumbers,
-                                          int index, int number) {
+                                          int index, String strNum) {
+
+    int number = 0;
+    try {
+      number = Integer.parseInt(strNum);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException(strNum + " is not a valid number");
+    }
     switch (number) {
       case 1:
         cardNumbers[index] = CardNumber.ONE;

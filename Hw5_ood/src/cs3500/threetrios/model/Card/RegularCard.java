@@ -97,13 +97,14 @@ public class RegularCard implements ICard {
   }
 
   @Override
-  public void setOwner(EPlayer owner) {
-
+  public ICard setOwner(EPlayer owner) {
+    this.owner = owner;
+    return this;
   }
 
   @Override
   public EPlayer getOwner() {
-    return null;
+    return this.owner;
   }
 
   @Override

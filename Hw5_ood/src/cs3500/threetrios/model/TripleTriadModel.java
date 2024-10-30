@@ -1,6 +1,7 @@
 package cs3500.threetrios.model;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import cs3500.threetrios.model.Card.ICard;
@@ -8,6 +9,7 @@ import cs3500.threetrios.model.Cells.ICell;
 import cs3500.threetrios.model.Enums.CellType;
 import cs3500.threetrios.model.Enums.EPlayer;
 import cs3500.threetrios.model.Enums.GameStatus;
+import cs3500.threetrios.model.Exception.NoSuchConfigException;
 import cs3500.threetrios.model.Exception.NotYourTurnException;
 import cs3500.threetrios.model.Grid.Grid;
 import cs3500.threetrios.model.Grid.IGrid;
@@ -68,12 +70,21 @@ public class TripleTriadModel implements ITripleTriadModel {
     assertGameNotStarted();
 
     // Make sure player names are not same or null
-    if(playerOneName == null || playerTwoName == null) {
+    if (playerOneName == null || playerTwoName == null) {
       throw new IllegalArgumentException("playerOneName and playerTwoName cannot be null");
     }
 
-    if(playerOneName.equals(playerTwoName)) {
+    if (playerOneName.equals(playerTwoName)) {
       throw new IllegalArgumentException("playerOneName and playerTwoName cannot be the same");
+    }
+
+    // Make sure config file path are not null or empty
+    if(boardConfigPath == null || boardConfigPath.isEmpty()) {
+      throw new IllegalArgumentException("boardConfigPath cannot be null or empty");
+    }
+
+    if(cardConfigPath == null || cardConfigPath.isEmpty()) {
+      throw new IllegalArgumentException("cardConfigPath cannot be null or empty");
     }
 
     // Try to get grid from config file.
@@ -81,7 +92,7 @@ public class TripleTriadModel implements ITripleTriadModel {
     try {
       gridToAdd = loadGridConfig(boardConfigPath);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Could not load grid config: " + boardConfigPath, e);
+      throw new NoSuchConfigException("Could not load grid config: " + boardConfigPath);
     }
 
     // Construct gameGrid
@@ -92,7 +103,12 @@ public class TripleTriadModel implements ITripleTriadModel {
     try {
       deckToAdd = loadCardConfig(cardConfigPath);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Could not load card config: " + cardConfigPath, e);
+      throw new NoSuchConfigException("Could not load card config: " + cardConfigPath);
+    }
+
+    // If shuffle, shuffle the deck
+    if (shuffle) {
+      Collections.shuffle(deckToAdd);
     }
 
     // Construct players
@@ -122,7 +138,7 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     IPlayer playerToOperate;
 
-    if(playerNumber == 1) {
+    if (playerNumber == 1) {
       playerToOperate = this.playerOne;
     } else {
       playerToOperate = this.playerTwo;
@@ -141,42 +157,42 @@ public class TripleTriadModel implements ITripleTriadModel {
 
   /**
    * A helper method, check validity of variants for playToGrid().
+   *
    * @param playerNumber Number of player.
-   * @param cardIndex Index of card, 0-based.
-   * @param col_toPlay Col to play to, 0-based.
-   * @param row_toPlay Row to play to, 0-based.
+   * @param cardIndex    Index of card, 0-based.
+   * @param col_toPlay   Col to play to, 0-based.
+   * @param row_toPlay   Row to play to, 0-based.
    */
   private void playToGridVariantChecker(int playerNumber, int cardIndex, int col_toPlay, int row_toPlay) {
     //First, check if variables are legal.
     assertGameInProgress();
-    if(playerNumber != 1 && playerNumber != 2) {
+    if (playerNumber != 1 && playerNumber != 2) {
       throw new IllegalArgumentException("Invalid player number");
     }
-    if(cardIndex < 0) {
+    if (cardIndex < 0) {
       throw new IllegalArgumentException("Invalid card index");
     }
-    if(playerNumber == 1) {
-      if(cardIndex >= playerOne.getHand().size()) {
+    if (playerNumber == 1) {
+      if (cardIndex >= playerOne.getHand().size()) {
+        throw new IllegalArgumentException("Invalid card index");
+      }
+    } else {
+      if (cardIndex >= playerTwo.getHand().size()) {
         throw new IllegalArgumentException("Invalid card index");
       }
     }
-    else {
-      if(cardIndex >= playerTwo.getHand().size()) {
-        throw new IllegalArgumentException("Invalid card index");
-      }
-    }
-    if(col_toPlay >= this.gameGrid.getColNumber()) {
+    if (col_toPlay >= this.gameGrid.getColNumber()) {
       throw new IllegalArgumentException("Invalid column number");
     }
-    if(row_toPlay >= this.gameGrid.getRowNumber()) {
+    if (row_toPlay >= this.gameGrid.getRowNumber()) {
       throw new IllegalArgumentException("Invalid row number");
     }
 
     //Check if turn is right
-    if(playerNumber == 1 && this.currentTurn == EPlayer.PLAYER_TWO) {
+    if (playerNumber == 1 && this.currentTurn == EPlayer.PLAYER_TWO) {
       throw new NotYourTurnException("Current turn is P2");
     }
-    if(playerNumber == 2 && this.currentTurn == EPlayer.PLAYER_ONE) {
+    if (playerNumber == 2 && this.currentTurn == EPlayer.PLAYER_ONE) {
       throw new NotYourTurnException("Current turn is P1");
     }
   }
@@ -192,8 +208,8 @@ public class TripleTriadModel implements ITripleTriadModel {
   }
 
   @Override
-  public ICard[][] getGrid() {
-    return new ICard[0][];
+  public ICell[][] getGrid() {
+    return this.gameGrid.getGrid();
   }
 
   @Override
@@ -214,6 +230,7 @@ public class TripleTriadModel implements ITripleTriadModel {
 
   /**
    * This method check if any of the player won the game, and change gamestatus.
+   *
    * @throws IllegalStateException If encountered card with unknown owner.
    */
   private void calculateAndSetWinningStatus() {
@@ -223,28 +240,28 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     ICell[][] gridToCheck = this.gameGrid.getGrid();
 
-    for(int i = 0; i < gridToCheck.length; i++) {
-      for(int j = 0; j < gridToCheck[i].length; j++) {
+    for (int i = 0; i < gridToCheck.length; i++) {
+      for (int j = 0; j < gridToCheck[i].length; j++) {
         ICell cell = gridToCheck[i][j];
-        if(cell.getType() == CellType.CARD_CELL) {
+        if (cell.getType() == CellType.CARD_CELL) {
           cardCellNum++;
         }
-        if(cell.getCard() != null) {
-          if(cell.getCard().getOwner() == EPlayer.PLAYER_ONE) {
+        if (cell.getCard() != null) {
+          if (cell.getCard().getOwner() == EPlayer.PLAYER_ONE) {
             playerOneCardNum++;
-          } else if(cell.getCard().getOwner() == EPlayer.PLAYER_TWO) {
+          } else if (cell.getCard().getOwner() == EPlayer.PLAYER_TWO) {
             playerTwoCardNum++;
           } else {
-            throw new IllegalStateException("Unknown card owner");
+            throw new IllegalStateException("Unknown card owner: " + cell.getCard().getOwner());
           }
         }
       }
     }
-    if(cardCellNum != 0) {
-      if(playerOneCardNum + playerTwoCardNum == cardCellNum) {
-        if(playerOneCardNum > playerTwoCardNum) {
+    if (cardCellNum != 0) {
+      if (playerOneCardNum + playerTwoCardNum == cardCellNum) {
+        if (playerOneCardNum > playerTwoCardNum) {
           this.gameStatus = GameStatus.PLAYER_ONE_WIN;
-        } else if(playerTwoCardNum > playerOneCardNum) {
+        } else if (playerTwoCardNum > playerOneCardNum) {
           this.gameStatus = GameStatus.PLAYER_TWO_WIN;
         }
       }
@@ -255,10 +272,9 @@ public class TripleTriadModel implements ITripleTriadModel {
    * Make the game enter next turn, swich between p1 and p2.
    */
   private void nextTurn() {
-    if(currentTurn == EPlayer.PLAYER_ONE) {
+    if (currentTurn == EPlayer.PLAYER_ONE) {
       currentTurn = EPlayer.PLAYER_TWO;
-    }
-    else if(currentTurn == EPlayer.PLAYER_TWO) {
+    } else if (currentTurn == EPlayer.PLAYER_TWO) {
       currentTurn = EPlayer.PLAYER_ONE;
     }
   }
@@ -288,7 +304,7 @@ public class TripleTriadModel implements ITripleTriadModel {
    */
   private void assertGameInProgress() {
     if (this.gameStatus != GameStatus.GAME_IN_PROGRESS) {
-      throw new IllegalStateException("Game Not in progress");
+      throw new IllegalStateException("Game Not in progress, game status: " + this.gameStatus);
     }
   }
 }

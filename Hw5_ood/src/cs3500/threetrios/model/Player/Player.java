@@ -1,5 +1,6 @@
 package cs3500.threetrios.model.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Player implements IPlayer {
   public Player(EPlayer identity, String name) {
     this.identity = identity;
     this.name = name;
+    this.hand = new ArrayList<>();
   }
 
   /**
@@ -83,7 +85,7 @@ public class Player implements IPlayer {
 
     // Add clone, not cards reference in deck.
     while (this.hand.size() < numToDraw) {
-      this.hand.add(deck.get(0).makeClone());
+      this.hand.add(deck.get(0).makeClone().setOwner(identity));
     }
   }
 

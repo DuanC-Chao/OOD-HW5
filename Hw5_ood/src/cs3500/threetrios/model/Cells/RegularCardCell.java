@@ -52,6 +52,10 @@ public class RegularCardCell implements ICell {
 
   @Override
   public ICell makeClone() {
-    return new RegularCardCell(this.card.makeClone());
+    if(this.card == null) {
+      return new RegularCardCell();
+    } else {
+      return new RegularCardCell(this.card.makeClone());
+    }
   }
 }

@@ -1,7 +1,9 @@
 package cs3500.threetrios.model;
 
 import cs3500.threetrios.model.Card.ICard;
+import cs3500.threetrios.model.Cells.ICell;
 import cs3500.threetrios.model.Exception.CouldNotPlaceCardException;
+import cs3500.threetrios.model.Exception.NoSuchConfigException;
 import cs3500.threetrios.model.Exception.NotYourTurnException;
 import cs3500.threetrios.model.Player.IPlayer;
 import cs3500.threetrios.model.Rule.ICombatRule;
@@ -25,7 +27,7 @@ public interface ITripleTriadModel {
    * @throws IllegalArgumentException If players' names are the same.
    * @throws IllegalArgumentException If any of player's name is null.
    * @throws IllegalArgumentException If any of config name is null or empty String.
-   * @throws IllegalArgumentException If board or card config path is invalid.
+   * @throws NoSuchConfigException If board or card config path is invalid.
    */
   void startGame(String boardConfigPath, String cardConfigPath, String playerOneName,
                  String playerTwoName, boolean shuffle, ICombatRule rule);
@@ -66,7 +68,7 @@ public interface ITripleTriadModel {
    *
    * @return A 2D array, representing the grid.
    */
-  ICard[][] getGrid();
+  ICell[][] getGrid();
 
   /**
    * return a boolean, represents weather the game is won by any player.

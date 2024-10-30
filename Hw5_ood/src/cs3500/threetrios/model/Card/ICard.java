@@ -49,8 +49,9 @@ public interface ICard extends ICloneable<ICard> {
   /**
    * Takes a card belong enum, and set it as the owner of the card.
    * @param owner The owner as a CardBelong.
+   * @return Card itself to support chain calling.
    */
-  void setOwner(EPlayer owner);
+  ICard setOwner(EPlayer owner);
 
   /**
    * Return the owner of the card, as a card belong.

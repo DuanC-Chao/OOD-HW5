@@ -24,9 +24,14 @@ public class BoardConfigReader {
    */
   public static ICell[][] loadGridConfig(String filePath) throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-      // read row and col, and check if legal.
-      int rowNum = Integer.parseInt(reader.readLine().trim());
-      int colNum = Integer.parseInt(reader.readLine().trim());
+      // Split the first line and read.
+      String[] dimensions = reader.readLine().trim().split("\\s+");
+      if (dimensions.length != 2) {
+        throw new IllegalArgumentException("First line must contain exactly two integers for row and col.");
+      }
+
+      int rowNum = Integer.parseInt(dimensions[0]);
+      int colNum = Integer.parseInt(dimensions[1]);
 
       if(rowNum == 0 || colNum == 0) {
         throw new IllegalArgumentException("Row or Col could not be 0");

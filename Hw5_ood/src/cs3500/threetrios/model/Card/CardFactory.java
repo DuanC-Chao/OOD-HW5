@@ -50,7 +50,11 @@ public class CardFactory {
 
     int number = 0;
     try {
-      number = Integer.parseInt(strNum);
+      if(strNum.equals("A")) {
+        number = 10;
+      } else {
+        number = Integer.parseInt(strNum);
+      }
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException(strNum + " is not a valid number");
     }

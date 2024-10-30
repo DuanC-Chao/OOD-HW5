@@ -24,8 +24,8 @@ public class CardFactory {
     CardNumber[] cardNumbers = new CardNumber[4];
 
     getCardNumberMapping(cardNumbers, 0, north);
-    getCardNumberMapping(cardNumbers, 1, east);
-    getCardNumberMapping(cardNumbers, 2, south);
+    getCardNumberMapping(cardNumbers, 1, south);
+    getCardNumberMapping(cardNumbers, 2, east);
     getCardNumberMapping(cardNumbers, 3, west);
 
     card.setCardNumber(cardNumbers[0], cardNumbers[1], cardNumbers[2], cardNumbers[3]);

@@ -4,8 +4,9 @@ package cs3500.threetrios.model;
  * The Functional class of Grid.
  * <p>
  * Class Invariant:
- * 1, Field grid is always a Matrix, not a jagged array in any form
- * 2, the Number of the Cells in grid is always odd
+ * 1, Field grid is always a Matrix, not a jagged array in any form.
+ * 2, The Number of the Cells in grid is always odd.
+ * 3, The Number of CardCells in the grid is always odd.
  */
 public class Grid implements IGrid {
 
@@ -90,7 +91,7 @@ public class Grid implements IGrid {
       }
     }
     if(cardCellNum % 2 == 0) {
-      throw new IllegalArgumentException("Card Cell number must be odd");
+      throw new IllegalArgumentException("Card Cell number must be odd, currently " + cardCellNum);
     }
   }
 

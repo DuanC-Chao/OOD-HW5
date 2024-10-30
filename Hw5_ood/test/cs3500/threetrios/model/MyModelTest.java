@@ -38,8 +38,12 @@ public class MyModelTest {
   public void testStartGameWithSimpleCongifurationFiles() {
     resetModel();
     String boardConfigPath = "src/docs/SimpleBoard.txt";
-    String cardConfigPath = "src/docs/SimpleDeck.txt";
+    String bigBoardConfigPath = "src/docs/UnreachableHoleBoard.txt";
     String boardConfigPathWithEvenTotalCellNum = "src/docs/NonOddBoard.txt";
+
+    String cardConfigPath = "src/docs/SimpleDeck.txt";
+    String smallCardConfigPath = "src/docs/SmallDeck.txt";
+
     try {
       model.startGame(boardConfigPath, cardConfigPath, "John",
         "Bob", false, new DefaultCombatRule());
@@ -79,6 +83,13 @@ public class MyModelTest {
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       model.startGame(boardConfigPathWithEvenTotalCellNum, cardConfigPath,
         "B", "A", false, new DefaultCombatRule());
+    });
+
+    //Test of IllegalStatement is thrown when given a too big grid and too small deck
+    resetModel();
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.startGame(bigBoardConfigPath, smallCardConfigPath, "A",
+        "B", false, new DefaultCombatRule());
     });
   }
 

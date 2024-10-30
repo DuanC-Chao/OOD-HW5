@@ -93,18 +93,23 @@ public class TripleTriadModel implements ITripleTriadModel {
       throw new NoSuchConfigException("Could not load card config: " + cardConfigPath);
     }
 
-    // If shuffle, shuffle the deck
-    if (shuffle) {
-      Collections.shuffle(deckToAdd);
-    }
-
     // Construct players
     this.playerOne = new Player(EPlayer.PLAYER_ONE, playerOneName);
     this.playerTwo = new Player(EPlayer.PLAYER_TWO, playerTwoName);
 
     // Draw for player hand
     int drawCardNum = ((gridToAdd.length * gridToAdd[0].length) + 1) / 2;
+
+    if (shuffle) {
+      Collections.shuffle(deckToAdd);
+    }
+
     this.playerOne.setHand(deckToAdd, drawCardNum);
+
+    if (shuffle) {
+      Collections.shuffle(deckToAdd);
+    }
+
     this.playerTwo.setHand(deckToAdd, drawCardNum);
 
     // Set rule

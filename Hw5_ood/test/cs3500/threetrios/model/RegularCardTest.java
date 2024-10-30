@@ -3,8 +3,28 @@ package cs3500.threetrios.model;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Combined testing class for RegularCard.
+ * Contains examples, model interface tests, and implementation tests in one.
+ */
 public class RegularCardTest {
 
+  // Examples Section
+  public static void main(String[] args) {
+    // Example usage of RegularCard
+    RegularCard exampleCard = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
+            CardNumber.FOUR, "Example Card", EPlayer.PLAYER_ONE);
+
+    System.out.println("Example RegularCard:");
+    System.out.println("Card Name: " + exampleCard.getCardName());
+    System.out.println("Owner: " + exampleCard.getOwner());
+    System.out.println("North Value: " + exampleCard.getNorth());
+    System.out.println("South Value: " + exampleCard.getSouth());
+    System.out.println("East Value: " + exampleCard.getEast());
+    System.out.println("West Value: " + exampleCard.getWest());
+  }
+
+  // Model Interface-Testing Section (Public Method Tests)
   @Test
   public void testDefaultConstructor() {
     RegularCard card = new RegularCard();
@@ -57,6 +77,7 @@ public class RegularCardTest {
     assertEquals(EPlayer.PLAYER_TWO, card.getOwner());
   }
 
+  // Implementation-Testing Section (Testing Cloning Functionality)
   @Test
   public void testMakeClone() {
     RegularCard card = new RegularCard(CardNumber.THREE, CardNumber.FOUR, CardNumber.FIVE,
@@ -70,8 +91,9 @@ public class RegularCardTest {
     assertEquals("Clone Test", clone.getCardName());
     assertEquals(EPlayer.PLAYER_ONE, clone.getOwner());
 
-    assertNotSame(card, clone);
+    assertNotSame(card, clone);  // Ensure clone is a different instance
   }
 }
+
 
 

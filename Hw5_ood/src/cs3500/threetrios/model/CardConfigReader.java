@@ -12,6 +12,7 @@ import java.util.List;
 public class CardConfigReader {
   /**
    * Read the card config file of given path, and return a List of Card.
+   * Mapping: N S E W
    *
    * @param filePath The config file path.
    * @return List of card, which includes all cards.

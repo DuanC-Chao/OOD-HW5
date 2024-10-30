@@ -1,5 +1,7 @@
 package cs3500.threetrios.view;
 
+import java.io.IOException;
+
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.ITripleTriadModel;
@@ -17,8 +19,8 @@ public class TripleTriadTextView implements TripleTriadView {
   }
 
   @Override
-  public void render() {
-    StringBuilder boardView = new StringBuilder();
+  public void render(Appendable out) throws IOException {
+    Appendable boardView = out;
     ICell[][] grid = model.getGrid();
 
     for (ICell[] row : grid) {
@@ -50,13 +52,13 @@ public class TripleTriadTextView implements TripleTriadView {
     IPlayer playerOne = model.getPlayerOneClone();
     IPlayer playerTwo = model.getPlayerTwoClone();
 
-    // Displays numbers as N S W E
+    // Displays numbers as N S E W
     boardView.append("Player One Cards: \n");
     for (ICard card : playerOne.getHand()) {
       boardView.append(card.getCardName()).append(" ").append(card.getNorth().toString()).
         append(" ").append(card.getSouth().toString()).append(" ").
-        append(card.getWest().toString()).
-        append(" ").append(card.getEast().toString()).append("\n");
+        append(card.getEast().toString()).
+        append(" ").append(card.getWest().toString()).append("\n");
     }
 
     boardView.append("\n");
@@ -65,9 +67,10 @@ public class TripleTriadTextView implements TripleTriadView {
     for (ICard card : playerTwo.getHand()) {
       boardView.append(card.getCardName()).append(" ").append(card.getNorth().toString()).
         append(" ").append(card.getSouth().toString()).append(" ").
-        append(card.getWest().toString()).
-        append(" ").append(card.getEast().toString()).append("\n");
+        append(card.getEast().toString()).
+        append(" ").append(card.getWest().toString()).append("\n");
     }
+
 
     if (model.isGameWon()) {
       boardView.append("Winner: ").append(model.getWinningPlayerName()).append("\n");

@@ -1,13 +1,5 @@
 package cs3500.threetrios.model;
 
-import cs3500.threetrios.model.Card.ICard;
-import cs3500.threetrios.model.Cells.ICell;
-import cs3500.threetrios.model.Exception.CouldNotPlaceCardException;
-import cs3500.threetrios.model.Exception.NoSuchConfigException;
-import cs3500.threetrios.model.Exception.NotYourTurnException;
-import cs3500.threetrios.model.Player.IPlayer;
-import cs3500.threetrios.model.Rule.ICombatRule;
-
 /**
  * The main Interface for the Triple Triad Game.
  */

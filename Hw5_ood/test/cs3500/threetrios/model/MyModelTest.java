@@ -3,9 +3,6 @@ package cs3500.threetrios.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cs3500.threetrios.model.Exception.NoSuchConfigException;
-import cs3500.threetrios.model.Rule.DefaultCombatRule;
-
 /**
  * The test class for TripleTriadModel.
  */
@@ -93,6 +90,7 @@ public class MyModelTest {
 
     String boardConfigPath = "src/docs/SimpleBoard.txt";
     String cardConfigPath = "src/docs/SimpleDeck.txt";
+    String holeBoardConfigPath = "src/docs/ReachableHoleBoard.txt";
 
     //First, test if 0-based variant passing is implemented
     resetReadyToGoModel();
@@ -102,6 +100,47 @@ public class MyModelTest {
       e.printStackTrace();
       Assert.fail();
     }
+
+    try {
+      model.playToGrid(2, 2, 1, 0);
+    } catch (Exception e) {
+      e.printStackTrace();
+      Assert.fail();
+    }
+
+    //Try invalid card index, player should have 5 cards
+    resetReadyToGoModel();
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.playToGrid(1, 5, 0, 0);
+    });
+
+    //This time, test an invalid player number
+    resetReadyToGoModel();
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.playToGrid(3, 3, 0, 0);
+    });
+
+    //Test if the model could handle switch of player's turn
+    resetReadyToGoModel();
+    model.playToGrid(1, 0, 0, 0);
+    Assert.assertThrows(NotYourTurnException.class, () -> {
+      model.playToGrid(1, 0, 1, 0);
+    });
+
+    //Test if model could handle Cell already full situation
+    resetReadyToGoModel();
+    model.playToGrid(1, 0, 0, 0);
+    Assert.assertThrows(CouldNotPlaceCardException.class, () -> {
+      model.playToGrid(2, 0, 0, 0);
+    });
+
+    //Test if Cell is a Hole situation
+    resetModel();
+    model.startGame(holeBoardConfigPath, cardConfigPath, "A",
+      "B", false, new DefaultCombatRule());
+    Assert.assertThrows(CouldNotPlaceCardException.class, () -> {
+      model.playToGrid(1, 0, 1, 1);
+    });
 
   }
 }

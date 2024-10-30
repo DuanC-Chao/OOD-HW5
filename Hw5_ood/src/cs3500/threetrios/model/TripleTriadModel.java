@@ -4,21 +4,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import cs3500.threetrios.model.Card.ICard;
-import cs3500.threetrios.model.Cells.ICell;
-import cs3500.threetrios.model.Enums.CellType;
-import cs3500.threetrios.model.Enums.EPlayer;
-import cs3500.threetrios.model.Enums.GameStatus;
-import cs3500.threetrios.model.Exception.NoSuchConfigException;
-import cs3500.threetrios.model.Exception.NotYourTurnException;
-import cs3500.threetrios.model.Grid.Grid;
-import cs3500.threetrios.model.Grid.IGrid;
-import cs3500.threetrios.model.Player.IPlayer;
-import cs3500.threetrios.model.Player.Player;
-import cs3500.threetrios.model.Rule.ICombatRule;
-
-import static cs3500.threetrios.model.Config.BoardConfigReader.loadGridConfig;
-import static cs3500.threetrios.model.Config.CardConfigReader.loadCardConfig;
+import static cs3500.threetrios.model.BoardConfigReader.loadGridConfig;
+import static cs3500.threetrios.model.CardConfigReader.loadCardConfig;
 
 /**
  * The functional class for the TripleTriad Model.

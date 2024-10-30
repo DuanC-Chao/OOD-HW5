@@ -152,6 +152,32 @@ public class MyModelTest {
     Assert.assertThrows(CouldNotPlaceCardException.class, () -> {
       model.playToGrid(1, 0, 1, 1);
     });
+  }
 
+  /**
+   * Test if game could be won.
+   */
+  @Test
+  public void testWinning() {
+    String boardConfigPath = "src/docs/SimpleBoard.txt";
+    String cardConfigPath = "src/docs/SmallDeck.txt";
+    resetModel();
+    model.startGame(boardConfigPath, cardConfigPath, "A",
+      "B", false, new DefaultCombatRule());
+
+    Assert.assertFalse(model.isGameWon());
+
+    model.playToGrid(1, 0, 0, 0);
+    model.playToGrid(2, 0, 0, 1);
+    model.playToGrid(1, 0, 0, 2);
+    model.playToGrid(2, 0, 1, 0);
+    model.playToGrid(1, 0, 1, 1);
+    model.playToGrid(2, 0, 1, 2);
+    model.playToGrid(1, 0, 2, 0);
+    model.playToGrid(2, 0, 2, 1);
+    model.playToGrid(1, 0, 2, 2);
+
+    Assert.assertTrue(model.isGameWon());
+    Assert.assertEquals("B", model.getWinningPlayerName());
   }
 }

@@ -46,15 +46,15 @@ public interface IGrid {
   /**
    * Takes two 0-Based int, as col and row, and an ICard, try to place the card.
    * To the cell at [col, row].
+   * throws CouldNotPlaceCardException If the cell wished to place card to is hole, or is full.
    *
    * @param col  The 0-Based col to operate.
    * @param row  The 0-Based row to operate.
    * @param card The ICard wished to place.
    * @throws IllegalArgumentException   If col > maxCol or/and row > maxRow (0-Based)
    *                                    or row or/and col < 0
-   * @throws CouldNotPlaceCardException If the cell wished to place card to is hole, or is full.
    */
-  public void placeCard(int col, int row, ICard card) throws CouldNotPlaceCardException;
+  public void placeCard(int col, int row, ICard card);
 
   /**
    * Takes coordinate of starting card and a rule, start filpping with the rule.

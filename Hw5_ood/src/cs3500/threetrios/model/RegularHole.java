@@ -9,7 +9,7 @@ public class RegularHole implements ICell {
    * The default constructor.
    */
   public RegularHole() {
-
+    // Nothing to be initailized.
   }
 
   @Override

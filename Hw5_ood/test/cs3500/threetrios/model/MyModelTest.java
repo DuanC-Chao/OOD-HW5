@@ -28,7 +28,7 @@ public class MyModelTest {
     String cardConfigPath = "src/docs/SimpleDeck.txt";
     this.model = new TripleTriadModel();
     model.startGame(boardConfigPath, cardConfigPath, "A",
-      "B", false, new DefaultCombatRule());
+        "B", false, new DefaultCombatRule());
   }
 
   /**
@@ -46,7 +46,7 @@ public class MyModelTest {
 
     try {
       model.startGame(boardConfigPath, cardConfigPath, "John",
-        "Bob", false, new DefaultCombatRule());
+          "Bob", false, new DefaultCombatRule());
     } catch (Exception e) {
       Assert.fail(e.getMessage());
     }
@@ -55,26 +55,26 @@ public class MyModelTest {
     resetModel();
     Assert.assertThrows(NoSuchConfigException.class, () -> {
       model.startGame("nonsense", "nonsense", "John",
-        "bob", false, new DefaultCombatRule());
+          "bob", false, new DefaultCombatRule());
     });
 
     resetModel();
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       model.startGame(null, "nonsense", "John",
-        "bob", false, new DefaultCombatRule());
+          "bob", false, new DefaultCombatRule());
     });
 
     //Test if IllegalArgumentException could be thrown when player's name are Illegal.
     resetModel();
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       model.startGame(boardConfigPath, cardConfigPath,
-        "A", "A", false, new DefaultCombatRule());
+          "A", "A", false, new DefaultCombatRule());
     });
 
     resetModel();
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       model.startGame(boardConfigPath, cardConfigPath,
-        null, "A", false, new DefaultCombatRule());
+          null, "A", false, new DefaultCombatRule());
     });
 
     //Test if IllegalArgumentException could be thrown when the board config contains
@@ -82,14 +82,14 @@ public class MyModelTest {
     resetModel();
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       model.startGame(boardConfigPathWithEvenTotalCellNum, cardConfigPath,
-        "B", "A", false, new DefaultCombatRule());
+          "B", "A", false, new DefaultCombatRule());
     });
 
     //Test of IllegalStatement is thrown when given a too big grid and too small deck
     resetModel();
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       model.startGame(bigBoardConfigPath, smallCardConfigPath, "A",
-        "B", false, new DefaultCombatRule());
+          "B", false, new DefaultCombatRule());
     });
   }
 
@@ -148,7 +148,7 @@ public class MyModelTest {
     //Test if Cell is a Hole situation
     resetModel();
     model.startGame(holeBoardConfigPath, cardConfigPath, "A",
-      "B", false, new DefaultCombatRule());
+        "B", false, new DefaultCombatRule());
     Assert.assertThrows(CouldNotPlaceCardException.class, () -> {
       model.playToGrid(1, 0, 1, 1);
     });
@@ -163,7 +163,7 @@ public class MyModelTest {
     String cardConfigPath = "src/docs/SmallDeck.txt";
     resetModel();
     model.startGame(boardConfigPath, cardConfigPath, "A",
-      "B", false, new DefaultCombatRule());
+        "B", false, new DefaultCombatRule());
 
     Assert.assertFalse(model.isGameWon());
 

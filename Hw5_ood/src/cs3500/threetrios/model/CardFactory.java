@@ -8,11 +8,11 @@ public class CardFactory {
   /**
    * A factory method, takes variables and return a constructed RegularCard.
    *
-   * @param name    The name of the card.
-   * @param north   The north number of the card.
-   * @param south   The south number of the card.
-   * @param west    The west number of the card.
-   * @param east    The east number of the card.
+   * @param name  The name of the card.
+   * @param north The north number of the card.
+   * @param south The south number of the card.
+   * @param west  The west number of the card.
+   * @param east  The east number of the card.
    * @return A constructed RegularCard.
    * @throws IllegalArgumentException If any number (north, south, etc.) is not a valid CardNumber.
    */
@@ -48,7 +48,7 @@ public class CardFactory {
 
     int number = 0;
     try {
-      if(strNum.equals("A")) {
+      if (strNum.equals("A")) {
         number = 10;
       } else {
         number = Integer.parseInt(strNum);

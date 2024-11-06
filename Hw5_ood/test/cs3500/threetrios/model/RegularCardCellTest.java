@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
+import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * Combined testing class for RegularCardCell.
@@ -9,29 +9,13 @@ import static org.junit.Assert.*;
  */
 public class RegularCardCellTest {
 
-  // Examples Section
-  public static void main(String[] args) {
-    // Example usage of RegularCardCell
-    RegularCard exampleCard = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
-            CardNumber.FOUR, "Example Card", EPlayer.PLAYER_ONE);
-    RegularCardCell exampleCell = new RegularCardCell(exampleCard);
-
-    System.out.println("Example RegularCardCell:");
-    System.out.println("Cell Type: " + exampleCell.getType());
-    System.out.println("Card Owner: " + exampleCell.getCard().getOwner());
-    System.out.println("Card North Value: " + exampleCell.getCard().getNorth());
-    System.out.println("Card East Value: " + exampleCell.getCard().getEast());
-    System.out.println("Card South Value: " + exampleCell.getCard().getSouth());
-    System.out.println("Card West Value: " + exampleCell.getCard().getWest());
-  }
-
   // Model Interface-Testing Section (Public Method Tests)
 
   @Test
   public void testDefaultConstructor() {
     RegularCardCell cell = new RegularCardCell();
-    assertNull(cell.getCard());
-    assertEquals(CellType.CARD_CELL, cell.getType());
+    Assert.assertNull(cell.getCard());
+    Assert.assertEquals(CellType.CARD_CELL, cell.getType());
   }
 
   @Test
@@ -39,7 +23,7 @@ public class RegularCardCellTest {
     RegularCard card = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Test Card", EPlayer.PLAYER_ONE);
     RegularCardCell cell = new RegularCardCell(card);
-    assertEquals(card, cell.getCard());
+    Assert.assertEquals(card, cell.getCard());
   }
 
   @Test
@@ -48,7 +32,7 @@ public class RegularCardCellTest {
     RegularCard card = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Test Card", EPlayer.PLAYER_ONE);
     cell.setCard(card);
-    assertEquals(card, cell.getCard());
+    Assert.assertEquals(card, cell.getCard());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -73,8 +57,8 @@ public class RegularCardCellTest {
     RegularCardCell cell = new RegularCardCell();
     RegularCardCell clonedCell = (RegularCardCell) cell.makeClone();
 
-    assertNotSame(cell, clonedCell);
-    assertNull(clonedCell.getCard());
+    Assert.assertNotSame(cell, clonedCell);
+    Assert.assertNull(clonedCell.getCard());
   }
 
   @Test
@@ -84,9 +68,9 @@ public class RegularCardCellTest {
     RegularCardCell cell = new RegularCardCell(card);
 
     RegularCardCell clonedCell = (RegularCardCell) cell.makeClone();
-    assertNotSame(cell, clonedCell);
-    assertNotSame(card, clonedCell.getCard());
-    assertEquals(card.getOwner(), clonedCell.getCard().getOwner());
+    Assert.assertNotSame(cell, clonedCell);
+    Assert.assertNotSame(card, clonedCell.getCard());
+    Assert.assertEquals(card.getOwner(), clonedCell.getCard().getOwner());
   }
 }
 

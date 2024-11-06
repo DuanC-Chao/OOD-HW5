@@ -1,36 +1,30 @@
 package cs3500.threetrios.model;
 
+import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test toward Player class.
+ */
 public class PlayerTest {
-
-  // Examples Section
-  public static void main(String[] args) {
-    Player examplePlayer = new Player(EPlayer.PLAYER_ONE, "Alice");
-    System.out.println("Example Player:");
-    System.out.println("Name: " + examplePlayer.getName());
-    System.out.println("Identity: " + examplePlayer.getIdentity());
-    System.out.println("Hand: " + examplePlayer.getHand());
-  }
 
   // Model Interface-Testing Section (Public Method Tests)
 
   @Test
   public void testConstructorAndGetters() {
     Player player = new Player(EPlayer.PLAYER_ONE, "Alice");
-    assertEquals("Alice", player.getName());
-    assertEquals(EPlayer.PLAYER_ONE, player.getIdentity());
-    assertTrue(player.getHand().isEmpty());
+    Assert.assertEquals("Alice", player.getName());
+    Assert.assertEquals(EPlayer.PLAYER_ONE, player.getIdentity());
+    Assert.assertTrue(player.getHand().isEmpty());
   }
 
   @Test
   public void testSetName() {
     Player player = new Player(EPlayer.PLAYER_TWO, "Bob");
     player.setName("Charlie");
-    assertEquals("Charlie", player.getName());
+    Assert.assertEquals("Charlie", player.getName());
   }
 
   @Test
@@ -40,8 +34,8 @@ public class PlayerTest {
     deck.add(new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE, CardNumber.FOUR,
             "Card 1", EPlayer.PLAYER_TWO));
     player.setHand(deck, 1);
-    assertEquals(1, player.getHand().size());
-    assertEquals(EPlayer.PLAYER_ONE, player.getHand().get(0).getOwner());
+    Assert.assertEquals(1, player.getHand().size());
+    Assert.assertEquals(EPlayer.PLAYER_ONE, player.getHand().get(0).getOwner());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -66,8 +60,8 @@ public class PlayerTest {
     deck.add(card);
     player.setHand(deck, 1);
     // The card in player's hand is a clone.
-    assertNotEquals(card, player.popCardFromHand(0));
-    assertTrue(player.getHand().isEmpty());
+    Assert.assertNotEquals(card, player.popCardFromHand(0));
+    Assert.assertTrue(player.getHand().isEmpty());
   }
 
   // Implementation-Testing Section (Testing Clone Functionality)
@@ -79,9 +73,9 @@ public class PlayerTest {
     Player player = new Player(EPlayer.PLAYER_ONE, "Alice", hand);
     Player clonedPlayer = (Player) player.makeClone();
 
-    assertNotSame(player, clonedPlayer);
-    assertEquals(player.getName(), clonedPlayer.getName());
-    assertEquals(player.getIdentity(), clonedPlayer.getIdentity());
-    assertEquals(player.getHand(), clonedPlayer.getHand());
+    Assert.assertNotSame(player, clonedPlayer);
+    Assert.assertEquals(player.getName(), clonedPlayer.getName());
+    Assert.assertEquals(player.getIdentity(), clonedPlayer.getIdentity());
+    Assert.assertEquals(player.getHand(), clonedPlayer.getHand());
   }
 }

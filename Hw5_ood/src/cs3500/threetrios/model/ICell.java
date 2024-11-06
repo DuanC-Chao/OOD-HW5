@@ -13,11 +13,11 @@ public interface ICell extends ICloneable<ICell> {
 
   /**
    * Takes an ICard and set as the Cell's card.
+   * throws CouldNotPlaceCardException If Already Exist a card in the Cell or Cell is a Hole.
    * @param card The card wished to settle.
    * @throws IllegalArgumentException If Card is null.
-   * @throws CouldNotPlaceCardException If Already Exist a card in the Cell or Cell is a Hole.
    */
-  public void setCard(ICard card) throws CouldNotPlaceCardException;
+  public void setCard(ICard card);
 
   /**
    * Get the type of the cell.

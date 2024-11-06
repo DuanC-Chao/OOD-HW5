@@ -29,15 +29,15 @@ public interface ITripleTriadModel {
    *
    * @param playerNumber The 1-based player number representation, which could only be 1 or 2.
    * @param cardIndex    The 0-based CardIndex on player's hand.
-   * @param col_toPlay   The column to play the card to, 0-based.
-   * @param row_toPlay   The row to play the card to, 0-based.
+   * @param colToPlay   The column to play the card to, 0-based.
+   * @param rowToPlay   The row to play the card to, 0-based.
    * @throws IllegalArgumentException If the playerNumber, CardIndex,
    *                                  col or row is invalid or less than 0.
    * @throws IllegalStateException    If the game is not started or already over.
    * @throws NotYourTurnException     If trying to play at the wrong turn.
    * @throws CouldNotPlaceCardException If the coordinate trying to place card is full or is Hole.
    */
-  void playToGrid(int playerNumber, int cardIndex, int col_toPlay, int row_toPlay);
+  void playToGrid(int playerNumber, int cardIndex, int colToPlay, int rowToPlay);
 
   /**
    * Get a clone of player one, which was deep-copied, except for ICard instance within it.

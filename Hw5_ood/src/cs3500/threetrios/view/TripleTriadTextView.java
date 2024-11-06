@@ -11,6 +11,9 @@ import cs3500.threetrios.model.IPlayer;
 import static cs3500.threetrios.model.EPlayer.PLAYER_ONE;
 import static cs3500.threetrios.model.EPlayer.PLAYER_TWO;
 
+/**
+ * The pure text view for TripleTriad game.
+ */
 public class TripleTriadTextView implements TripleTriadView {
   private final ITripleTriadModel model;
 

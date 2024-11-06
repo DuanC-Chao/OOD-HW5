@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
+import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * Combined testing class for RegularCard.
@@ -9,27 +9,12 @@ import static org.junit.Assert.*;
  */
 public class RegularCardTest {
 
-  // Examples Section
-  public static void main(String[] args) {
-    // Example usage of RegularCard
-    RegularCard exampleCard = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
-            CardNumber.FOUR, "Example Card", EPlayer.PLAYER_ONE);
-
-    System.out.println("Example RegularCard:");
-    System.out.println("Card Name: " + exampleCard.getCardName());
-    System.out.println("Owner: " + exampleCard.getOwner());
-    System.out.println("North Value: " + exampleCard.getNorth());
-    System.out.println("South Value: " + exampleCard.getSouth());
-    System.out.println("East Value: " + exampleCard.getEast());
-    System.out.println("West Value: " + exampleCard.getWest());
-  }
-
   // Model Interface-Testing Section (Public Method Tests)
   @Test
   public void testDefaultConstructor() {
     RegularCard card = new RegularCard();
-    assertEquals("Default Name", card.getCardName());
-    assertNull(card.getOwner());
+    Assert.assertEquals("Default Name", card.getCardName());
+    Assert.assertNull(card.getOwner());
   }
 
   @Test
@@ -37,12 +22,12 @@ public class RegularCardTest {
     RegularCard card = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Test Card", EPlayer.PLAYER_ONE);
 
-    assertEquals(CardNumber.ONE, card.getNorth());
-    assertEquals(CardNumber.TWO, card.getSouth());
-    assertEquals(CardNumber.THREE, card.getEast());
-    assertEquals(CardNumber.FOUR, card.getWest());
-    assertEquals("Test Card", card.getCardName());
-    assertEquals(EPlayer.PLAYER_ONE, card.getOwner());
+    Assert.assertEquals(CardNumber.ONE, card.getNorth());
+    Assert.assertEquals(CardNumber.TWO, card.getSouth());
+    Assert.assertEquals(CardNumber.THREE, card.getEast());
+    Assert.assertEquals(CardNumber.FOUR, card.getWest());
+    Assert.assertEquals("Test Card", card.getCardName());
+    Assert.assertEquals(EPlayer.PLAYER_ONE, card.getOwner());
   }
 
   @Test
@@ -50,31 +35,31 @@ public class RegularCardTest {
     RegularCard card = new RegularCard();
     card.setCardNumber(CardNumber.FIVE, CardNumber.SIX, CardNumber.SEVEN, CardNumber.EIGHT);
 
-    assertEquals(CardNumber.FIVE, card.getNorth());
-    assertEquals(CardNumber.SIX, card.getSouth());
-    assertEquals(CardNumber.SEVEN, card.getEast());
-    assertEquals(CardNumber.EIGHT, card.getWest());
+    Assert.assertEquals(CardNumber.FIVE, card.getNorth());
+    Assert.assertEquals(CardNumber.SIX, card.getSouth());
+    Assert.assertEquals(CardNumber.SEVEN, card.getEast());
+    Assert.assertEquals(CardNumber.EIGHT, card.getWest());
   }
 
   @Test
   public void testSetCardName() {
     RegularCard card = new RegularCard();
     card.setCardName("New Name");
-    assertEquals("New Name", card.getCardName());
+    Assert.assertEquals("New Name", card.getCardName());
   }
 
   @Test
   public void testSetCardNameNull() {
     RegularCard card = new RegularCard();
     card.setCardName(null); // Should ignore null name
-    assertEquals("Default Name", card.getCardName());
+    Assert.assertEquals("Default Name", card.getCardName());
   }
 
   @Test
   public void testSetOwner() {
     RegularCard card = new RegularCard();
     card.setOwner(EPlayer.PLAYER_TWO);
-    assertEquals(EPlayer.PLAYER_TWO, card.getOwner());
+    Assert.assertEquals(EPlayer.PLAYER_TWO, card.getOwner());
   }
 
   // Implementation-Testing Section (Testing Cloning Functionality)
@@ -84,14 +69,14 @@ public class RegularCardTest {
             CardNumber.SIX, "Clone Test", EPlayer.PLAYER_ONE);
     RegularCard clone = (RegularCard) card.makeClone();
 
-    assertEquals(CardNumber.THREE, clone.getNorth());
-    assertEquals(CardNumber.FOUR, clone.getSouth());
-    assertEquals(CardNumber.FIVE, clone.getEast());
-    assertEquals(CardNumber.SIX, clone.getWest());
-    assertEquals("Clone Test", clone.getCardName());
-    assertEquals(EPlayer.PLAYER_ONE, clone.getOwner());
+    Assert.assertEquals(CardNumber.THREE, clone.getNorth());
+    Assert.assertEquals(CardNumber.FOUR, clone.getSouth());
+    Assert.assertEquals(CardNumber.FIVE, clone.getEast());
+    Assert.assertEquals(CardNumber.SIX, clone.getWest());
+    Assert.assertEquals("Clone Test", clone.getCardName());
+    Assert.assertEquals(EPlayer.PLAYER_ONE, clone.getOwner());
 
-    assertNotSame(card, clone);  // Ensure clone is a different instance
+    Assert.assertNotSame(card, clone);  // Ensure clone is a different instance
   }
 }
 

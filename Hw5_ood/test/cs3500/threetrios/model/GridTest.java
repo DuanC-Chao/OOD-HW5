@@ -1,26 +1,12 @@
 package cs3500.threetrios.model;
 
+import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+/**
+ * The class to test Grid.
+ */
 public class GridTest {
-
-  // Examples Section
-  public static void main(String[] args) {
-    RegularCardCell cardCell = new RegularCardCell();
-    RegularHole holeCell = new RegularHole();
-    ICell[][] exampleGrid = {
-            {cardCell, holeCell, cardCell},
-            {holeCell, cardCell, holeCell},
-            {cardCell, holeCell, cardCell}
-    };
-
-    Grid grid = new Grid(exampleGrid);
-    System.out.println("Example Grid:");
-    System.out.println("Row count: " + grid.getRowNumber());
-    System.out.println("Column count: " + grid.getColNumber());
-    System.out.println("Card in (0,0): " + grid.getCard(0, 0));
-  }
 
   // Model Interface-Testing Section (Public Method Tests)
 
@@ -32,7 +18,7 @@ public class GridTest {
             {new RegularCardCell(), new RegularHole(), new RegularCardCell()}
     };
     Grid grid = new Grid(gridData);
-    assertEquals(3, grid.getRowNumber());
+    Assert.assertEquals(3, grid.getRowNumber());
   }
 
   @Test
@@ -43,7 +29,7 @@ public class GridTest {
             {new RegularCardCell(), new RegularHole(), new RegularCardCell()}
     };
     Grid grid = new Grid(gridData);
-    assertEquals(3, grid.getColNumber());
+    Assert.assertEquals(3, grid.getColNumber());
   }
 
   @Test
@@ -55,8 +41,8 @@ public class GridTest {
     };
     Grid grid = new Grid(gridData);
     ICell[][] cloneGrid = grid.getGrid();
-    assertNotSame(gridData, cloneGrid);
-    assertEquals(gridData.length, cloneGrid.length);
+    Assert.assertNotSame(gridData, cloneGrid);
+    Assert.assertEquals(gridData.length, cloneGrid.length);
   }
 
   @Test
@@ -71,7 +57,7 @@ public class GridTest {
             {new RegularCardCell(), new RegularHole(), new RegularCardCell()}
     };
     Grid grid = new Grid(gridData);
-    assertEquals(card, grid.getCard(0, 0));
+    Assert.assertEquals(card, grid.getCard(0, 0));
   }
 
   @Test(expected = IllegalArgumentException.class)

@@ -13,6 +13,7 @@ public class ReverseCombatRule implements ICombatRule {
 
   @Override
   public void flip(ICell[][] grid, int row, int col) {
-
+    // Not implemented yet.
+    throw new UnsupportedOperationException();
   }
 }

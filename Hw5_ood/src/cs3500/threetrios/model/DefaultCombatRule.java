@@ -68,7 +68,8 @@ public class DefaultCombatRule implements ICombatRule {
           if (neighborCard != null && neighborCard.getOwner() != player) {
             // Use compare to calculate if should flip.
             CardNumber currentCardValue = getCardValue(currentCard, direction);
-            CardNumber neighborCardValue = getCardValue(neighborCard, getOppositeDirection(direction));
+            CardNumber neighborCardValue = getCardValue(neighborCard,
+                getOppositeDirection(direction));
 
             if (compare(currentCardValue, neighborCardValue) > 0) {
               neighborCard.setOwner(player);

@@ -14,11 +14,12 @@ public class RegularCardCell implements ICell {
    * The default constructor.
    */
   public RegularCardCell() {
-
+    this.card = null;
   }
 
   /**
    * The clone constructor.
+   *
    * @param card The card.
    */
   public RegularCardCell(ICard card) {
@@ -32,10 +33,10 @@ public class RegularCardCell implements ICell {
 
   @Override
   public void setCard(ICard card) throws CouldNotPlaceCardException {
-    if(card == null) {
+    if (card == null) {
       throw new IllegalArgumentException();
     }
-    if(this.card != null) {
+    if (this.card != null) {
       throw new CouldNotPlaceCardException("Already placed card to this Cell, Card Name: " +
         this.card.getCardName() + " Card Owner: " + this.card.getOwner());
     }
@@ -49,7 +50,7 @@ public class RegularCardCell implements ICell {
 
   @Override
   public ICell makeClone() {
-    if(this.card == null) {
+    if (this.card == null) {
       return new RegularCardCell();
     } else {
       return new RegularCardCell(this.card.makeClone());

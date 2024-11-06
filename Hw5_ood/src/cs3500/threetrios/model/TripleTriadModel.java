@@ -51,7 +51,9 @@ public class TripleTriadModel implements ITripleTriadModel {
 
 
   @Override
-  public void startGame(String boardConfigPath, String cardConfigPath, String playerOneName, String playerTwoName, boolean shuffle, ICombatRule rule) {
+  public void startGame(String boardConfigPath, String cardConfigPath,
+                        String playerOneName, String playerTwoName,
+                        boolean shuffle, ICombatRule rule) {
 
     // Make sure game is not started.
     assertGameNotStarted();
@@ -66,11 +68,11 @@ public class TripleTriadModel implements ITripleTriadModel {
     }
 
     // Make sure config file path are not null or empty
-    if(boardConfigPath == null || boardConfigPath.isEmpty()) {
+    if (boardConfigPath == null || boardConfigPath.isEmpty()) {
       throw new IllegalArgumentException("boardConfigPath cannot be null or empty");
     }
 
-    if(cardConfigPath == null || cardConfigPath.isEmpty()) {
+    if (cardConfigPath == null || cardConfigPath.isEmpty()) {
       throw new IllegalArgumentException("cardConfigPath cannot be null or empty");
     }
 
@@ -124,9 +126,9 @@ public class TripleTriadModel implements ITripleTriadModel {
   }
 
   @Override
-  public void playToGrid(int playerNumber, int cardIndex, int col_toPlay, int row_toPlay) {
+  public void playToGrid(int playerNumber, int cardIndex, int colToPlay, int rowToPlay) {
 
-    playToGridVariantChecker(playerNumber, cardIndex, col_toPlay, row_toPlay);
+    playToGridVariantChecker(playerNumber, cardIndex, colToPlay, rowToPlay);
 
     IPlayer playerToOperate;
 
@@ -137,8 +139,8 @@ public class TripleTriadModel implements ITripleTriadModel {
     }
 
     // Place card to grid, and start flipping with current rule.
-    this.gameGrid.placeCard(col_toPlay, row_toPlay, playerToOperate.popCardFromHand(cardIndex));
-    this.gameGrid.filp(col_toPlay, row_toPlay, this.rule);
+    this.gameGrid.placeCard(colToPlay, rowToPlay, playerToOperate.popCardFromHand(cardIndex));
+    this.gameGrid.filp(colToPlay, rowToPlay, this.rule);
 
     // After flipped, recalculate winning status
     calculateAndSetWinningStatus();
@@ -152,10 +154,11 @@ public class TripleTriadModel implements ITripleTriadModel {
    *
    * @param playerNumber Number of player.
    * @param cardIndex    Index of card, 0-based.
-   * @param col_toPlay   Col to play to, 0-based.
-   * @param row_toPlay   Row to play to, 0-based.
+   * @param colToPlay    Col to play to, 0-based.
+   * @param rowToPlay    Row to play to, 0-based.
    */
-  private void playToGridVariantChecker(int playerNumber, int cardIndex, int col_toPlay, int row_toPlay) {
+  private void playToGridVariantChecker(int playerNumber,
+                                        int cardIndex, int colToPlay, int rowToPlay) {
     //First, check if variables are legal.
     assertGameInProgress();
     if (playerNumber != 1 && playerNumber != 2) {
@@ -173,10 +176,10 @@ public class TripleTriadModel implements ITripleTriadModel {
         throw new IllegalArgumentException("Invalid card index");
       }
     }
-    if (col_toPlay >= this.gameGrid.getColNumber()) {
+    if (colToPlay >= this.gameGrid.getColNumber()) {
       throw new IllegalArgumentException("Invalid column number");
     }
-    if (row_toPlay >= this.gameGrid.getRowNumber()) {
+    if (rowToPlay >= this.gameGrid.getRowNumber()) {
       throw new IllegalArgumentException("Invalid row number");
     }
 

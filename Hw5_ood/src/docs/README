@@ -1,0 +1,36 @@
+Overview:
+The ThreeTrios project is a Java-based card game system that models a grid-based strategy game.
+Players place cards on a grid with the goal of outscoring their opponent by interacting with
+cards and cells under specific rules. The codebase is designed with extensibility in mind,
+allowing future enhancements of game rules or grid configurations.
+
+Key Components:
+Grid: The Grid class represents the playing field and is made up of a 2D array of cells. Each cell
+may hold a card (RegularCardCell) or be empty (RegularHole). The grid enforces the game’s rules by
+validating card placements.
+
+Player: The Player class represents each player, managing their name, identity, and hand (list of
+cards). Each player can add or remove cards from their hand, make moves on the grid, and interact
+with the game’s rules through their actions.
+
+Card and Combat Rules: ICard and its implementations define the values and owners of each card.
+ICombatRule and associated implementations handle rule-based card interactions, determining
+outcomes when cards are placed or compared on the grid.
+
+Key Subcomponents:
+RegularCard: Represents individual cards with specific values and owners.
+RegularCardCell and RegularHole: Cells in the grid that can either hold a card (RegularCardCell)
+or remain unoccupied (RegularHole).
+ICombatRule: Defines rules for card interactions, determining gameplay outcomes based on rules
+defined by implementations of ICombatRule.
+
+Source Organization
+source: The root directory containing all project source files.
+model: Holds the core components for gameplay, including:
+Player - Manages player information and actions.
+Grid - Represents the grid structure and controls cell interactions.
+Card - Includes card-related classes, representing the card values and ownership.
+Cells - Contains the types of cells (RegularCardCell, RegularHole) that make up the grid.
+Enums - Provides enumerations for standardized values like CardNumber, EPlayer, and CellType.
+Rule - Manages rule enforcement for card interactions.
+view: Responsible for rendering game states and displaying game information.

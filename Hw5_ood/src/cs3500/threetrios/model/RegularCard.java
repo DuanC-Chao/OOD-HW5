@@ -1,5 +1,8 @@
 package cs3500.threetrios.model;
 
+/**
+ * The functional class for RegularCard.
+ */
 public class RegularCard implements ICard {
 
   /**

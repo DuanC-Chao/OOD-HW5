@@ -1,6 +1,7 @@
 package cs3500.threetrios.view;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.CellType;
@@ -80,5 +81,10 @@ public class TripleTriadTextView implements TripleTriadView {
     }
 
     System.out.println(boardView.toString());
+  }
+
+  @Override
+  public void setMoveEventHandler(Consumer<Move> delegate) {
+
   }
 }

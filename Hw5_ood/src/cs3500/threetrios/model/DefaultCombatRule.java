@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Stack;
 
+import static cs3500.threetrios.model.MappingConfig.downLeftOriginMapping;
 import static cs3500.threetrios.model.TripleTriadUtilities.getCardValue;
 import static cs3500.threetrios.model.TripleTriadUtilities.getOppositeDirection;
 
@@ -37,11 +38,7 @@ public class DefaultCombatRule implements ICombatRule {
     stack.push(new int[]{col, row});
 
     // Mapping each enum Direction to an int[x, y]
-    Map<Direction, int[]> directionOffsets = new EnumMap<>(Direction.class);
-    directionOffsets.put(Direction.NORTH, new int[]{-1, 0});
-    directionOffsets.put(Direction.SOUTH, new int[]{1, 0});
-    directionOffsets.put(Direction.WEST, new int[]{0, -1});
-    directionOffsets.put(Direction.EAST, new int[]{0, 1});
+    Map<Direction, int[]> directionOffsets = downLeftOriginMapping();
 
     while (!stack.isEmpty()) {
       int[] position = stack.pop();

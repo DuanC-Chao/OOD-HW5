@@ -22,7 +22,13 @@ public class TripleTriadProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     TripleTriadView view = new TripleTriadTextView(model);
-    model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B", false, new DefaultCombatRule());
+    model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B", false, new DefaultCombatRule(), new AdvancedBot());
+    try {
+      view.render(System.out);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    model.playToGrid(1, 0, 0, 0);
     try {
       view.render(System.out);
     } catch (IOException e) {

@@ -41,7 +41,7 @@ public class BoardConfigReader {
       // Initialize grid.
       ICell[][] grid = new ICell[colNum][rowNum];
 
-      for (int row = 0; row < rowNum; row++) {
+      for (int row = grid[0].length - 1; row >= 0; row--) {
         String line = reader.readLine().trim();
 
         if (line.length() != colNum) {

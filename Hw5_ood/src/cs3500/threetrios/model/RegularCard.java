@@ -45,11 +45,12 @@ public class RegularCard implements ICard {
 
   /**
    * The Clone constructor.
+   *
    * @param north The north number of the card.
    * @param south The south number of the card.
-   * @param east The east number of the card.
-   * @param west The west number of the card.
-   * @param name The name.
+   * @param east  The east number of the card.
+   * @param west  The west number of the card.
+   * @param name  The name.
    * @param owner The owner.
    */
   public RegularCard(CardNumber north, CardNumber south, CardNumber east,
@@ -112,6 +113,24 @@ public class RegularCard implements ICard {
   @Override
   public CardNumber getEast() {
     return this.east;
+  }
+
+  @Override
+  public boolean myCompare(ICard other) {
+    if(other == null) {
+      return false;
+    }
+    //First, compare if card is in same class
+    if (other instanceof RegularCard) {
+      RegularCard otherCard = (RegularCard) other;
+      return
+        this.south == otherCard.south &&
+          this.east == otherCard.east &&
+          this.west == otherCard.west &&
+          this.north == otherCard.north &&
+          this.owner == otherCard.owner;
+    }
+    return false;
   }
 
   @Override

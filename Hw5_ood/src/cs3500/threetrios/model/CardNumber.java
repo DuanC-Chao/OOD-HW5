@@ -31,4 +31,12 @@ public enum CardNumber {
   public String toString() {
     return number + "";
   }
+
+  /**
+   * Get the number as int.
+   * @return An int number.
+   */
+  public int getNumber() {
+    return number;
+  }
 }

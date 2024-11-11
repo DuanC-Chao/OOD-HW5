@@ -26,9 +26,9 @@ public class TripleTriadTextView implements TripleTriadView {
   public void render(Appendable out) throws IOException {
     Appendable boardView = out;
     ICell[][] grid = model.getGrid();
-
-    for (ICell[] row : grid) {
-      for (ICell cell : row) {
+    
+    for (int row = grid.length - 1; row >= 0; row--) {
+      for (ICell cell : grid[row]) {
         String cellSymbol;
 
         if (cell.getType() == CellType.HOLE) {
@@ -48,7 +48,7 @@ public class TripleTriadTextView implements TripleTriadView {
 
         boardView.append(cellSymbol).append(" ");
       }
-      boardView.append("\n"); // New line after each row
+      boardView.append("\n");
     }
 
     boardView.append("\n");

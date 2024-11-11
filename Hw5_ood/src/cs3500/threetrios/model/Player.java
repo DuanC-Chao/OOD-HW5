@@ -19,6 +19,11 @@ public class Player implements IPlayer {
   private List<ICard> hand;
 
   /**
+   * The backup for hand, as the original state of hand At the start of game.
+   */
+  private List<ICard> backupHand;
+
+  /**
    * The player's name.
    */
   private String name;
@@ -33,6 +38,7 @@ public class Player implements IPlayer {
     this.identity = identity;
     this.name = name;
     this.hand = new ArrayList<>();
+    this.backupHand = new ArrayList<>();
   }
 
   /**
@@ -46,6 +52,10 @@ public class Player implements IPlayer {
     this.identity = identity;
     this.name = name;
     this.hand = hand;
+    this.backupHand = new ArrayList<>();
+    for (ICard card : hand) {
+      this.backupHand.add(card.makeClone());
+    }
   }
 
   @Override
@@ -84,11 +94,20 @@ public class Player implements IPlayer {
     while (this.hand.size() < numToDraw) {
       this.hand.add(deck.get(acc++).makeClone().setOwner(identity));
     }
+    acc = 0;
+    while (this.backupHand.size() < numToDraw) {
+      this.backupHand.add(deck.get(acc++).makeClone().setOwner(identity));
+    }
   }
 
   @Override
   public List<ICard> getHand() {
     return hand;
+  }
+
+  @Override
+  public List<ICard> getOriginalHand() {
+    return backupHand;
   }
 
   @Override

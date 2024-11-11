@@ -42,6 +42,12 @@ public interface IPlayer extends ICloneable<IPlayer> {
   List<ICard> getHand();
 
   /**
+   * Return the player's hand as the start of the game.
+   * @return Player's original hand.
+   */
+  List<ICard> getOriginalHand();
+
+  /**
    * Takes a 0-based card index from hand, and pop the card from the hand.
    * Pop means return the card, and remove the card from hand.
    * @param cardIdx The 0-based index of the card.

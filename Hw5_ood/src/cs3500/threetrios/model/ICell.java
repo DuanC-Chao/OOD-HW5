@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * Represent a Cell on the Grid.
  */
-public interface ICell extends ICloneable<ICell> {
+public interface ICell extends ICloneable<ICell>,MyComparable<ICell> {
 
   /**
    * Get the current card on the cell.
@@ -24,5 +24,11 @@ public interface ICell extends ICloneable<ICell> {
    * @return The cell type.
    */
   public CellType getType();
+
+  /**
+   * Return a boolean, represent if could place any card to the invoking cell.
+   * @return A boolean, represent if could play to the cell.
+   */
+  public boolean couldPlace();
 
 }

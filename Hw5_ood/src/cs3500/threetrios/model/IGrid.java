@@ -8,7 +8,7 @@ package cs3500.threetrios.model;
  * [0, maxRow] -> Top left corner
  * [maxCol, maxRow] -> Top right corner
  */
-public interface IGrid {
+public interface IGrid extends ICloneable<IGrid> {
 
   /**
    * Gets the total number of rows of the grid, start from 1.
@@ -44,6 +44,15 @@ public interface IGrid {
   public ICard getCard(int col, int row);
 
   /**
+   * Takes two 0-Based int, as col and row, gets the ICell on that coordinate.
+   * If col or row is out of bound, return null instead of throwing exception.
+   * @param col The 0-Based col to operate.
+   * @param row The 0-Based row to operate.
+   * @return An ICell.
+   */
+  public ICell getCell(int col, int row);
+
+  /**
    * Takes two 0-Based int, as col and row, and an ICard, try to place the card.
    * To the cell at [col, row].
    * throws CouldNotPlaceCardException If the cell wished to place card to is hole, or is full.
@@ -57,11 +66,28 @@ public interface IGrid {
   public void placeCard(int col, int row, ICard card);
 
   /**
-   * Takes coordinate of starting card and a rule, start filpping with the rule.
+   * Takes 0-Based coordinate of starting card and a rule, start filpping with the rule.
    * @param col the col of start card, 0-based.
    * @param row the row of start card, 0-based.
    * @param rule The rule wished to use.
    */
   public void filp(int col, int row, ICombatRule rule);
+
+  /**
+   * Takes a 0-Based coordinate, and check if could place card on the Cell of that coordinate.
+   * @param col The col to check.
+   * @param row The row to check.
+   * @return A boolean represent weather could place card.
+   */
+  public boolean isLegalMove(int col, int row);
+
+  /**
+   * Takes a o-Based coordinate, and return the owner of the card on that coord.
+   * @param col The col to check.
+   * @param row The row to check.
+   * @return An EPlayer, represent the owner of the card, return null if no card exist.
+   * @throws IllegalArgumentException If col or row is illegal.
+   */
+  public EPlayer getCardOwner(int col, int row);
 
 }

@@ -43,6 +43,11 @@ public class TripleTriadModel implements ITripleTriadModel {
   private EPlayer currentTurn;
 
   /**
+   * The bot to use for the game.
+   */
+  private IBot bot;
+
+  /**
    * The default constructor.
    */
   public TripleTriadModel() {
@@ -53,7 +58,7 @@ public class TripleTriadModel implements ITripleTriadModel {
   @Override
   public void startGame(String boardConfigPath, String cardConfigPath,
                         String playerOneName, String playerTwoName,
-                        boolean shuffle, ICombatRule rule) {
+                        boolean shuffle, ICombatRule rule, IBot bot) {
 
     // Make sure game is not started.
     assertGameNotStarted();
@@ -120,6 +125,9 @@ public class TripleTriadModel implements ITripleTriadModel {
     // Set the turn as Player one's turn
     this.currentTurn = EPlayer.PLAYER_ONE;
 
+    // Set the bot as passed.
+    this.bot = bot;
+
     // Set game as started
     markAsGameStart();
 
@@ -147,6 +155,9 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     // Proceed to next turn
     nextTurn();
+
+    // Call the bot to play
+    botPlay();
   }
 
   /**
@@ -208,6 +219,11 @@ public class TripleTriadModel implements ITripleTriadModel {
   }
 
   @Override
+  public IGrid getGridClone() {
+    return this.gameGrid.makeClone();
+  }
+
+  @Override
   public boolean isGameWon() {
     return this.gameStatus == GameStatus.PLAYER_ONE_WIN ||
       this.gameStatus == GameStatus.PLAYER_TWO_WIN;
@@ -221,6 +237,98 @@ public class TripleTriadModel implements ITripleTriadModel {
       return playerTwo.getName();
     }
     return null;
+  }
+
+  @Override
+  public int calculateFlips(EPlayer player, ICard card, int col, int row) {
+    //First, make a copy of gameGrid for a simulated flip
+    IGrid gridCopy = this.gameGrid.makeClone();
+
+    //Then, put card into that copy grid, and flip
+    gridCopy.placeCard(col, row, card);
+    gridCopy.filp(col, row, this.rule);
+
+    int result = 0;
+    ICell[][] innerGridCopy = gridCopy.getGrid();
+    ICell[][] innerCurrentGrid = this.getGrid();
+
+    //Then, calculate how many cards in flipped copy grid is different from the original grid
+    for (int column = 0; column < innerGridCopy.length; column++) {
+      for (int row_ = 0; row_ < innerGridCopy[0].length; row_++) {
+        if (!innerGridCopy[column][row_].myCompare(innerCurrentGrid[column][row_])) {
+          result++;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  @Override
+  public boolean isLegalMove(int col, int row) {
+    return this.gameGrid.isLegalMove(col, row);
+  }
+
+  @Override
+  public List<ICard> getPlayerHand(int playerNumber) {
+    if (playerNumber != 1 && playerNumber != 2) {
+      throw new IllegalArgumentException("Invalid player number");
+    }
+    if (playerNumber == 1) {
+      return this.playerOne.getHand();
+    }
+    return this.playerTwo.getHand();
+  }
+
+  @Override
+  public EPlayer getCardOwner(int col, int row) {
+    return this.gameGrid.getCardOwner(col, row);
+  }
+
+  @Override
+  public int getPlayerScore(int playerNumber) {
+    if (playerNumber != 1 && playerNumber != 2) {
+      throw new IllegalArgumentException("Invalid player number");
+    }
+    int pOneScore = 0;
+    int pTwoScore = 0;
+    for (int col = 0; col < this.gameGrid.getColNumber(); col++) {
+      for (int row = 0; row < this.gameGrid.getRowNumber(); row++) {
+        if (getCardOwner(col, row) == EPlayer.PLAYER_ONE) {
+          pOneScore++;
+        }
+        if (getCardOwner(col, row) == EPlayer.PLAYER_TWO) {
+          pTwoScore++;
+        }
+      }
+    }
+    if (playerNumber == 1) {
+      return pOneScore;
+    }
+    return pTwoScore;
+  }
+
+  @Override
+  public int isCorner(int col, int row) {
+    if (col == 0 && row == 0) {
+      return 3;
+    }
+    if (col == this.gameGrid.getColNumber() - 1 && row == this.gameGrid.getRowNumber() - 1) {
+      return 1;
+    }
+    if (col == this.gameGrid.getColNumber() - 1 && row == 0) {
+      return 2;
+    }
+    if(col == 0 && row == this.gameGrid.getRowNumber() - 1) {
+      return 4;
+    }
+
+    return 0;
+  }
+
+  @Override
+  public ICombatRule getCombatRule() {
+    return rule;
   }
 
   /**
@@ -271,6 +379,19 @@ public class TripleTriadModel implements ITripleTriadModel {
       currentTurn = EPlayer.PLAYER_TWO;
     } else if (currentTurn == EPlayer.PLAYER_TWO) {
       currentTurn = EPlayer.PLAYER_ONE;
+    }
+  }
+
+  /**
+   * The method to call the bot to play the turn.
+   */
+  private void botPlay() {
+    if (this.currentTurn == EPlayer.PLAYER_ONE) {
+      return;
+    }
+    if (this.bot != null) {
+      bot.play(this);
+      nextTurn();
     }
   }
 

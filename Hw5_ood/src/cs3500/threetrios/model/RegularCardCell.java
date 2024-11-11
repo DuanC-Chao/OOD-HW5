@@ -49,6 +49,26 @@ public class RegularCardCell implements ICell {
   }
 
   @Override
+  public boolean couldPlace() {
+    return this.card == null;
+  }
+
+  @Override
+  public boolean myCompare(ICell other) {
+    if(other == null) {
+      return false;
+    }
+    if (!(other instanceof RegularCardCell)) {
+      return false;
+    }
+    RegularCardCell otherCell = (RegularCardCell) other;
+    if(this.card == null) {
+      return otherCell.card == null;
+    }
+    return this.card.equals(otherCell.card);
+  }
+
+  @Override
   public ICell makeClone() {
     if (this.card == null) {
       return new RegularCardCell();

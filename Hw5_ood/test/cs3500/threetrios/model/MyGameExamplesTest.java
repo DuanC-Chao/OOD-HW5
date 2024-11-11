@@ -10,6 +10,7 @@ import cs3500.threetrios.view.TripleTriadView;
 
 /**
  * Testing with a example model, along with sinple view.
+ * N S E W
  */
 public class MyGameExamplesTest {
 
@@ -36,7 +37,7 @@ public class MyGameExamplesTest {
     resetModel();
     TripleTriadView view = new TripleTriadTextView(model);
     model.startGame(boardConfigPath_Big, cardConfigPath, "A",
-        "B", false, new DefaultCombatRule());
+        "B", false, new DefaultCombatRule(), null);
     Appendable output = new StringBuilder();
     try {
       view.render(output);
@@ -101,13 +102,13 @@ public class MyGameExamplesTest {
   @Test
   public void testIfCouldPlaceCardAndFlip() {
     String expected =
-        " R   _   _   X   _  \n" +
-        " R   _   X   _   _  \n" +
+        " _   _   _   X   _  \n" +
         " _   _   X   _   _  \n" +
         " _   _   X   _   _  \n" +
         " _   _   X   _   _  \n" +
-        " _   X   X   _   _  \n" +
-        " _   X   _   _   _  \n" +
+        " _   _   X   _   _  \n" +
+        " R   X   X   _   _  \n" +
+        " R   X   _   _   _  \n" +
         "\n" +
         "Player One Cards: \n" +
         "Dragon 2 3 4 5\n" +
@@ -150,7 +151,7 @@ public class MyGameExamplesTest {
     resetModel();
     TripleTriadView view = new TripleTriadTextView(model);
     model.startGame(boardConfigPath_Big, cardConfigPath, "A",
-        "B", false, new DefaultCombatRule());
+        "B", false, new DefaultCombatRule(), null);
     model.playToGrid(1, 0, 0, 0);
     model.playToGrid(2, 0, 0, 1);
     Appendable output = new StringBuilder();
@@ -169,13 +170,13 @@ public class MyGameExamplesTest {
   @Test
   public void testCombo() {
     String expected =
-        " B   _   _   X   _  \n" +
-        " B   _   X   _   _  \n" +
-        " B   _   X   _   _  \n" +
+        " _   _   _   X   _  \n" +
         " _   _   X   _   _  \n" +
         " _   _   X   _   _  \n" +
-        " _   X   X   _   _  \n" +
-        " _   X   _   _   _  \n" +
+        " _   _   X   _   _  \n" +
+        " B   _   X   _   _  \n" +
+        " B   X   X   _   _  \n" +
+        " B   X   _   _   _  \n" +
         "\n" +
         "Player One Cards: \n" +
         "Dragon 2 3 4 5\n" +
@@ -217,7 +218,7 @@ public class MyGameExamplesTest {
     resetModel();
     TripleTriadView view = new TripleTriadTextView(model);
     model.startGame(boardConfigPath_Big, cardConfigPath, "A",
-        "B", false, new DefaultCombatRule());
+        "B", false, new DefaultCombatRule(), null);
     model.playToGrid(1, 0, 0, 0);
     model.playToGrid(2, 0, 0, 1);
     model.playToGrid(1, 2, 0, 2);

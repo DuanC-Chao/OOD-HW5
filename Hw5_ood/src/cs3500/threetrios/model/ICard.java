@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * Represent a Card in the game.
  */
-public interface ICard extends ICloneable<ICard> {
+public interface ICard extends ICloneable<ICard>,MyComparable<ICard> {
 
   /**
    * Set the Numbers for the card.

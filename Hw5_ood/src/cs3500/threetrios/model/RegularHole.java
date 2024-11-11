@@ -28,6 +28,19 @@ public class RegularHole implements ICell {
   }
 
   @Override
+  public boolean couldPlace() {
+    return false;
+  }
+
+  @Override
+  public boolean myCompare(ICell other) {
+    if(other == null) {
+      return false;
+    }
+    return other instanceof RegularHole;
+  }
+
+  @Override
   public ICell makeClone() {
     return new RegularHole();
   }

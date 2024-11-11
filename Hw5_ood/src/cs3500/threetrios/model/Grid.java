@@ -58,6 +58,15 @@ public class Grid implements IGrid {
   }
 
   @Override
+  public ICell getCell(int col, int row) {
+    if (col < 0 || col >= getColNumber() || row < 0 || row >= getRowNumber()) {
+      return null;
+    }
+
+    return grid[col][row];
+  }
+
+  @Override
   public void placeCard(int col, int row, ICard card) {
 
     if (col < 0 || col >= getColNumber() || row < 0 || row >= getRowNumber()) {
@@ -70,6 +79,31 @@ public class Grid implements IGrid {
   @Override
   public void filp(int col, int row, ICombatRule rule) {
     rule.flip(this.grid, col, row);
+  }
+
+  @Override
+  public boolean isLegalMove(int col, int row) {
+    if (col < 0 || col >= getColNumber() || row < 0 || row >= getRowNumber()) {
+      return false;
+    }
+    return this.grid[col][row].couldPlace();
+  }
+
+  @Override
+  public EPlayer getCardOwner(int col, int row) {
+    if (col < 0 || col >= getColNumber() || row < 0 || row >= getRowNumber()) {
+      throw new IllegalArgumentException();
+    }
+    if (this.grid[col][row].getCard() != null) {
+      EPlayer result = null;
+      try {
+        result = this.grid[col][row].getCard().getOwner();
+      } catch (IllegalStateException e) {
+        result = null;
+      }
+      return result;
+    }
+    return null;
   }
 
   /**
@@ -86,6 +120,9 @@ public class Grid implements IGrid {
     for (int row = 0; row < grid.length; row++) {
       for (int col = 0; col < grid[row].length; col++) {
         ICell cell = grid[row][col];
+        if(cell == null) {
+          throw new IllegalArgumentException();
+        }
         if (cell.getType() == CellType.CARD_CELL) {
           cardCellNum++;
         }
@@ -96,4 +133,14 @@ public class Grid implements IGrid {
     }
   }
 
+  @Override
+  public IGrid makeClone() {
+    ICell[][] newGrid = new ICell[getColNumber()][getRowNumber()];
+    for (int col = 0; col < newGrid.length; col++) {
+      for (int row = 0; row < newGrid[col].length; row++) {
+        newGrid[col][row] = grid[col][row].makeClone();
+      }
+    }
+    return new Grid(newGrid);
+  }
 }

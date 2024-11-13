@@ -13,12 +13,14 @@ public interface TripleTriadView {
 
   /**
    * Render the model.
+   *
    * @param out The appendable.
    */
   void render(Appendable out) throws IOException;
 
   /**
    * Takes a delegate from controller, which should be the method handling the move logic.
+   *
    * @param delegate The fuctional object to pass to view.
    */
   void setMoveEventHandler(Consumer<Move> delegate);
@@ -34,8 +36,9 @@ public interface TripleTriadView {
 
     /**
      * The constructor of Move.
-     * @param player The player of chosen.
-     * @param cardIdx The card index in player's hand/
+     *
+     * @param player      The player of chosen.
+     * @param cardIdx     The card index in player's hand/
      * @param play_to_col The col to play to.
      * @param play_to_row The row to play to.
      */

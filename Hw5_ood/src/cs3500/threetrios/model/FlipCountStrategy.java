@@ -4,7 +4,7 @@ package cs3500.threetrios.model;
  * Adjust a Play's Score by.
  * The number of cards it could flip.
  */
-public class FlipCountStrategy implements IStrategy{
+public class FlipCountStrategy implements IStrategy {
 
   @Override
   public void adjustPlayScore(ReadOnlyTripleTriadModel model, Play play) {

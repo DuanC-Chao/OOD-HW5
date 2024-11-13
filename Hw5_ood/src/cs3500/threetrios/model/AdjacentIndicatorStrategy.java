@@ -101,6 +101,4 @@ public class AdjacentIndicatorStrategy implements IStrategy {
   static double normalize(int num) {
     return ((double) num + 40) / 2 - 15;
   }
-
-
 }

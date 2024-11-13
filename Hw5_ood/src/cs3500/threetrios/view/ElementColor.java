@@ -20,6 +20,7 @@ public enum ElementColor {
 
   /**
    * Get the color hex.
+   *
    * @return The color hex, as a String.
    */
   public String toString() {

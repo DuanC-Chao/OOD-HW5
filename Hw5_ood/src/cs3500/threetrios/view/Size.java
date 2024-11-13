@@ -15,6 +15,7 @@ public enum Size {
 
   /**
    * Get the size of the Enum instance.
+   *
    * @return The size.
    */
   public int getSize() {

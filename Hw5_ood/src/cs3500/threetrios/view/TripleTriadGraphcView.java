@@ -20,8 +20,7 @@ public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
   private IHandPanel playerOneHandPanel;
   private IHandPanel playerTwoHandPanel;
 
-  private IGridPanel gridPanel
-    ;
+  private IGridPanel gridPanel;
   private Consumer<Move> moveHandler;  // 用于处理用户动作的事件处理器
 
   public TripleTriadGraphcView(ReadOnlyTripleTriadModel model) {
@@ -37,13 +36,13 @@ public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
     // Dynamically decide the width
     int width = model.getGridClone().getColNumber() * 100 + 400;
 
-    if(width > 1920) {
+    if (width > 1920) {
       width = 1920;
     }
 
     int height = model.getPlayerHand(1).size() * 150 + 20;
 
-    if(height > 1080) {
+    if (height > 1080) {
       height = 1080;
     }
 

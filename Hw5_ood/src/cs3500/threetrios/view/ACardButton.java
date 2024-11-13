@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
 
 /**
@@ -141,7 +140,7 @@ public abstract class ACardButton extends JButton implements ICardButton {
   public void setPreferredYValue(int yValue) {
     setPreferredSize(new Dimension(100, yValue));
     int ratio = 4;
-    if(yValue < Size.CARD_HEIGHT.getSize()) {
+    if (yValue < Size.CARD_HEIGHT.getSize()) {
       ratio = (yValue / Size.CARD_HEIGHT.getSize()) * 4;
     }
     setLabelDistanceWithBound(4, ratio);

@@ -1,7 +1,5 @@
 package cs3500.threetrios.view;
 
-import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
-
 /**
  * An Interface, provide Panel, Frame or other components the ability of refresh.
  * Refresh with model's status.

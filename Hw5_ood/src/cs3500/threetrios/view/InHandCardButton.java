@@ -1,10 +1,5 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
-
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-
 import cs3500.threetrios.model.ICard;
 
 /**
@@ -17,7 +12,8 @@ public class InHandCardButton extends ACardButton implements IinHandCardButton {
 
   /**
    * The contructor of InHandCardButton.
-   * @param card The card to assign to the CardButton.
+   *
+   * @param card    The card to assign to the CardButton.
    * @param cardIdx The Index of card in hand.
    */
   public InHandCardButton(ICard card, int cardIdx, String color) {

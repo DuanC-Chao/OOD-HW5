@@ -12,6 +12,7 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
 
   /**
    * The default constructor.
+   *
    * @param card The card.
    */
   public OnCellCardButton(ICard card) {
@@ -22,6 +23,7 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
 
   /**
    * Another constructor that takes a InHandCardButton and convert into a OnGridCardButton.
+   *
    * @param cardButton The InHandCardButton.
    */
   public OnCellCardButton(IinHandCardButton cardButton) {
@@ -42,12 +44,12 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
    * Helper method. set itself's color based on card's owner.
    */
   private void setColor() {
-    if(logicalCard.getOwner() == null) {
+    if (logicalCard.getOwner() == null) {
       throw new IllegalStateException();
     }
-    if(logicalCard.getOwner() == EPlayer.PLAYER_ONE) {
+    if (logicalCard.getOwner() == EPlayer.PLAYER_ONE) {
       this.changeColor(ElementColor.PLAYER_ONE_COLOR.toString());
-    } else if(logicalCard.getOwner() == EPlayer.PLAYER_TWO) {
+    } else if (logicalCard.getOwner() == EPlayer.PLAYER_TWO) {
       this.changeColor(ElementColor.PLAYER_TWO_COLOR.toString());
     }
   }

@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.CellType;
-import cs3500.threetrios.model.ITripleTriadModel;
 import cs3500.threetrios.model.ICell;
 import cs3500.threetrios.model.IPlayer;
 import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
@@ -25,6 +24,7 @@ public class TripleTriadTextView implements TripleTriadView {
 
   /**
    * The default constructor.
+   *
    * @param model The model to be assigned to the view.
    */
   public TripleTriadTextView(ReadOnlyTripleTriadModel model) {
@@ -35,7 +35,7 @@ public class TripleTriadTextView implements TripleTriadView {
   public void render(Appendable out) throws IOException {
     Appendable boardView = out;
     ICell[][] grid = model.getGrid();
-    
+
     for (int row = grid.length - 1; row >= 0; row--) {
       for (ICell cell : grid[row]) {
         String cellSymbol;

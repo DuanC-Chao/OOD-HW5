@@ -5,6 +5,9 @@ import cs3500.threetrios.model.ITripleTriadModel;
 import cs3500.threetrios.model.PredefinedBot;
 import cs3500.threetrios.model.TripleTriadModel;
 
+/**
+ * The main for graphic view, just for test.
+ */
 public class ViewTestProgram {
 
   public static void main(String[] args) throws InterruptedException {

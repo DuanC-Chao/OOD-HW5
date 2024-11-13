@@ -10,7 +10,7 @@ import static cs3500.threetrios.model.TripleTriadUtilities.getCardValue;
  * Two, if play to corner will hide a card's advantages sides.
  * For more information, check AdvancedBotDocument.txt
  */
-public class CornerStrategy implements IStrategy{
+public class CornerStrategy implements IStrategy {
 
   /**
    * Check if the plays a card on corner will hide a card's advantage.

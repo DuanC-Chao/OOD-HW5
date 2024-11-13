@@ -4,12 +4,10 @@ import java.awt.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.text.View;
 
 import cs3500.threetrios.model.ICell;
 import cs3500.threetrios.model.IGrid;
 import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
-import cs3500.threetrios.model.TripleTriadModel;
 import cs3500.threetrios.model.Tuple;
 
 import static cs3500.threetrios.view.ViewUtils.toGridLayoutList;
@@ -32,6 +30,7 @@ public class GridPanel extends JPanel implements IGridPanel {
 
   /**
    * The default constructor.
+   *
    * @param model The model of the game.
    */
   public GridPanel(ReadOnlyTripleTriadModel model) {
@@ -66,7 +65,7 @@ public class GridPanel extends JPanel implements IGridPanel {
     // Remove all components before updating grid panel.
     removeAll();
 
-    for(Tuple<ICell, Tuple<Integer, Integer>> tuple : loICell) {
+    for (Tuple<ICell, Tuple<Integer, Integer>> tuple : loICell) {
       ICell cell = tuple.getFirst();
       int col = tuple.getSecond().getFirst();
       int row = tuple.getSecond().getSecond();

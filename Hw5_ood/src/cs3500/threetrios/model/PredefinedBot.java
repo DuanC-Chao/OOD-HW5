@@ -23,6 +23,7 @@ public enum PredefinedBot {
 
   /**
    * Get the bot of the enum.
+   *
    * @return The bot.
    */
   public IBot getBot() {

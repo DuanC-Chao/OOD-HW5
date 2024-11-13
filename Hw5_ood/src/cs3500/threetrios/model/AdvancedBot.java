@@ -12,11 +12,12 @@ import java.util.List;
  */
 public class AdvancedBot extends ABot {
 
-  List<IStrategy> strategies = new ArrayList<>();
+  List<IStrategy> strategies;
 
   /**
    * Default constructor for AdvancedBot.
    * Notice: Sequence of Strategies in list DOES MATTER.
+   *
    * @param strategies The strategies composed.
    */
   public AdvancedBot(List<IStrategy> strategies) {
@@ -42,7 +43,7 @@ public class AdvancedBot extends ABot {
 
     // Iterate each play and change their scores
     for (Play play : loPlays) {
-      for(IStrategy strategy : strategies) {
+      for (IStrategy strategy : strategies) {
         strategy.adjustPlayScore(model, play);
       }
     }

@@ -15,9 +15,9 @@ public class FixSizerPanel<T> extends JPanel {
    * Constructs a FixSizerPanel to wrap a component and center it.
    *
    * @param component The component to wrap.
-   * @param color The color for Fixsizer Background.
-   * @param width The wished width for FixSizer.
-   * @param height The wished height for FixSizer.
+   * @param color     The color for Fixsizer Background.
+   * @param width     The wished width for FixSizer.
+   * @param height    The wished height for FixSizer.
    */
   public FixSizerPanel(T component, int width, int height, ElementColor color) {
     this.wrappedComponent = component;
@@ -39,6 +39,7 @@ public class FixSizerPanel<T> extends JPanel {
 
   /**
    * Gets the wrapped component.
+   *
    * @return The component wrapped by this FixSizerPanel.
    */
   public T getWrappedComponent() {

@@ -7,7 +7,7 @@ HW6 modification:
 Extra Credit: Made a Composable AdvancedBot, which takes Multiple Strategies, Strategies are defined in
 IStrategy Interface and implementation classes.
 
-View: A full-functional view, cards could be clicked, and 
+View: A full-functional view, cards could be clicked, and
 
 
 //-----------------------------------------------------------------------------------------------------

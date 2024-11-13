@@ -55,6 +55,7 @@ public class HandPanel extends JPanel implements IHandPanel {
    * The list of ICard will be considered player's hand.
    * Added as InHandCardButton, their sequence are determined by index in the list.
    * Index 0 is on the top of CardPanel, index list.size() - 1 is on the bottom.
+   *
    * @param cards The List of logical cards.
    */
   private void updateHand(List<ICard> cards) {
@@ -113,12 +114,13 @@ public class HandPanel extends JPanel implements IHandPanel {
 
   /**
    * Get the color Hex based on this HandPanel's player.
+   *
    * @return A Stirng of color hex.
    */
   private String getColorBasedOnPlayer() {
-    if(this.player == EPlayer.PLAYER_ONE) {
+    if (this.player == EPlayer.PLAYER_ONE) {
       return ElementColor.PLAYER_ONE_COLOR.toString();
-    } else if(this.player == EPlayer.PLAYER_TWO) {
+    } else if (this.player == EPlayer.PLAYER_TWO) {
       return ElementColor.PLAYER_TWO_COLOR.toString();
     } else {
       throw new IllegalArgumentException("Unknown player " + this.player);

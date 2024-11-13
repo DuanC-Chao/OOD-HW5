@@ -34,3 +34,6 @@ Cells - Contains the types of cells (RegularCardCell, RegularHole) that make up 
 Enums - Provides enumerations for standardized values like CardNumber, EPlayer, and CellType.
 Rule - Manages rule enforcement for card interactions.
 view: Responsible for rendering game states and displaying game information.
+
+
+Changes for part 2:

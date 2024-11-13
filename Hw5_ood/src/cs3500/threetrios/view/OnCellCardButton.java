@@ -1,5 +1,8 @@
 package cs3500.threetrios.view;
 
+import java.awt.*;
+
+import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
 
 /**
@@ -13,6 +16,8 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
    */
   public OnCellCardButton(ICard card) {
     super(card);
+    setColor();
+    setMinimumSize(new Dimension(100, Size.CARD_HEIGHT.getSize()));
   }
 
   /**
@@ -31,5 +36,19 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
   @Override
   protected void configStyle() {
 
+  }
+
+  /**
+   * Helper method. set itself's color based on card's owner.
+   */
+  private void setColor() {
+    if(logicalCard.getOwner() == null) {
+      throw new IllegalStateException();
+    }
+    if(logicalCard.getOwner() == EPlayer.PLAYER_ONE) {
+      this.changeColor(ElementColor.PLAYER_ONE_COLOR.toString());
+    } else if(logicalCard.getOwner() == EPlayer.PLAYER_TWO) {
+      this.changeColor(ElementColor.PLAYER_TWO_COLOR.toString());
+    }
   }
 }

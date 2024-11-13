@@ -50,9 +50,19 @@ public class CellButton extends JButton implements ICellButton {
     this.setPreferredSize(new Dimension(102, Size.CARD_HEIGHT.getSize() + 2));
     this.setMaximumSize(new Dimension(102, Size.CARD_HEIGHT.getSize() + 2));
 
+    setLayout(new GridBagLayout());
+
+    // Wrapped Component will always be centered.
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.anchor = GridBagConstraints.CENTER;
+
     selfDetermineColor();
     configStyle();
 
+    // Load card from logical cell.
+    asyncCardFromCell();
   }
 
   @Override
@@ -82,6 +92,9 @@ public class CellButton extends JButton implements ICellButton {
     ICard card = this.logicalCell.getCard();
     if (card != null) {
       this.cardButton = new OnCellCardButton(card);
+      this.add((Component) cardButton);
+    } else {
+      System.out.println("Cell has no card");
     }
   }
 

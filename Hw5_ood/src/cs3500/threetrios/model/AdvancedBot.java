@@ -52,7 +52,8 @@ public class AdvancedBot extends ABot {
 
     /**
      * Multiple iteration times, with index.
-     * @param index The index.
+     *
+     * @param index     The index.
      * @param iteration The iteratiom time.
      */
     public void multiplyScore(double index, int iteration) {
@@ -205,11 +206,12 @@ public class AdvancedBot extends ABot {
     Play chosenPlay = loPlays.get(0);
 
     for (Play play : loPlays) {
-      if(play.score > chosenPlay.score) {
+      if (play.score > chosenPlay.score) {
         chosenPlay = play;
       }
     }
 
+    /*
     for (Play play : loPlays) {
       System.out.println("\n");
       System.out.println("Card: " + play.cardIdx + "\n");
@@ -218,6 +220,7 @@ public class AdvancedBot extends ABot {
       System.out.println("Score: " + play.score + "\n");
       System.out.println("\n");
     }
+     */
 
     model.playToGrid(2, chosenPlay.cardIdx, chosenPlay.colToPlay, chosenPlay.rowToPlay);
   }

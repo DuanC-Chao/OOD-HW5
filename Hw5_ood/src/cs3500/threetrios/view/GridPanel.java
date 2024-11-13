@@ -63,6 +63,9 @@ public class GridPanel extends JPanel implements IGridPanel {
   private void updateGrid() {
     List<Tuple<ICell, Tuple<Integer, Integer>>> loICell = toGridLayoutList(this.model.getGrid());
 
+    // Remove all components before updating grid panel.
+    removeAll();
+
     for(Tuple<ICell, Tuple<Integer, Integer>> tuple : loICell) {
       ICell cell = tuple.getFirst();
       int col = tuple.getSecond().getFirst();

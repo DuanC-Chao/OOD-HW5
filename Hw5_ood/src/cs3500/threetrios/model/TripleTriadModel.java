@@ -391,7 +391,7 @@ public class TripleTriadModel implements ITripleTriadModel {
     }
     if (this.bot != null) {
       bot.play(this);
-      nextTurn();
+      System.out.println("Bot played\n");
     }
   }
 

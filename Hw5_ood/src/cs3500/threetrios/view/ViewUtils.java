@@ -32,8 +32,8 @@ public class ViewUtils {
    */
   public static <T> List<Tuple<T,Tuple<Integer, Integer>>> toGridLayoutList(T[][] grid) {
     List<Tuple<T,Tuple<Integer, Integer>>> list = new ArrayList<>();
-    int rows = grid[0].length;
-    int cols = grid.length;
+    int cols = grid[0].length;
+    int rows = grid.length;
 
     for (int row = rows - 1; row >= 0; row--) {
       for (int col = 0; col < cols; col++) {

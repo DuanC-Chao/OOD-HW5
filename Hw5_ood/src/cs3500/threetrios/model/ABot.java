@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The abstract class of Bot.
  */
-public class ABot implements IBot {
+public abstract class ABot implements IBot {
 
   @Override
   public void play(ITripleTriadModel model) {

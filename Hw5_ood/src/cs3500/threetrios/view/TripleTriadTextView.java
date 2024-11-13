@@ -8,6 +8,7 @@ import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.ITripleTriadModel;
 import cs3500.threetrios.model.ICell;
 import cs3500.threetrios.model.IPlayer;
+import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
 
 import static cs3500.threetrios.model.EPlayer.PLAYER_ONE;
 import static cs3500.threetrios.model.EPlayer.PLAYER_TWO;
@@ -16,9 +17,17 @@ import static cs3500.threetrios.model.EPlayer.PLAYER_TWO;
  * The pure text view for TripleTriad game.
  */
 public class TripleTriadTextView implements TripleTriadView {
-  private final ITripleTriadModel model;
 
-  public TripleTriadTextView(ITripleTriadModel model) {
+  /**
+   * The model, stored as a field in view.
+   */
+  private final ReadOnlyTripleTriadModel model;
+
+  /**
+   * The default constructor.
+   * @param model The model to be assigned to the view.
+   */
+  public TripleTriadTextView(ReadOnlyTripleTriadModel model) {
     this.model = model;
   }
 

@@ -93,8 +93,6 @@ public class CellButton extends JButton implements ICellButton {
     if (card != null) {
       this.cardButton = new OnCellCardButton(card);
       this.add((Component) cardButton);
-    } else {
-      System.out.println("Cell has no card");
     }
   }
 

@@ -16,6 +16,8 @@ public abstract class ACardButton extends JButton implements ICardButton {
 
   ICard logicalCard;
 
+  GridBagConstraints gbc;
+
   private JLabel northLabel;
   private JLabel southLabel;
   private JLabel eastLabel;
@@ -76,14 +78,22 @@ public abstract class ACardButton extends JButton implements ICardButton {
     this.add(eastLabel);
     this.add(westLabel);
 
-    GridBagConstraints gbc = new GridBagConstraints();
+    gbc = new GridBagConstraints();
 
-    // Adjust distance with Top and Bottom bounds
-    // Lower = Closer to the center of the Button
-    int yOffset = 4;
+    // Settle labels coordinate.
+    setLabelDistanceWithBound(4, 4);
+  }
 
-    // Adjust distance with left and right bounds
-    int xOffset = 4;
+  /**
+   * Helper method, settle the Distance of lebel with bound with a ratio.
+   * Lower = Closer to the center.
+   *
+   * @param xOffset The x offset ratio.
+   * @param yOffset The y offset ratio.
+   */
+  private void setLabelDistanceWithBound(int xOffset, int yOffset) {
+    // First remove all labels.
+    removeAll();
 
     gbc.insets = new Insets(yOffset, xOffset, yOffset, xOffset);
 
@@ -130,6 +140,11 @@ public abstract class ACardButton extends JButton implements ICardButton {
   @Override
   public void setPreferredYValue(int yValue) {
     setPreferredSize(new Dimension(100, yValue));
+    int ratio = 4;
+    if(yValue < Size.CARD_HEIGHT.getSize()) {
+      ratio = (yValue / Size.CARD_HEIGHT.getSize()) * 4;
+    }
+    setLabelDistanceWithBound(4, ratio);
   }
 
   @Override

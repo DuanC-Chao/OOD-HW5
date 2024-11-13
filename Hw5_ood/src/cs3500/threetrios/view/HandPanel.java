@@ -63,11 +63,9 @@ public class HandPanel extends JPanel implements IHandPanel {
     if (840 / cards.size() < Size.CARD_HEIGHT.getSize()) {
       wishedHeight = 840 / cards.size();
     }
-    System.out.println("Should be: " + cards.size() + " CardButtons added \n");
     for (int i = 0; i < cards.size(); i++) {
       addSingleCard(cards.get(i), i, i == cards.size() - 1, wishedHeight);
     }
-    System.out.println("Alcutally added: " + this.getComponentCount() + " CardButtons \n");
   }
 
   /**

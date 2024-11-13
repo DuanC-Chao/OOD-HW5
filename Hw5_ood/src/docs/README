@@ -1,4 +1,19 @@
 Overview:
+
+Quick Start:
+
+HW6 modification:
+
+Extra Credit: Made a Composable AdvancedBot, which takes Multiple Strategies, Strategies are defined in
+IStrategy Interface and implementation classes.
+
+View: A full-functional view, cards could be clicked, and 
+
+
+//-----------------------------------------------------------------------------------------------------
+
+Details:
+
 The ThreeTrios project is a Java-based card game system that models a grid-based strategy game.
 Players place cards on a grid with the goal of outscoring their opponent by interacting with
 cards and cells under specific rules. The codebase is designed with extensibility in mind,

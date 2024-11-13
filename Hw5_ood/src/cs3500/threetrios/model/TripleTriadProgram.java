@@ -22,7 +22,8 @@ public class TripleTriadProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     TripleTriadView view = new TripleTriadTextView(model);
-    model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B", false, new DefaultCombatRule(), new AdvancedBot());
+    model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B",
+      false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
 
     System.out.println("Grid Col: " + model.getGrid().length);
     System.out.println("Grid Row: " + model.getGrid()[0].length);

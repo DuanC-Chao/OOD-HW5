@@ -9,9 +9,7 @@ import java.util.List;
 public abstract class ABot implements IBot {
 
   @Override
-  public void play(ITripleTriadModel model) {
-    return;
-  }
+  public abstract void play(ITripleTriadModel model);
 
   /**
    * Get a list of all coordinates that allows bot to place a card on.

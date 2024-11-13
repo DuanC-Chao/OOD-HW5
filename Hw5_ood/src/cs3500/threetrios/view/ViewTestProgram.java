@@ -1,8 +1,8 @@
 package cs3500.threetrios.view;
 
-import cs3500.threetrios.model.AdvancedBot;
 import cs3500.threetrios.model.DefaultCombatRule;
 import cs3500.threetrios.model.ITripleTriadModel;
+import cs3500.threetrios.model.PredefinedBot;
 import cs3500.threetrios.model.TripleTriadModel;
 
 public class ViewTestProgram {
@@ -17,7 +17,7 @@ public class ViewTestProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B",
-      false, new DefaultCombatRule(), new AdvancedBot());
+      false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
     TripleTriadGraphcView view = new TripleTriadGraphcView(model);
 
     //model.playToGrid(1, 0, 0, 0);

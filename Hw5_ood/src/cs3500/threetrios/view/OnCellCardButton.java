@@ -2,6 +2,8 @@ package cs3500.threetrios.view;
 
 import java.awt.*;
 
+import javax.swing.*;
+
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
 
@@ -37,7 +39,16 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
 
   @Override
   protected void configStyle() {
-
+    // Disable clicking highlighting and hover highlighting
+    this.putClientProperty("Nimbus.Overrides", new UIDefaults() {{
+      put("Button[Enabled].backgroundPainter", null);
+      put("Button[MouseOver].backgroundPainter", null);
+      put("Button[Pressed].backgroundPainter", null);
+      put("Button[Focused].backgroundPainter", null);
+    }});
+    this.setContentAreaFilled(false);
+    this.setOpaque(true);
+    this.setBorderPainted(false);
   }
 
   /**
@@ -53,4 +64,5 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
       this.changeColor(ElementColor.PLAYER_TWO_COLOR.toString());
     }
   }
+
 }

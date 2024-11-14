@@ -1,5 +1,9 @@
 package cs3500.threetrios.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.function.Consumer;
+
 import cs3500.threetrios.model.ICard;
 
 /**
@@ -9,6 +13,11 @@ import cs3500.threetrios.model.ICard;
 public class InHandCardButton extends ACardButton implements IinHandCardButton {
 
   private final int cardIdx;
+
+  /**
+   * The delegate about picking a card.
+   */
+  private Consumer<Pick> delegate;
 
   /**
    * The contructor of InHandCardButton.
@@ -23,11 +32,29 @@ public class InHandCardButton extends ACardButton implements IinHandCardButton {
     // Only invoked in InHandCardButton's constructor
     // Since for OnGridCardButton, there will be different logic of setting color
     changeColor(color);
+
+    this.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Just for test, remove after implement Controller.
+        System.out.println("Card Button with Index: " + cardIdx + "Pressed\n");
+
+        // Controller will be dealing with the "Selected Card Buffer".
+        if(InHandCardButton.this.delegate != null) {
+          delegate.accept(new Pick(InHandCardButton.this.logicalCard.getOwner(), cardIdx));
+        }
+      }
+    });
   }
 
   @Override
   public int getCardIndex() {
     return cardIdx;
+  }
+
+  @Override
+  public void passPickDelegate(Consumer<Pick> delegate) {
+
   }
 
   @Override

@@ -93,7 +93,7 @@ public class TripleTriadTextView implements TripleTriadView {
   }
 
   @Override
-  public void setMoveEventHandler(Consumer<Move> delegate) {
-
+  public void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate) {
+    return;
   }
 }

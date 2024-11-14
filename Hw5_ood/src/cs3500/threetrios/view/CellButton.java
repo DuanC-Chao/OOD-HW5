@@ -1,6 +1,9 @@
 package cs3500.threetrios.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.function.Consumer;
 
 import javax.swing.*;
 
@@ -29,6 +32,12 @@ public class CellButton extends JButton implements ICellButton {
    * The row of the cell on the grid, 0-Based.
    */
   private int cellRow;
+
+  /**
+   * The Delegate of "Move card from buffer to this Cell".
+   * Should be provided by Controller.
+   */
+  private Consumer<Move> delegate;
 
   /**
    * The On Cell CardButton it holds.
@@ -65,6 +74,26 @@ public class CellButton extends JButton implements ICellButton {
     asyncCardFromCell();
   }
 
+  /**
+   * Set the listener of itself being pressed.
+   * And call delegate.
+   */
+  private void setListener() {
+    this.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Just for test, remove after implement Controller.
+        System.out.println("Cell Button with Col: " + CellButton.this.cellCol +
+          ", Row: " + CellButton.this.cellRow + " Pressed\n");
+
+        // Controller will be dealing with the "Put from buffer to this coord".
+        if(CellButton.this.delegate != null) {
+          delegate.accept(new Move(CellButton.this.cellCol, CellButton.this.cellRow));
+        }
+      }
+    });
+  }
+
   @Override
   public int getCellCol() {
     return this.cellCol;
@@ -78,6 +107,11 @@ public class CellButton extends JButton implements ICellButton {
   @Override
   public void assignCardButton(IinHandCardButton cardButton) {
     this.cardButton = new OnCellCardButton(cardButton);
+  }
+
+  @Override
+  public void passMoveDelegate(Consumer<Move> delegate) {
+    this.delegate = delegate;
   }
 
   @Override
@@ -132,6 +166,5 @@ public class CellButton extends JButton implements ICellButton {
     this.setContentAreaFilled(false);
     this.setOpaque(true);
     this.setBorderPainted(false);
-
   }
 }

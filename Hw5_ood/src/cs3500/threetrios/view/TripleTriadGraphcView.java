@@ -21,12 +21,13 @@ public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
   private IHandPanel playerTwoHandPanel;
 
   private IGridPanel gridPanel;
-  private Consumer<Move> moveHandler;  // 用于处理用户动作的事件处理器
 
   public TripleTriadGraphcView(ReadOnlyTripleTriadModel model) {
 
     // Set title of the window
     setTitle("Triple Triad Game");
+
+    setFocusTraversalPolicy(new ContainerOrderFocusTraversalPolicy());
 
     // Set Feel and Look
     configFeelAndLook();
@@ -64,7 +65,8 @@ public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
 
     // Use ScrollPane to wrap GridPanel.
     gridPanel = new GridPanel(model);
-    FixSizerPanel<IGridPanel> fixSizerPanel = new FixSizerPanel<>(gridPanel, width - 400, height, ElementColor.GRID_BACKGROUND_COLOR);
+    FixSizerPanel<IGridPanel> fixSizerPanel = new FixSizerPanel<>(gridPanel,
+      width - 400, height, ElementColor.GRID_BACKGROUND_COLOR);
     add(fixSizerPanel, BorderLayout.CENTER);
 
     // Refresh rendering for the first time
@@ -86,11 +88,12 @@ public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
     display();
   }
 
-  // 设置用户动作的事件处理器
   @Override
-  public void setMoveEventHandler(Consumer<Move> delegate) {
-    this.moveHandler = delegate;
+  public void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate) {
+    this.playerOneHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
+    this.playerTwoHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
   }
+
 
   /**
    * Display the Frame.

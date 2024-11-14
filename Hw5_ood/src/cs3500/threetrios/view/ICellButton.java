@@ -1,5 +1,7 @@
 package cs3500.threetrios.view;
 
+import java.util.function.Consumer;
+
 /**
  * The Interface for the button that represents a Cell.
  * A Cell button could hold an IOnGridCardButton.
@@ -27,4 +29,10 @@ public interface ICellButton extends Refreshable, Discolorable {
    * @param cardButton The cardButton to be putted.
    */
   void assignCardButton(IinHandCardButton cardButton);
+
+  /**
+   * Passing a delegate of moving to xxx to the CellButton.
+   * @param delegate The delegate to be passed, should be from Controller.
+   */
+  void passMoveDelegate(Consumer<Move> delegate);
 }

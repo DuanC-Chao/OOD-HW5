@@ -2,6 +2,7 @@ package cs3500.threetrios.view;
 
 import java.awt.*;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.*;
 
@@ -22,6 +23,11 @@ public class GridPanel extends JPanel implements IGridPanel {
    * The Logical Grid.
    */
   private IGrid logicalGrid;
+
+  /**
+   * The delegate to be dispatched.
+   */
+  private Consumer<Move> delegateToDispatch;
 
   /**
    * The model.
@@ -71,6 +77,8 @@ public class GridPanel extends JPanel implements IGridPanel {
       int row = tuple.getSecond().getSecond();
 
       ICellButton cellButton = new CellButton(cell, col, row);
+      // Dispatch delegate
+      cellButton.passMoveDelegate(delegateToDispatch);
       this.add((Component) cellButton);
     }
   }
@@ -91,5 +99,10 @@ public class GridPanel extends JPanel implements IGridPanel {
    */
   private void setGridBackGroundColor() {
     this.changeColor(ElementColor.GRID_BACKGROUND_COLOR.toString());
+  }
+
+  @Override
+  public void takeToBeDispatchedDelegate(Consumer<Move> delegate) {
+    this.delegateToDispatch = delegate;
   }
 }

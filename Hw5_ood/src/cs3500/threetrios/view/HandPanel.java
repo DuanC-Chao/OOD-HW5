@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
@@ -40,6 +41,11 @@ public class HandPanel extends JPanel implements IHandPanel {
    * Represent which player's hand this panel represents.
    */
   private final EPlayer player;
+
+  /**
+   * The delegate waiting to be dispatched to all InHandCardButtons.
+   */
+  private Consumer<Pick> delegateToDispatch;
 
   public HandPanel(EPlayer player, ReadOnlyTripleTriadModel model) {
     this.model = model;
@@ -80,11 +86,10 @@ public class HandPanel extends JPanel implements IHandPanel {
   private void addSingleCard(ICard card, int cardIdx, boolean isEnd, int preferredHeight) {
     IinHandCardButton cardButton = new InHandCardButton(card, cardIdx, this.getColorBasedOnPlayer());
     cardButton.setPreferredYValue(preferredHeight);
+    // Dispatch delegate
+    cardButton.passPickDelegate(delegateToDispatch);
     cards.add(cardButton);
     this.add((Component) cardButton);
-    if (!isEnd) {
-      this.add(Box.createVerticalGlue());
-    }
   }
 
   @Override
@@ -125,6 +130,11 @@ public class HandPanel extends JPanel implements IHandPanel {
     } else {
       throw new IllegalArgumentException("Unknown player " + this.player);
     }
+  }
+
+  @Override
+  public void takeToBeDispatchedDelegate(Consumer<Pick> delegate) {
+    this.delegateToDispatch = delegate;
   }
 }
 

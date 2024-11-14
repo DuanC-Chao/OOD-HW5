@@ -10,13 +10,17 @@ import cs3500.threetrios.model.TripleTriadModel;
  */
 public class ViewTestProgram {
 
-  public static void main(String[] args) throws InterruptedException {
+  /**
+   * The main class.
+   * @param args The args.
+   */
+  public static void main(String[] args) {
 
-    //String boardConfigPath_Big = "src/docs/SimpleBoard.txt";
-    //String cardConfigPath = "src/docs/SevenCardsDeck.txt";
+    String boardConfigPath_Big = "src/docs/SimpleBoard.txt";
+    String cardConfigPath = "src/docs/SevenCardsDeck.txt";
 
-    String boardConfigPath_Big = "src/docs/MediumSizeBoard.txt";
-    String cardConfigPath = "src/docs/SimpleDeck.txt";
+    //String boardConfigPath_Big = "src/docs/MediumSizeBoard.txt";
+    //String cardConfigPath = "src/docs/SimpleDeck.txt";
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B",

@@ -2,13 +2,14 @@ Overview:
 
 Quick Start:
 
-HW6 modification:
+HW6 Updates:
 
 Extra Credit: Made a Composable AdvancedBot, which takes Multiple Strategies, Strategies are defined in
 IStrategy Interface and implementation classes.
 
-View: A full-functional view, cards could be clicked, and
-
+View: A fully-functional view, cards could be clicked, and will be highlighted.
+Card's size will be automatically adjusted when there are multiple cards exist in hand.
+Grid will NOT automatically fill the entire space except player's cards, that is ON PURPOSE, for aesthetics.
 
 //-----------------------------------------------------------------------------------------------------
 

@@ -122,7 +122,7 @@ public class ABotTest {
     }
 
     @Override
-    public void filp(int col, int row, ICombatRule rule) {
+    public void flip(int col, int row, ICombatRule rule) {
     }
 
     @Override

@@ -179,7 +179,7 @@ public class MockTripleTriadModel implements ITripleTriadModel {
     }
 
     @Override
-    public void filp(int col, int row, ICombatRule rule) {
+    public void flip(int col, int row, ICombatRule rule) {
       // No-op for mock
     }
 

@@ -148,7 +148,7 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     // Place card to grid, and start flipping with current rule.
     this.gameGrid.placeCard(colToPlay, rowToPlay, playerToOperate.popCardFromHand(cardIndex));
-    this.gameGrid.filp(colToPlay, rowToPlay, this.rule);
+    this.gameGrid.flip(colToPlay, rowToPlay, this.rule);
 
     // After flipped, recalculate winning status
     calculateAndSetWinningStatus();
@@ -246,7 +246,7 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     //Then, put card into that copy grid, and flip
     gridCopy.placeCard(col, row, card);
-    gridCopy.filp(col, row, this.rule);
+    gridCopy.flip(col, row, this.rule);
 
     int result = 0;
     ICell[][] innerGridCopy = gridCopy.getGrid();

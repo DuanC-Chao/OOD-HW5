@@ -71,7 +71,7 @@ public interface IGrid extends ICloneable<IGrid> {
    * @param row the row of start card, 0-based.
    * @param rule The rule wished to use.
    */
-  public void filp(int col, int row, ICombatRule rule);
+  public void flip(int col, int row, ICombatRule rule);
 
   /**
    * Takes a 0-Based coordinate, and check if could place card on the Cell of that coordinate.

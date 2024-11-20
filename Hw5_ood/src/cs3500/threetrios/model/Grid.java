@@ -77,7 +77,7 @@ public class Grid implements IGrid {
   }
 
   @Override
-  public void filp(int col, int row, ICombatRule rule) {
+  public void flip(int col, int row, ICombatRule rule) {
     rule.flip(this.grid, col, row);
   }
 

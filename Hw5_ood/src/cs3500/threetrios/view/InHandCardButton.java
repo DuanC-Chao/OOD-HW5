@@ -41,7 +41,10 @@ public class InHandCardButton extends ACardButton implements IinHandCardButton {
 
         // Controller will be dealing with the "Selected Card Buffer".
         if(InHandCardButton.this.delegate != null) {
+          System.out.println("Calling delegate");
           delegate.accept(new Pick(InHandCardButton.this.logicalCard.getOwner(), cardIdx));
+        } else {
+          System.out.println("Delegate not set");
         }
       }
     });

@@ -34,7 +34,7 @@ public class RegularHole implements ICell {
 
   @Override
   public boolean myCompare(ICell other) {
-    if(other == null) {
+    if (other == null) {
       return false;
     }
     return other instanceof RegularHole;

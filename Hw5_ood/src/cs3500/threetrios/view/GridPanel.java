@@ -47,12 +47,12 @@ public class GridPanel extends JPanel implements IGridPanel {
     int rows = logicalGrid.getRowNumber();
 
     this.setPreferredSize(new Dimension(cols * 102, rows *
-      (Size.CARD_HEIGHT.getSize() + 2)));
+        (Size.CARD_HEIGHT.getSize() + 2)));
 
     // To ensure that Grid will not be automatically stretched when there are too many space
     // But, still will be automatically condensed when available space is not enough
     this.setMaximumSize(new Dimension(cols * 102, rows *
-      (Size.CARD_HEIGHT.getSize() + 2)));
+        (Size.CARD_HEIGHT.getSize() + 2)));
 
     setGridBackGroundColor();
 

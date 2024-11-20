@@ -40,12 +40,14 @@ public class OnCellCardButton extends ACardButton implements IOnCellCardButton {
   @Override
   protected void configStyle() {
     // Disable clicking highlighting and hover highlighting
-    this.putClientProperty("Nimbus.Overrides", new UIDefaults() {{
-      put("Button[Enabled].backgroundPainter", null);
-      put("Button[MouseOver].backgroundPainter", null);
-      put("Button[Pressed].backgroundPainter", null);
-      put("Button[Focused].backgroundPainter", null);
-    }});
+    this.putClientProperty("Nimbus.Overrides", new UIDefaults() {
+      {
+        put("Button[Enabled].backgroundPainter", null);
+        put("Button[MouseOver].backgroundPainter", null);
+        put("Button[Pressed].backgroundPainter", null);
+        put("Button[Focused].backgroundPainter", null);
+      }
+    });
     this.setContentAreaFilled(false);
     this.setOpaque(true);
     this.setBorderPainted(false);

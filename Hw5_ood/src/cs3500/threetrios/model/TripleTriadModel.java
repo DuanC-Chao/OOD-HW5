@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static cs3500.threetrios.model.BoardConfigReader.loadGridConfig;
-import static cs3500.threetrios.model.CardConfigReader.loadCardConfig;
+import static cs3500.threetrios.model.ConfigReader.loadGridConfig;
+import static cs3500.threetrios.model.ConfigReader.loadCardConfig;
 
 /**
  * The functional class for the TripleTriad Model.
@@ -319,7 +319,7 @@ public class TripleTriadModel implements ITripleTriadModel {
     if (col == this.gameGrid.getColNumber() - 1 && row == 0) {
       return 2;
     }
-    if(col == 0 && row == this.gameGrid.getRowNumber() - 1) {
+    if (col == 0 && row == this.gameGrid.getRowNumber() - 1) {
       return 4;
     }
 

@@ -21,7 +21,9 @@ public class CornerStrategy implements IStrategy {
    * @param corner  The integer representation of corner.
    * @return A boolean, weather advantage will be hide.
    */
-  private boolean checkIfWillHideAdvantagePlayingToCorner(ICombatRule rule, List<ICard> hand, int cardIdx, int corner) {
+  private boolean checkIfWillHideAdvantagePlayingToCorner(ICombatRule rule,
+                                                          List<ICard> hand,
+                                                          int cardIdx, int corner) {
     if (corner != 1 && corner != 2 && corner != 3 && corner != 4) {
       throw new IllegalArgumentException("The corner must be 1 or 2 or 3 or 4");
     }
@@ -61,7 +63,9 @@ public class CornerStrategy implements IStrategy {
     // Assign corner score, and deduction, if apply
     if (model.isCorner(play.colToPlay, play.rowToPlay) != 0) {
       play.addScore(10);
-      if (checkIfWillHideAdvantagePlayingToCorner(model.getCombatRule(), model.getPlayerHand(2), play.cardIdx, model.isCorner(play.colToPlay, play.rowToPlay))) {
+      if (checkIfWillHideAdvantagePlayingToCorner(model.getCombatRule(),
+          model.getPlayerHand(2), play.cardIdx,
+          model.isCorner(play.colToPlay, play.rowToPlay))) {
         play.addScore(-10);
       }
     }

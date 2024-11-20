@@ -21,7 +21,7 @@ public class BoardConfigReaderTest {
       writer.write("CXC\n");
     }
 
-    ICell[][] grid = BoardConfigReader.loadGridConfig(filePath);
+    ICell[][] grid = ConfigReader.loadGridConfig(filePath);
     assertEquals(3, grid[0].length);
     assertEquals(3, grid.length);
     assertTrue(grid[0][0] instanceof RegularCardCell);
@@ -34,7 +34,7 @@ public class BoardConfigReaderTest {
     try (FileWriter writer = new FileWriter(filePath)) {
       writer.write("0 3\n");
     }
-    BoardConfigReader.loadGridConfig(filePath);
+    ConfigReader.loadGridConfig(filePath);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -45,7 +45,7 @@ public class BoardConfigReaderTest {
       writer.write("CC\n");
       writer.write("CC\n");
     }
-    BoardConfigReader.loadGridConfig(filePath);
+    ConfigReader.loadGridConfig(filePath);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -57,7 +57,7 @@ public class BoardConfigReaderTest {
       writer.write("XCX\n");
       writer.write("CXC\n");
     }
-    BoardConfigReader.loadGridConfig(filePath);
+    ConfigReader.loadGridConfig(filePath);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -69,7 +69,7 @@ public class BoardConfigReaderTest {
       writer.write("XCX\n");
       writer.write("CXC\n");
     }
-    BoardConfigReader.loadGridConfig(filePath);
+    ConfigReader.loadGridConfig(filePath);
   }
 }
 

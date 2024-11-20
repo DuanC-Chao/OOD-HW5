@@ -117,7 +117,7 @@ public class RegularCard implements ICard {
 
   @Override
   public boolean myCompare(ICard other) {
-    if(other == null) {
+    if (other == null) {
       return false;
     }
     //First, compare if card is in same class

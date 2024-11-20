@@ -2,6 +2,9 @@ package cs3500.threetrios.model;
 
 import java.util.List;
 
+/**
+ * The readonly interface for our game model.
+ */
 public interface ReadOnlyTripleTriadModel {
 
   /**
@@ -29,6 +32,7 @@ public interface ReadOnlyTripleTriadModel {
 
   /**
    * Get the clone of the grid as an IGrid.
+   *
    * @return The clone of grid as IGrid.
    */
   IGrid getGridClone();
@@ -85,7 +89,7 @@ public interface ReadOnlyTripleTriadModel {
    * @return the player that own the card on given coord.
    * @throws IllegalArgumentException If col or row are illegal.
    */
-   EPlayer getCardOwner(int col, int row);
+  EPlayer getCardOwner(int col, int row);
 
   /**
    * Get the current score of the specified player.
@@ -103,6 +107,7 @@ public interface ReadOnlyTripleTriadModel {
    * Return 3 for the lower-left corner.
    * Return 4 for the upper-left corner.
    * Return 0 for non-corner.
+   *
    * @param col The col to check.
    * @param row The row to check.
    * @return An int represents weather coord is a corner.
@@ -111,6 +116,7 @@ public interface ReadOnlyTripleTriadModel {
 
   /**
    * Return the current using combat rule.
+   *
    * @return The rule.
    */
   ICombatRule getCombatRule();

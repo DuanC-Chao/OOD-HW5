@@ -84,10 +84,10 @@ public class CellButton extends JButton implements ICellButton {
       public void actionPerformed(ActionEvent e) {
         // Just for test, remove after implement Controller.
         System.out.println("Cell Button with Col: " + CellButton.this.cellCol +
-          ", Row: " + CellButton.this.cellRow + " Pressed\n");
+            ", Row: " + CellButton.this.cellRow + " Pressed\n");
 
         // Controller will be dealing with the "Put from buffer to this coord".
-        if(CellButton.this.delegate != null) {
+        if (CellButton.this.delegate != null) {
           delegate.accept(new Move(CellButton.this.cellCol, CellButton.this.cellRow));
         }
       }
@@ -156,12 +156,14 @@ public class CellButton extends JButton implements ICellButton {
    */
   private void configStyle() {
     // Disable clicking highlighting and hover highlighting
-    this.putClientProperty("Nimbus.Overrides", new UIDefaults() {{
-      put("Button[Enabled].backgroundPainter", null);
-      put("Button[MouseOver].backgroundPainter", null);
-      put("Button[Pressed].backgroundPainter", null);
-      put("Button[Focused].backgroundPainter", null);
-    }});
+    this.putClientProperty("Nimbus.Overrides", new UIDefaults() {
+      {
+        put("Button[Enabled].backgroundPainter", null);
+        put("Button[MouseOver].backgroundPainter", null);
+        put("Button[Pressed].backgroundPainter", null);
+        put("Button[Focused].backgroundPainter", null);
+      }
+    });
 
     this.setContentAreaFilled(false);
     this.setOpaque(true);

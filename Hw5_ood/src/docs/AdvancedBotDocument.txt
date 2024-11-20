@@ -25,7 +25,8 @@ Greater:    Score + 5       Score + 0           Score + 5         Score - 10    
 Smaller:    Score + 5       Score + 0           Score + 5         Score - 10          Score + 5
 Equals:     Score + 5       Score + 0           Score + 5         Score + 5           Score + 5
 
-Steps Advanced Bot take to determine a Play's Score
+Details about the predefined Bot by me:
+Any one could config their own AdvancedBot with Strategies
 //--------------------------------------------------------------------------------------------------
 
 Base Score: 10pts
@@ -36,27 +37,6 @@ On Corner: 10pts
 Adjacent Identifier Expectation Value: (-15, 15) pts
 
 Possible Flip Number: For each card flipped: Score *= 1.2
-
-//--------------------------------------------------------------------------------------------------
-
-
-// The following things are the same content as above in Chinese, just for me to keep a good cognitive model, ignore it
-
-什么是邻接指示器：
-邻接指示器取决于一个坐标的四个邻居的状态，Hole, 值更高的卡，值更低的卡，空Cell，边界，在邻接指示器里面有不同的状态表示
-邻接指示器提供一个方法来返回一个Play的期望值，期望值单纯的代表这一步是好还是坏，其值为 -15 <= n <= 15
-
-
-//--------------------------------------------------------------------------------------------------
-
-基本得分: 10pts
-
-在角落: 10pts
-    如果会将强侧隐藏在角落：-10pts
-
-邻接调整因子: [-15, 15]
-
-Flip数量: 每个Flip对分数的影响：totalScore *= 1.2
 
 //--------------------------------------------------------------------------------------------------
 

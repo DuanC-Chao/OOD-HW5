@@ -7,13 +7,13 @@ import static org.junit.Assert.assertTrue;
 
 public class BotCornerTest {
 
-  private SimpleBot bot;
+  private AdvancedBot bot;
   private MockCoordinate model;
 
   @Before
   public void setUp() {
     model = new MockCoordinate();
-    bot = new SimpleBot();
+    bot = new AdvancedBot(null);
   }
 
   @Test

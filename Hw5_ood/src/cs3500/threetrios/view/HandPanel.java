@@ -47,6 +47,11 @@ public class HandPanel extends JPanel implements IHandPanel {
    */
   private Consumer<Pick> delegateToDispatch;
 
+  /**
+   * adadawd.
+   * @param player dawdaw
+   * @param model dawd a
+   */
   public HandPanel(EPlayer player, ReadOnlyTripleTriadModel model) {
     this.model = model;
     this.player = player;
@@ -84,7 +89,8 @@ public class HandPanel extends JPanel implements IHandPanel {
    * @param preferredHeight The preferred height of the cardButton.
    */
   private void addSingleCard(ICard card, int cardIdx, boolean isEnd, int preferredHeight) {
-    IinHandCardButton cardButton = new InHandCardButton(card, cardIdx, this.getColorBasedOnPlayer());
+    IinHandCardButton cardButton = new InHandCardButton(card, cardIdx,
+        this.getColorBasedOnPlayer());
     cardButton.setPreferredYValue(preferredHeight);
     // Dispatch delegate
     cardButton.passPickDelegate(delegateToDispatch);

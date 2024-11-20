@@ -9,7 +9,7 @@ import java.util.Map;
 public class MappingConfig {
 
   /**
-   * This method returns the down-left based mapping.
+   * xaawdad returns the down-left based mapping.
    * Like:
    * [0, 2] [1, 2] [2, 2]
    * [0, 1] [1, 1] [2, 1]

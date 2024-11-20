@@ -20,7 +20,7 @@ public class CardConfigReaderTests {
       writer.write("Card2 A 1 5 3\n");
     }
 
-    List<ICard> cards = CardConfigReader.loadCardConfig(filePath);
+    List<ICard> cards = ConfigReader.loadCardConfig(filePath);
     Assert.assertEquals(2, cards.size());
     Assert.assertEquals("Card1", cards.get(0).getCardName());
     Assert.assertEquals(CardNumber.ONE, cards.get(0).getNorth());
@@ -35,7 +35,7 @@ public class CardConfigReaderTests {
     try (FileWriter writer = new FileWriter(filePath)) {
       writer.write("InvalidCardFormat\n");
     }
-    CardConfigReader.loadCardConfig(filePath);
+    ConfigReader.loadCardConfig(filePath);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -44,7 +44,7 @@ public class CardConfigReaderTests {
     try (FileWriter writer = new FileWriter(filePath)) {
       writer.write("CardName 1 2 3\n");  // Missing one part
     }
-    CardConfigReader.loadCardConfig(filePath);
+    ConfigReader.loadCardConfig(filePath);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class CardConfigReaderTests {
       writer.write("Card2 A 5 4 3\n");
     }
 
-    List<ICard> cards = CardConfigReader.loadCardConfig(filePath);
+    List<ICard> cards = ConfigReader.loadCardConfig(filePath);
     Assert.assertEquals(2, cards.size());
   }
 }

@@ -10,7 +10,7 @@ import javax.swing.border.LineBorder;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
 
-public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
+public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   /**
    * The read-only model, stored as a field in view.
@@ -22,7 +22,7 @@ public class TripleTriadGraphcView extends JFrame implements TripleTriadView {
 
   private IGridPanel gridPanel;
 
-  public TripleTriadGraphcView(ReadOnlyTripleTriadModel model) {
+  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model) {
 
     // Set title of the window
     setTitle("Triple Triad Game");

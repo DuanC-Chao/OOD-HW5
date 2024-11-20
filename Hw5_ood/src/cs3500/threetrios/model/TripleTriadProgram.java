@@ -12,6 +12,7 @@ public class TripleTriadProgram {
 
   /**
    * The main method, here to demostrate view.
+   *
    * @param args Arguemnts.
    */
   public static void main(String[] args) {

@@ -120,7 +120,7 @@ public class Grid implements IGrid {
     for (int row = 0; row < grid.length; row++) {
       for (int col = 0; col < grid[row].length; col++) {
         ICell cell = grid[row][col];
-        if(cell == null) {
+        if (cell == null) {
           throw new IllegalArgumentException();
         }
         if (cell.getType() == CellType.CARD_CELL) {

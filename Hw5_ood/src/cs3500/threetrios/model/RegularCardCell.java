@@ -55,14 +55,14 @@ public class RegularCardCell implements ICell {
 
   @Override
   public boolean myCompare(ICell other) {
-    if(other == null) {
+    if (other == null) {
       return false;
     }
     if (!(other instanceof RegularCardCell)) {
       return false;
     }
     RegularCardCell otherCell = (RegularCardCell) other;
-    if(this.card == null) {
+    if (this.card == null) {
       return otherCell.card == null;
     }
     return this.card.equals(otherCell.card);

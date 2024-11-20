@@ -51,7 +51,8 @@ public class AdjacentIndicatorStrategy implements IStrategy {
    * @param direction The direction of neighbor cell onto current checking card.
    * @return An Integer, ans adjustment index.
    */
-  static int getSingleDirectionAdjustmentIndex(ReadOnlyTripleTriadModel model, int cardIdx, ICell neighbor, Direction direction) {
+  static int getSingleDirectionAdjustmentIndex(ReadOnlyTripleTriadModel model,
+                                               int cardIdx, ICell neighbor, Direction direction) {
 
     // If neighbor is Boundary (no neighbor), return 5.
     if (neighbor == null) {
@@ -67,13 +68,16 @@ public class AdjacentIndicatorStrategy implements IStrategy {
     }
 
     ICombatRule ruleToUse = model.getCombatRule();
-    CardNumber selfNumberOfDirection = getCardValue(model.getPlayerTwoClone().getHand().get(cardIdx), direction);
-    CardNumber opponentNumberOfDirection = getCardValue(neighbor.getCard(), getOppositeDirection(direction));
+    CardNumber selfNumberOfDirection =
+        getCardValue(model.getPlayerTwoClone().getHand().get(cardIdx), direction);
+    CardNumber opponentNumberOfDirection =
+        getCardValue(neighbor.getCard(), getOppositeDirection(direction));
 
     // If card belongs to self (Player2).
     if (neighbor.getCard().getOwner() == EPlayer.PLAYER_TWO) {
 
-      // When greater or smaller than friend card, is considered dangerous, because may be flipped by combo.
+      // When greater or smaller than friend card,
+      // is considered dangerous, because may be flipped by combo.
       if (ruleToUse.compare(selfNumberOfDirection, opponentNumberOfDirection) != 0) {
         return -10;
       } else {

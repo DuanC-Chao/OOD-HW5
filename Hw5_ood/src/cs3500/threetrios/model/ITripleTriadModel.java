@@ -20,7 +20,6 @@ public interface ITripleTriadModel extends ReadOnlyTripleTriadModel {
    * @throws IllegalArgumentException If players' names are the same.
    * @throws IllegalArgumentException If any of player's name is null.
    * @throws IllegalArgumentException If any of config name is null or empty String.
-   * @throws NoSuchConfigException    If board or card config path is invalid.
    */
   void startGame(String boardConfigPath, String cardConfigPath, String playerOneName,
                  String playerTwoName, boolean shuffle, ICombatRule rule, IBot bot);
@@ -35,8 +34,6 @@ public interface ITripleTriadModel extends ReadOnlyTripleTriadModel {
    * @throws IllegalArgumentException   If the playerNumber, CardIndex,
    *                                    col or row is invalid or less than 0.
    * @throws IllegalStateException      If the game is not started or already over.
-   * @throws NotYourTurnException       If trying to play at the wrong turn.
-   * @throws CouldNotPlaceCardException If the coordinate trying to place card is full or is Hole.
    */
   void playToGrid(int playerNumber, int cardIndex, int colToPlay, int rowToPlay);
 }

@@ -86,7 +86,7 @@ public class TripleTriadModel implements ITripleTriadModel {
     try {
       gridToAdd = loadGridConfig(boardConfigPath);
     } catch (IOException e) {
-      throw new NoSuchConfigException("Could not load grid config: " + boardConfigPath);
+      throw new IllegalArgumentException("Could not load grid config: " + boardConfigPath);
     }
 
     // Construct gameGrid
@@ -97,7 +97,7 @@ public class TripleTriadModel implements ITripleTriadModel {
     try {
       deckToAdd = loadCardConfig(cardConfigPath);
     } catch (IOException e) {
-      throw new NoSuchConfigException("Could not load card config: " + cardConfigPath);
+      throw new IllegalArgumentException("Could not load card config: " + cardConfigPath);
     }
 
     // Construct players
@@ -196,10 +196,10 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     //Check if turn is right
     if (playerNumber == 1 && this.currentTurn == EPlayer.PLAYER_TWO) {
-      throw new NotYourTurnException("Current turn is P2");
+      throw new IllegalArgumentException("Current turn is P2");
     }
     if (playerNumber == 2 && this.currentTurn == EPlayer.PLAYER_ONE) {
-      throw new NotYourTurnException("Current turn is P1");
+      throw new IllegalArgumentException("Current turn is P1");
     }
   }
 

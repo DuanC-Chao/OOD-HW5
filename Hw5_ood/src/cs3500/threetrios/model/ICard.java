@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * Represent a Card in the game.
  */
-public interface ICard extends ICloneable<ICard>,MyComparable<ICard> {
+public interface ICard extends ICloneable<ICard> {
 
   /**
    * Set the Numbers for the card.
@@ -66,4 +66,6 @@ public interface ICard extends ICloneable<ICard>,MyComparable<ICard> {
    * @return The Est number.
    */
   CardNumber getEast();
+
+  boolean myCompare(ICard other);
 }

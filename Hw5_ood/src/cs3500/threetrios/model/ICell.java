@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * Represent a Cell on the Grid.
  */
-public interface ICell extends ICloneable<ICell>,MyComparable<ICell> {
+public interface ICell extends ICloneable<ICell> {
 
   /**
    * Get the current card on the cell.
@@ -31,4 +31,5 @@ public interface ICell extends ICloneable<ICell>,MyComparable<ICell> {
    */
   public boolean couldPlace();
 
+  boolean myCompare(ICell other);
 }

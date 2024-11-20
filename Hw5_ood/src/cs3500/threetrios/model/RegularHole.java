@@ -18,8 +18,8 @@ public class RegularHole implements ICell {
   }
 
   @Override
-  public void setCard(ICard card) throws CouldNotPlaceCardException {
-    throw new CouldNotPlaceCardException("Trying to place card to Hole.");
+  public void setCard(ICard card) throws IllegalStateException {
+    throw new IllegalStateException("Trying to place card to Hole.");
   }
 
   @Override

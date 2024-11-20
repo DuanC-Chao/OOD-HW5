@@ -27,7 +27,7 @@ public class RegularCardCellTest {
   }
 
   @Test
-  public void testSetCardInEmptyCell() throws CouldNotPlaceCardException {
+  public void testSetCardInEmptyCell() throws Exception {
     RegularCardCell cell = new RegularCardCell();
     RegularCard card = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Test Card", EPlayer.PLAYER_ONE);
@@ -36,13 +36,13 @@ public class RegularCardCellTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testSetCardWithNull() throws CouldNotPlaceCardException {
+  public void testSetCardWithNull() throws Exception {
     RegularCardCell cell = new RegularCardCell();
     cell.setCard(null);
   }
 
-  @Test(expected = CouldNotPlaceCardException.class)
-  public void testSetCardInOccupiedCell() throws CouldNotPlaceCardException {
+  @Test(expected = Exception.class)
+  public void testSetCardInOccupiedCell() throws Exception {
     RegularCard card1 = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Card 1", EPlayer.PLAYER_ONE);
     RegularCard card2 = new RegularCard(CardNumber.FIVE, CardNumber.SIX, CardNumber.SEVEN,

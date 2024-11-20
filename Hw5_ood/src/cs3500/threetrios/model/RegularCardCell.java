@@ -32,12 +32,12 @@ public class RegularCardCell implements ICell {
   }
 
   @Override
-  public void setCard(ICard card) throws CouldNotPlaceCardException {
+  public void setCard(ICard card) throws IllegalStateException {
     if (card == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalStateException("Card cannot be null");
     }
     if (this.card != null) {
-      throw new CouldNotPlaceCardException("Already placed card to this Cell, Card Name: " +
+      throw new IllegalStateException("Already placed card to this Cell, Card Name: " +
         this.card.getCardName() + " Card Owner: " + this.card.getOwner());
     }
     this.card = card;

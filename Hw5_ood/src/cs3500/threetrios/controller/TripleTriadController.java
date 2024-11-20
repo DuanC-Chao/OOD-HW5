@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ITripleTriadModel;
-import cs3500.threetrios.model.NotYourTurnException;
 import cs3500.threetrios.view.Move;
 import cs3500.threetrios.view.Pick;
 import cs3500.threetrios.view.TripleTriadView;
@@ -69,7 +68,7 @@ public class TripleTriadController implements ITripleTriadController {
 
     try {
       this.model.playToGrid(pIdx, this.pickBuffer, move.play_to_col, move.play_to_row);
-    } catch (NotYourTurnException e) {
+    } catch (IllegalArgumentException e) {
       System.out.println("Not your turn, Player: " + this.player.toString());
     }
     refreshView();

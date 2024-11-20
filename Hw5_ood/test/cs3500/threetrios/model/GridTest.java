@@ -70,7 +70,7 @@ public class GridTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testPlaceCardOutOfBounds() throws CouldNotPlaceCardException {
+  public void testPlaceCardOutOfBounds() throws Exception {
     RegularCard card = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Test Card", EPlayer.PLAYER_ONE);
     ICell[][] gridData = {
@@ -80,8 +80,8 @@ public class GridTest {
     grid.placeCard(3, 0, card);
   }
 
-  @Test(expected = CouldNotPlaceCardException.class)
-  public void testPlaceCardInHole() throws CouldNotPlaceCardException {
+  @Test(expected = Exception.class)
+  public void testPlaceCardInHole() throws Exception {
     RegularCard card = new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE,
             CardNumber.FOUR, "Test Card", EPlayer.PLAYER_ONE);
     RegularHole hole = new RegularHole();

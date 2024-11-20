@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 import java.util.Map;
 import java.util.Stack;
 
-import static cs3500.threetrios.model.MappingConfig.downLeftOriginMapping;
+import static cs3500.threetrios.model.Direction.downLeftOriginMapping;
 import static cs3500.threetrios.model.TripleTriadUtilities.getCardValue;
 import static cs3500.threetrios.model.TripleTriadUtilities.getOppositeDirection;
 

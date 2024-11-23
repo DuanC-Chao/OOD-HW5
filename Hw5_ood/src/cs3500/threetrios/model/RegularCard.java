@@ -124,11 +124,11 @@ public class RegularCard implements ICard {
     if (other instanceof RegularCard) {
       RegularCard otherCard = (RegularCard) other;
       return
-        this.south == otherCard.south &&
-          this.east == otherCard.east &&
-          this.west == otherCard.west &&
-          this.north == otherCard.north &&
-          this.owner == otherCard.owner;
+        this.south == otherCard.south
+                && this.east == otherCard.east
+                && this.west == otherCard.west
+                && this.north == otherCard.north
+                && this.owner == otherCard.owner;
     }
     return false;
   }

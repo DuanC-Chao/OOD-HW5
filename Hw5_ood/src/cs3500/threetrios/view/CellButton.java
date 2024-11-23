@@ -1,17 +1,22 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.function.Consumer;
-
-import javax.swing.*;
 
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.ICell;
 import cs3500.threetrios.model.RegularCardCell;
 import cs3500.threetrios.model.RegularHole;
 
+import java.awt.GridBagConstraints;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.Component;
+
+import javax.swing.JButton;
+import javax.swing.UIDefaults;
 /**
  * The class represents a CellButton.
  * A CellButton represent a logical Cell.
@@ -90,8 +95,8 @@ public class CellButton extends JButton implements ICellButton {
       @Override
       public void actionPerformed(ActionEvent e) {
         // Just for test, remove after implement Controller.
-        System.out.println("Cell Button with Col: " + CellButton.this.cellCol +
-            ", Row: " + CellButton.this.cellRow + " Pressed\n");
+        System.out.println("Cell Button with Col: " + CellButton.this.cellCol
+                + ", Row: " + CellButton.this.cellRow + " Pressed\n");
 
         // Controller will be dealing with the "Put from buffer to this coord".
         if (CellButton.this.delegate != null) {

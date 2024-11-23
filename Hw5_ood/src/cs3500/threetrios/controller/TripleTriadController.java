@@ -50,7 +50,8 @@ public class TripleTriadController implements ITripleTriadController {
    * @param model  The Read and Write model, since the controller could modify game status.
    * @param view   The view to pass delegate to.
    */
-  public TripleTriadController(EPlayer player, ITripleTriadModel model, TripleTriadView view, TripleTriadView secondaryView) {
+  public TripleTriadController(EPlayer player, ITripleTriadModel model, TripleTriadView view,
+                               TripleTriadView secondaryView) {
     this.player = player;
     this.model = model;
     this.view = view;
@@ -83,14 +84,15 @@ public class TripleTriadController implements ITripleTriadController {
       pIdx = 0;
     }
 
-    // If model the game has bot, and pIdx is 2, than do nothing, Human player should not be able to move
+    // If model the game has bot, and pIdx is 2, than do nothing, Human player should not be able
+    // to move
     if (pIdx == 2 && model.haveBot()) {
       return;
     }
 
     try {
       this.model.playToGrid(pIdx, pIdx == 1 ? this.playerOnePickBuffer : this.playerTwoPickBuffer,
-        move.play_to_col, move.play_to_row);
+              move.playToCol, move.playToRow);
     } catch (IllegalArgumentException e) {
       System.out.println("Not your turn, Player: " + this.player.toString());
     }

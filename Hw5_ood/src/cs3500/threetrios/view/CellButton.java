@@ -40,6 +40,11 @@ public class CellButton extends JButton implements ICellButton {
   private Consumer<Move> delegate;
 
   /**
+   * The delegate to refresh the whole view, called after a card is placed.
+   */
+  private Runnable refreshDelegate;
+
+  /**
    * The On Cell CardButton it holds.
    * Initialized as null.
    */
@@ -72,6 +77,8 @@ public class CellButton extends JButton implements ICellButton {
 
     // Load card from logical cell.
     asyncCardFromCell();
+
+    setListener();
   }
 
   /**
@@ -110,7 +117,7 @@ public class CellButton extends JButton implements ICellButton {
   }
 
   @Override
-  public void passMoveDelegate(Consumer<Move> delegate) {
+  public void passMoveDelegate(Consumer<Move> delegate, Runnable refreshDelegate) {
     this.delegate = delegate;
   }
 

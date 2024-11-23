@@ -30,6 +30,11 @@ public class GridPanel extends JPanel implements IGridPanel {
   private Consumer<Move> delegateToDispatch;
 
   /**
+   * The Method to refresh the view.
+   */
+  private Runnable viewRefresh;
+
+  /**
    * The model.
    */
   private ReadOnlyTripleTriadModel model;
@@ -78,7 +83,7 @@ public class GridPanel extends JPanel implements IGridPanel {
 
       ICellButton cellButton = new CellButton(cell, col, row);
       // Dispatch delegate
-      cellButton.passMoveDelegate(delegateToDispatch);
+      cellButton.passMoveDelegate(delegateToDispatch, this.viewRefresh);
       this.add((Component) cellButton);
     }
   }
@@ -102,7 +107,9 @@ public class GridPanel extends JPanel implements IGridPanel {
   }
 
   @Override
-  public void takeToBeDispatchedDelegate(Consumer<Move> delegate) {
+  public void takeToBeDispatchedDelegate(Consumer<Move> delegate, Runnable viewRefreshDelegate) {
     this.delegateToDispatch = delegate;
+    this.viewRefresh = viewRefreshDelegate;
+    updateGrid();
   }
 }

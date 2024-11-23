@@ -34,5 +34,5 @@ public interface ICellButton extends Refreshable, Discolorable {
    * Passing a delegate of moving to xxx to the CellButton.
    * @param delegate The delegate to be passed, should be from Controller.
    */
-  void passMoveDelegate(Consumer<Move> delegate);
+  void passMoveDelegate(Consumer<Move> delegate, Runnable refreshDelegate);
 }

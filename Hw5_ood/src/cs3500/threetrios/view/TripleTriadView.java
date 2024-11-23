@@ -25,4 +25,11 @@ public interface TripleTriadView {
    * @param cellDelegate     The delegate to be passed to Cells.
    */
   void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate);
+
+  /**
+   * A method, to create a popup window and show a certain message.
+   *
+   * @param message The message wished to show.
+   */
+  void showPopUp(String message);
 }

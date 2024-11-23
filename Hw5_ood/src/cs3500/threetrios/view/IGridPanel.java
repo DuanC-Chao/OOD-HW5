@@ -12,5 +12,5 @@ public interface IGridPanel extends Refreshable, Discolorable {
    * Takes a delegate, and to dispatch.
    * @param delegate The delegate to be dispatched.
    */
-  void takeToBeDispatchedDelegate(Consumer<Move> delegate);
+  void takeToBeDispatchedDelegate(Consumer<Move> delegate, Runnable viewRefreshDelegate);
 }

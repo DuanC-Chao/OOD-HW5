@@ -86,7 +86,7 @@ public class TripleTriadTextView implements TripleTriadView {
 
 
     if (model.isGameWon()) {
-      boardView.append("Winner: ").append(model.getWinningPlayerName()).append("\n");
+      boardView.append("Winner: ").append(model.getWinningPlayer().toString()).append("\n");
     }
 
     System.out.println(boardView.toString());
@@ -94,6 +94,11 @@ public class TripleTriadTextView implements TripleTriadView {
 
   @Override
   public void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate) {
+    return;
+  }
+
+  @Override
+  public void showPopUp(String message) {
     return;
   }
 }

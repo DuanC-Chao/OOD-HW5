@@ -10,7 +10,8 @@ public enum ElementColor {
   HOLE_COLOR("#2C5269"),
   EMPTY_CELL_COLOR("#FFFCF6"),
   GRID_BACKGROUND_COLOR("#2C5269"),
-  HAND_PANEL_BACKGROUBND_COLOR("#2C5269");
+  //#2C5269
+  HAND_PANEL_BACKGROUBND_COLOR("#000000");
 
   private final String colorHex;
 

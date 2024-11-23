@@ -48,13 +48,19 @@ public class HandPanel extends JPanel implements IHandPanel {
   private Consumer<Pick> delegateToDispatch;
 
   /**
+   * Represent weather this hand panel is activated.
+   */
+  private boolean isActivated;
+
+  /**
    * adadawd.
    * @param player dawdaw
    * @param model dawd a
    */
-  public HandPanel(EPlayer player, ReadOnlyTripleTriadModel model) {
+  public HandPanel(EPlayer player, ReadOnlyTripleTriadModel model, boolean isActivated) {
     this.model = model;
     this.player = player;
+    this.isActivated = isActivated;
     this.cards = new ArrayList<>();
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(100, 870));
@@ -90,11 +96,13 @@ public class HandPanel extends JPanel implements IHandPanel {
    */
   private void addSingleCard(ICard card, int cardIdx, boolean isEnd, int preferredHeight) {
     IinHandCardButton cardButton = new InHandCardButton(card, cardIdx,
-        this.getColorBasedOnPlayer());
+        this.getColorBasedOnPlayer(), this.isActivated);
     cardButton.setPreferredYValue(preferredHeight);
     // Dispatch delegate
     cardButton.passPickDelegate(delegateToDispatch);
-    cards.add(cardButton);
+    SwingUtilities.invokeLater(() -> {
+      cards.add(cardButton);
+    });
     this.add((Component) cardButton);
   }
 
@@ -118,9 +126,10 @@ public class HandPanel extends JPanel implements IHandPanel {
         throw new IllegalStateException("When refreshing HandPanel: " +
           "Encountered unexpected EPlayer");
     }
-    refreshPanel(this);
     List<ICard> hand = this.model.getPlayerHand(playerNum);
+    //System.out.println("Hand size of player: " + playerNum + " Is: " + hand.size());
     this.updateHand(hand);
+    refreshPanel(this);
   }
 
   /**
@@ -141,6 +150,7 @@ public class HandPanel extends JPanel implements IHandPanel {
   @Override
   public void takeToBeDispatchedDelegate(Consumer<Pick> delegate) {
     this.delegateToDispatch = delegate;
+    this.refresh();
   }
 }
 

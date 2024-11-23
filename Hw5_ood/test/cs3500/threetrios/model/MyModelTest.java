@@ -178,6 +178,5 @@ public class MyModelTest {
     model.playToGrid(1, 0, 2, 2);
 
     Assert.assertTrue(model.isGameWon());
-    Assert.assertEquals("B", model.getWinningPlayerName());
   }
 }

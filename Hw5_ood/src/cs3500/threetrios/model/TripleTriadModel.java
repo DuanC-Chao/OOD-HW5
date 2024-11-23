@@ -230,11 +230,11 @@ public class TripleTriadModel implements ITripleTriadModel {
   }
 
   @Override
-  public String getWinningPlayerName() {
+  public EPlayer getWinningPlayer() {
     if (this.gameStatus == GameStatus.PLAYER_ONE_WIN) {
-      return playerOne.getName();
+      return EPlayer.PLAYER_ONE;
     } else if (this.gameStatus == GameStatus.PLAYER_TWO_WIN) {
-      return playerTwo.getName();
+      return EPlayer.PLAYER_TWO;
     }
     return null;
   }
@@ -331,6 +331,11 @@ public class TripleTriadModel implements ITripleTriadModel {
     return rule;
   }
 
+  @Override
+  public boolean haveBot() {
+    return !(this.bot == null);
+  }
+
   /**
    * This method check if any of the player won the game, and change gamestatus.
    *
@@ -361,7 +366,7 @@ public class TripleTriadModel implements ITripleTriadModel {
       }
     }
     if (cardCellNum != 0) {
-      if (playerOneCardNum + playerTwoCardNum == cardCellNum) {
+      if (playerOneCardNum + playerTwoCardNum == cardCellNum + 1) {
         if (playerOneCardNum > playerTwoCardNum) {
           this.gameStatus = GameStatus.PLAYER_ONE_WIN;
         } else if (playerTwoCardNum > playerOneCardNum) {

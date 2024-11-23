@@ -53,7 +53,7 @@ public class MockTripleTriadModel implements ITripleTriadModel {
   }
 
   @Override
-  public String getWinningPlayerName() {
+  public EPlayer getWinningPlayer() {
     return null;
   }
 
@@ -107,6 +107,11 @@ public class MockTripleTriadModel implements ITripleTriadModel {
   public ICombatRule getCombatRule() {
     methodLog.add("getCombatRule called");
     return null;
+  }
+
+  @Override
+  public boolean haveBot() {
+    return false;
   }
 
   @Override

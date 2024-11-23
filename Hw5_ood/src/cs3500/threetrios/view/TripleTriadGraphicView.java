@@ -22,7 +22,17 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   private IGridPanel gridPanel;
 
-  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model) {
+  /**
+   * Represent the current player of the view.
+   */
+  private EPlayer currentPlayer;
+
+  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model, EPlayer currentPlayer) {
+
+    if (currentPlayer == null) {
+      throw new IllegalArgumentException("Current player cannot be null");
+    }
+    this.currentPlayer = currentPlayer;
 
     // Set title of the window
     setTitle("Triple Triad Game");
@@ -56,18 +66,32 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     setLayout(new BorderLayout());
 
     // Add the first HandPanel.
-    playerOneHandPanel = new HandPanel(EPlayer.PLAYER_ONE, model);
-    add((Component) playerOneHandPanel, BorderLayout.WEST);
+    if (currentPlayer == EPlayer.PLAYER_ONE) {
+      playerOneHandPanel = new HandPanel(EPlayer.PLAYER_ONE, model, true);
+    } else {
+      playerOneHandPanel = new HandPanel(EPlayer.PLAYER_ONE, model, false);
+    }
+    SwingUtilities.invokeLater(() -> {
+      add((Component) playerOneHandPanel, BorderLayout.WEST);
+    });
 
     // Add the second HandPanel.
-    playerTwoHandPanel = new HandPanel(EPlayer.PLAYER_TWO, model);
-    add((Component) playerTwoHandPanel, BorderLayout.EAST);
+    if (currentPlayer == EPlayer.PLAYER_TWO) {
+      playerTwoHandPanel = new HandPanel(EPlayer.PLAYER_TWO, model, true);
+    } else {
+      playerTwoHandPanel = new HandPanel(EPlayer.PLAYER_TWO, model, false);
+    }
+    SwingUtilities.invokeLater(() -> {
+      add((Component) playerTwoHandPanel, BorderLayout.EAST);
+    });
 
     // Use ScrollPane to wrap GridPanel.
     gridPanel = new GridPanel(model);
     FixSizerPanel<IGridPanel> fixSizerPanel = new FixSizerPanel<>(gridPanel,
       width - 400, height, ElementColor.GRID_BACKGROUND_COLOR);
-    add(fixSizerPanel, BorderLayout.CENTER);
+    SwingUtilities.invokeLater(() -> {
+      add(fixSizerPanel, BorderLayout.CENTER);
+    });
 
     // Refresh rendering for the first time
     try {
@@ -75,23 +99,36 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+
+    if(this.currentPlayer == EPlayer.PLAYER_ONE) {
+      showPopUp("Your Turn, Player One");
+    }
   }
 
   // In Graphic view, render() do not rely on out
   // Just call refresh() for each components.
   @Override
   public void render(Appendable out) throws IOException {
+    refresh();
+    // Display should be called after all components' status is up to date.
+    display();
+  }
+
+  /**
+   * Helper method to render(), refresh all components.
+   */
+  private void refresh() {
     this.playerOneHandPanel.refresh();
     this.playerTwoHandPanel.refresh();
     this.gridPanel.refresh();
-    // Display should be called after all components' status is up to date.
-    display();
+    System.out.println("View Refreshed");
   }
 
   @Override
   public void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate) {
     this.playerOneHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
     this.playerTwoHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
+    this.gridPanel.takeToBeDispatchedDelegate(cellDelegate, this::refresh);
   }
 
 
@@ -121,5 +158,15 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     }
 
     UIManager.put("Button.border", new LineBorder(Color.BLACK, 10));
+  }
+
+  @Override
+  public void showPopUp(String message) {
+    JOptionPane.showMessageDialog(
+      this,
+      message,
+      "Player Turn Notification",
+      JOptionPane.INFORMATION_MESSAGE
+    );
   }
 }

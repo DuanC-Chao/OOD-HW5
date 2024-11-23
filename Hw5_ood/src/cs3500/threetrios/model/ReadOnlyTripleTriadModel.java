@@ -45,12 +45,12 @@ public interface ReadOnlyTripleTriadModel {
   boolean isGameWon();
 
   /**
-   * Return the name of the player of winning.
+   * Return the winning player.
    * If no player is winning, return null.
    *
-   * @return The name of winning player.
+   * @return The winnind player.
    */
-  String getWinningPlayerName();
+  EPlayer getWinningPlayer();
 
   /**
    * Calculate how many cards can be flipped if the player plays at the given coordinate.
@@ -120,4 +120,10 @@ public interface ReadOnlyTripleTriadModel {
    * @return The rule.
    */
   ICombatRule getCombatRule();
+
+  /**
+   * Return weather the current game has a bot player.
+   * @return A boolean.
+   */
+  boolean haveBot();
 }

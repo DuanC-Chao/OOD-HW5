@@ -74,11 +74,13 @@ public class TripleTriadController implements ITripleTriadController {
 
   @Override
   public void moveHandler(Move move) {
-    int pIdx = 0;
+    int pIdx;
     if (this.player == EPlayer.PLAYER_ONE) {
       pIdx = 1;
     } else if (this.player == EPlayer.PLAYER_TWO) {
       pIdx = 2;
+    } else {
+      pIdx = 0;
     }
 
     // If model the game has bot, and pIdx is 2, than do nothing, Human player should not be able to move
@@ -98,38 +100,49 @@ public class TripleTriadController implements ITripleTriadController {
         try {
           Thread.sleep(50);
           refreshView();
+          showGameOverPopUp(pIdx, true);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
       }).start();
     } else {
       refreshView();
-      if (!this.model.isGameWon()) {
-        String playerSubject;
-        if (pIdx == 1) {
-          playerSubject = "Player Two";
-        } else {
-          playerSubject = "Player One";
-        }
+      showGameOverPopUp(pIdx, false);
+    }
+  }
 
-        this.secondaryView.showPopUp("Your Turn, " + playerSubject);
+  /**
+   * The Pop Up to show the game over info.
+   */
+  private void showGameOverPopUp(int pIdx, boolean botTurn) {
+    if (!this.model.isGameWon()) {
+      String playerSubject;
+      if (pIdx == 1) {
+        playerSubject = "Player Two";
       } else {
-        int winningPlayerNum = 0;
-        String playerSubject;
-        if (this.model.getWinningPlayer() == EPlayer.PLAYER_ONE) {
-          winningPlayerNum = 1;
-          playerSubject = "Player One";
-        } else if (this.model.getWinningPlayer() == EPlayer.PLAYER_TWO) {
-          winningPlayerNum = 2;
-          playerSubject = "Player Two";
-        } else {
-          throw new IllegalStateException();
-        }
-
-        int winningPlayerScore = this.model.getPlayerScore(winningPlayerNum);
-
-        this.secondaryView.showPopUp(playerSubject + " Won!, Score: " + winningPlayerScore);
+        playerSubject = "Player One";
       }
+
+      if (!botTurn || pIdx == 2) {
+        this.secondaryView.showPopUp("Your Turn, " + playerSubject);
+      }
+
+    } else {
+      int winningPlayerNum = 0;
+      String playerSubject;
+      if (this.model.getWinningPlayer() == EPlayer.PLAYER_ONE) {
+        winningPlayerNum = 1;
+        playerSubject = "Player One";
+      } else if (this.model.getWinningPlayer() == EPlayer.PLAYER_TWO) {
+        winningPlayerNum = 2;
+        playerSubject = "Player Two";
+      } else {
+        throw new IllegalStateException();
+      }
+
+      int winningPlayerScore = this.model.getPlayerScore(winningPlayerNum);
+
+      this.secondaryView.showPopUp(playerSubject + " Won!, Score: " + winningPlayerScore);
     }
   }
 

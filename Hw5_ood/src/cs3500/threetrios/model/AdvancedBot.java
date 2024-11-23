@@ -28,6 +28,9 @@ public class AdvancedBot implements IBot {
   public void play(ITripleTriadModel model) {
     //First, Define needed structure.
     List<Tuple<Integer, Integer>> loAvailableCoord = getAvailableTryCoordinate(model);
+    if (loAvailableCoord == null) {
+      return;
+    }
     List<Play> loPlays = new ArrayList<>();
 
     for (int cardIdx = 0; cardIdx < model.getPlayerHand(2).size(); cardIdx++) {
@@ -87,7 +90,7 @@ public class AdvancedBot implements IBot {
       }
     }
     if (result.isEmpty()) {
-      throw new IllegalStateException("No available try coordinate found");
+      return null;
     }
     return result;
   }

@@ -1,2 +1,4 @@
-Card1 1 2 3 4
-Card2 A 1 5 3
+3 3
+CXC
+XCX
+CXC

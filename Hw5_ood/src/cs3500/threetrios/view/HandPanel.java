@@ -78,6 +78,11 @@ public class HandPanel extends JPanel implements IHandPanel {
   private void updateHand(List<ICard> cards) {
 
     int wishedHeight = Size.CARD_HEIGHT.getSize();
+
+    if(cards.isEmpty()) {
+      return;
+    }
+
     if (840 / cards.size() < Size.CARD_HEIGHT.getSize()) {
       wishedHeight = 840 / cards.size();
     }

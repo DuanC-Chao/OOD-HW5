@@ -20,7 +20,7 @@ public class TripleTriadPaogram {
     String cardConfigPath = "src/docs/SimpleDeck.txt";
 
     ITripleTriadModel model = new TripleTriadModel();
-    model.startGame(boardConfigPath, cardConfigPath, "A", "B", false, new DefaultCombatRule(), null);
+    model.startGame(boardConfigPath, cardConfigPath, "A", "B", false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
 
     TripleTriadView view_P1 = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
     TripleTriadView view_P2 = new TripleTriadGraphicView(model, EPlayer.PLAYER_TWO);

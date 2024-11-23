@@ -366,7 +366,7 @@ public class TripleTriadModel implements ITripleTriadModel {
       }
     }
     if (cardCellNum != 0) {
-      if (playerOneCardNum + playerTwoCardNum == cardCellNum + 1) {
+      if (playerOneCardNum + playerTwoCardNum == cardCellNum) {
         if (playerOneCardNum > playerTwoCardNum) {
           this.gameStatus = GameStatus.PLAYER_ONE_WIN;
         } else if (playerTwoCardNum > playerOneCardNum) {

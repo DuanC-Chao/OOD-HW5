@@ -2,8 +2,6 @@ package cs3500.threetrios.view;
 
 import java.io.IOException;
 
-import cs3500.threetrios.model.EPlayer;
-
 import java.util.function.Consumer;
 
 /**

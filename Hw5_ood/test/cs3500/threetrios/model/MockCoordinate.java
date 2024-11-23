@@ -3,6 +3,12 @@ package cs3500.threetrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A mock implementation of the {@link TripleTriadModel} for testing purposes.
+ * This class allows tracking of inspected coordinates when legal moves are checked,
+ * making it useful for verifying behavior in tests.
+ */
+
 public class MockCoordinate extends TripleTriadModel {
   List<Tuple<Integer, Integer>> inspectedCoordinates = new ArrayList<>();
 
@@ -52,12 +58,12 @@ public class MockCoordinate extends TripleTriadModel {
 
       @Override
       public void placeCard(int col, int row, ICard card) {
-
+        // Intentionally left empty as this method is not needed in the mock implementation.
       }
 
       @Override
       public void flip(int col, int row, ICombatRule rule) {
-
+        // Intentionally left empty as this method is not needed in the mock implementation.
       }
     };
   }

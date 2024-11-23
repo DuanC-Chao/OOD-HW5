@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 
 /**
  * Consolidated test class for game model functionality.
@@ -88,7 +90,7 @@ public class GameModelTests {
             {new RegularCardCell(), new RegularHole(), new RegularCardCell()}
     };
     Grid grid = new Grid(gridData);
-    Assert.assertEquals(3, grid.getRowNumber());
+    assertEquals(3, grid.getRowNumber());
   }
 
   @Test
@@ -99,7 +101,7 @@ public class GameModelTests {
             {new RegularCardCell(), new RegularHole(), new RegularCardCell()}
     };
     Grid grid = new Grid(gridData);
-    Assert.assertEquals(3, grid.getColNumber());
+    assertEquals(3, grid.getColNumber());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -128,9 +130,9 @@ public class GameModelTests {
   @Test
   public void testConstructorAndGetters() {
     Player player = new Player(EPlayer.PLAYER_ONE, "Alice");
-    Assert.assertEquals("Alice", player.getName());
-    Assert.assertEquals(EPlayer.PLAYER_ONE, player.getIdentity());
-    Assert.assertTrue(player.getHand().isEmpty());
+    assertEquals("Alice", player.getName());
+    assertEquals(EPlayer.PLAYER_ONE, player.getIdentity());
+    assertTrue(player.getHand().isEmpty());
   }
 
   @Test
@@ -140,8 +142,8 @@ public class GameModelTests {
     deck.add(new RegularCard(CardNumber.ONE, CardNumber.TWO, CardNumber.THREE, CardNumber.FOUR,
             "Card 1", EPlayer.PLAYER_TWO));
     player.setHand(deck, 1);
-    Assert.assertEquals(1, player.getHand().size());
-    Assert.assertEquals(EPlayer.PLAYER_ONE, player.getHand().get(0).getOwner());
+    assertEquals(1, player.getHand().size());
+    assertEquals(EPlayer.PLAYER_ONE, player.getHand().get(0).getOwner());
   }
 
   @Test
@@ -154,7 +156,7 @@ public class GameModelTests {
     player.setHand(deck, 1);
     // The card in player's hand is a clone.
     Assert.assertNotEquals(card, player.popCardFromHand(0));
-    Assert.assertTrue(player.getHand().isEmpty());
+    assertTrue(player.getHand().isEmpty());
   }
 
   @Test
@@ -166,9 +168,9 @@ public class GameModelTests {
     Player clonedPlayer = (Player) player.makeClone();
 
     Assert.assertNotSame(player, clonedPlayer);
-    Assert.assertEquals(player.getName(), clonedPlayer.getName());
-    Assert.assertEquals(player.getIdentity(), clonedPlayer.getIdentity());
-    Assert.assertEquals(player.getHand(), clonedPlayer.getHand());
+    assertEquals(player.getName(), clonedPlayer.getName());
+    assertEquals(player.getIdentity(), clonedPlayer.getIdentity());
+    assertEquals(player.getHand(), clonedPlayer.getHand());
   }
 
   // ---------- RegularHole Tests ----------
@@ -191,7 +193,7 @@ public class GameModelTests {
   @Test
   public void testGetType() {
     RegularHole hole = new RegularHole();
-    Assert.assertEquals(CellType.HOLE, hole.getType());
+    assertEquals(CellType.HOLE, hole.getType());
   }
 
   @Test
@@ -200,7 +202,7 @@ public class GameModelTests {
     RegularHole clonedHole = (RegularHole) hole.makeClone();
 
     Assert.assertNotSame(hole, clonedHole);
-    Assert.assertEquals(CellType.HOLE, clonedHole.getType());
+    assertEquals(CellType.HOLE, clonedHole.getType());
     Assert.assertNull(clonedHole.getCard());
   }
 

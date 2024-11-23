@@ -7,6 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A test class for testing the functionality of {@link RegularCard}, {@link RegularCardCell},
+ * {@link ConfigReader}, and {@link CardFactory}.
+ * This class includes unit tests for constructors, methods, and specific use cases.
+ */
+
 public class CardTests {
 
   // Combined testing class for RegularCard.

@@ -21,6 +21,7 @@ import javax.swing.UIDefaults;
  * The class represents a CellButton.
  * A CellButton represent a logical Cell.
  */
+
 public class CellButton extends JButton implements ICellButton {
 
   /**

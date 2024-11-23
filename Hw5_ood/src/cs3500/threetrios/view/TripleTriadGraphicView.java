@@ -1,6 +1,10 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.ContainerOrderFocusTraversalPolicy;
+
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -10,12 +14,13 @@ import javax.swing.border.LineBorder;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
 
-public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
+/**
+ * A graphical view for the Triple Triad game.
+ * This class extends {@link JFrame} and implements {@link TripleTriadView},
+ * providing a graphical user interface for the game.
+ */
 
-  /**
-   * The read-only model, stored as a field in view.
-   */
-  private final ReadOnlyTripleTriadModel model;
+public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   private IHandPanel playerOneHandPanel;
   private IHandPanel playerTwoHandPanel;
@@ -23,16 +28,21 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
   private IGridPanel gridPanel;
 
   /**
-   * Represent the current player of the view.
+   * Constructs a new graphical view for the Triple Triad game.
+   *
+   * @param model         the read-only model representing the game's state.
+   * @param currentPlayer the current player at the time the view is created.
+   * @throws IllegalArgumentException if the currentPlayer is null.
    */
-  private EPlayer currentPlayer;
 
   public TripleTriadGraphicView(ReadOnlyTripleTriadModel model, EPlayer currentPlayer) {
 
     if (currentPlayer == null) {
       throw new IllegalArgumentException("Current player cannot be null");
     }
-    this.currentPlayer = currentPlayer;
+    /**
+     * Represent the current player of the view.
+     */
 
     // Set title of the window
     setTitle("Triple Triad Game");
@@ -42,7 +52,9 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     // Set Feel and Look
     configFeelAndLook();
 
-    this.model = model;
+    /**
+     * The read-only model, stored as a field in view.
+     */
 
     // Dynamically decide the width
     int width = model.getGridClone().getColNumber() * 100 + 400;
@@ -88,7 +100,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     // Use ScrollPane to wrap GridPanel.
     gridPanel = new GridPanel(model);
     FixSizerPanel<IGridPanel> fixSizerPanel = new FixSizerPanel<>(gridPanel,
-      width - 400, height, ElementColor.GRID_BACKGROUND_COLOR);
+            width - 400, height, ElementColor.GRID_BACKGROUND_COLOR);
     SwingUtilities.invokeLater(() -> {
       add(fixSizerPanel, BorderLayout.CENTER);
     });
@@ -100,7 +112,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
       throw new RuntimeException(e);
     }
 
-    if(this.currentPlayer == EPlayer.PLAYER_ONE) {
+    if (currentPlayer == EPlayer.PLAYER_ONE) {
       showPopUp("Your Turn, Player One");
     }
   }
@@ -162,11 +174,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   @Override
   public void showPopUp(String message) {
-    JOptionPane.showMessageDialog(
-      this,
-      message,
-      "Player Turn Notification",
-      JOptionPane.INFORMATION_MESSAGE
-    );
+    JOptionPane.showMessageDialog(this, message,
+            "Player Turn Notification", JOptionPane.INFORMATION_MESSAGE);
   }
 }

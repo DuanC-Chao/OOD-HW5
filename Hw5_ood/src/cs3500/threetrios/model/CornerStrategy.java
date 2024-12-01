@@ -17,7 +17,7 @@ public class CornerStrategy implements IStrategy {
    *
    * @param rule    The rule to apply.
    * @param hand    The hand of player2.
-   * @param cardIdx The index of card in hand.
+   * @param cardIdx The index of card in hand a.
    * @param corner  The integer representation of corner.
    * @return A boolean, weather advantage will be hide.
    */

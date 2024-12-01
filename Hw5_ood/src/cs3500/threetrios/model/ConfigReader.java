@@ -25,8 +25,8 @@ public class ConfigReader {
       // Split the first line and read.
       String[] dimensions = reader.readLine().trim().split("\\s+");
       if (dimensions.length != 2) {
-        throw new IllegalArgumentException("First line must contain exactly " +
-          "two integers for row and col.");
+        throw new IllegalArgumentException("First line must contain exactly "
+                + "two integers for row and col.");
       }
 
       int rowNum = Integer.parseInt(dimensions[0]);

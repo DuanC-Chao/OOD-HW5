@@ -4,17 +4,17 @@ package cs3500.threetrios.view;
  * A class, represents a move operation, includes the destination of move.
  */
 public class Move {
-  public final int play_to_col;
-  public final int play_to_row;
+  public final int playToCol;
+  public final int playToRow;
 
   /**
    * The constructor of Move.
    *
-   * @param play_to_col The col to play to.
-   * @param play_to_row The row to play to.
+   * @param playToCol The col to play to.
+   * @param playToRow The row to play to.
    */
-  public Move(int play_to_col, int play_to_row) {
-    this.play_to_col = play_to_col;
-    this.play_to_row = play_to_row;
+  public Move(int playToCol, int playToRow) {
+    this.playToCol = playToCol;
+    this.playToRow   = playToRow;
   }
 }

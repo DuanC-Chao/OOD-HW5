@@ -1,8 +1,13 @@
 package cs3500.threetrios.view;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.SwingUtilities;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -30,7 +35,7 @@ public class HandPanel extends JPanel implements IHandPanel {
    * The CardButtons managed as a list.
    * Should be always syncronized with Panel's component management logic.
    */
-  private List<IinHandCardButton> cards;
+  private final List<IinHandCardButton> cards;
 
   /**
    * The model of the game.
@@ -48,12 +53,12 @@ public class HandPanel extends JPanel implements IHandPanel {
   private Consumer<Pick> delegateToDispatch;
 
   /**
-   * Represent weather this hand panel is activated.
+   * Represent whether this hand panel is activated.
    */
-  private boolean isActivated;
+  private final boolean isActivated;
 
   /**
-   * adadawd.
+   * Constructor for HandPanel, takes a player and a model.
    * @param player dawdaw
    * @param model dawd a
    */
@@ -77,11 +82,11 @@ public class HandPanel extends JPanel implements IHandPanel {
    */
   private void updateHand(List<ICard> cards) {
 
-    int wishedHeight = Size.CARD_HEIGHT.getSize();
-
-    if(cards.isEmpty()) {
+    if (cards.isEmpty()) {
       return;
     }
+
+    int wishedHeight = Size.CARD_HEIGHT.getSize();
 
     if (840 / cards.size() < Size.CARD_HEIGHT.getSize()) {
       wishedHeight = 840 / cards.size();
@@ -93,6 +98,7 @@ public class HandPanel extends JPanel implements IHandPanel {
 
   /**
    * Helper method, takes a card, and a boolean indicates if is end, and add the card and
+   * corresponding CardButton to HandPanel.
    *
    * @param card            The logical card to add.
    * @param cardIdx         The index of the logical card in hand.
@@ -114,8 +120,8 @@ public class HandPanel extends JPanel implements IHandPanel {
   @Override
   public void refresh() {
     if (this.player == null) {
-      throw new IllegalStateException("When refreshing HandPanel: Encountered " +
-        "HandPanel with null player");
+      throw new IllegalStateException("When refreshing HandPanel: Encountered "
+              + "HandPanel with null player");
     }
     // Remove all cardButtons from HandPanel first.
     removeAll();
@@ -128,8 +134,8 @@ public class HandPanel extends JPanel implements IHandPanel {
         playerNum = 2;
         break;
       default:
-        throw new IllegalStateException("When refreshing HandPanel: " +
-          "Encountered unexpected EPlayer");
+        throw new IllegalStateException("When refreshing HandPanel: "
+                + "Encountered unexpected EPlayer");
     }
     List<ICard> hand = this.model.getPlayerHand(playerNum);
     //System.out.println("Hand size of player: " + playerNum + " Is: " + hand.size());

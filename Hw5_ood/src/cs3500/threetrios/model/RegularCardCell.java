@@ -37,8 +37,8 @@ public class RegularCardCell implements ICell {
       throw new IllegalStateException("Card cannot be null");
     }
     if (this.card != null) {
-      throw new IllegalStateException("Already placed card to this Cell, Card Name: " +
-        this.card.getCardName() + " Card Owner: " + this.card.getOwner());
+      throw new IllegalStateException("Already placed card to this Cell, Card Name: "
+              + this.card.getCardName() + " Card Owner: " + this.card.getOwner());
     }
     this.card = card;
   }

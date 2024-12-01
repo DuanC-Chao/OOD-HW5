@@ -1,8 +1,7 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
-
-import javax.swing.*;
+import java.awt.Dimension;
+import javax.swing.UIDefaults;
 
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;

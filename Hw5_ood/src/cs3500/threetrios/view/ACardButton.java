@@ -1,8 +1,16 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridBagLayout;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import cs3500.threetrios.model.ICard;
 

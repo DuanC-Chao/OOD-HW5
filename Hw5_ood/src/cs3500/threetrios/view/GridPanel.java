@@ -1,8 +1,12 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
+
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridLayout;
 
 import javax.swing.*;
 
@@ -18,12 +22,6 @@ import static cs3500.threetrios.view.ViewUtils.toGridLayoutList;
  * A Grid panel holds ICellButton, and forms the game grid.
  */
 public class GridPanel extends JPanel implements IGridPanel {
-
-  /**
-   * The Logical Grid.
-   */
-  private IGrid logicalGrid;
-
   /**
    * The delegate to be dispatched.
    */
@@ -46,18 +44,18 @@ public class GridPanel extends JPanel implements IGridPanel {
    */
   public GridPanel(ReadOnlyTripleTriadModel model) {
     this.model = model;
-    this.logicalGrid = model.getGridClone();
+    IGrid logicalGrid = model.getGridClone();
 
     int cols = logicalGrid.getColNumber();
     int rows = logicalGrid.getRowNumber();
 
-    this.setPreferredSize(new Dimension(cols * 102, rows *
-        (Size.CARD_HEIGHT.getSize() + 2)));
+    this.setPreferredSize(new Dimension(cols * 102, rows
+            * (Size.CARD_HEIGHT.getSize() + 2)));
 
     // To ensure that Grid will not be automatically stretched when there are too many space
     // But, still will be automatically condensed when available space is not enough
-    this.setMaximumSize(new Dimension(cols * 102, rows *
-        (Size.CARD_HEIGHT.getSize() + 2)));
+    this.setMaximumSize(new Dimension(cols * 102, rows
+            * (Size.CARD_HEIGHT.getSize() + 2)));
 
     setGridBackGroundColor();
 

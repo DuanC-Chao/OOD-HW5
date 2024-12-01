@@ -1,8 +1,11 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
-
-import javax.swing.*;
+import javax.swing.JPanel;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Component;
 
 /**
  * This class will be wrapping another component, fixing an auto-stretching problem.

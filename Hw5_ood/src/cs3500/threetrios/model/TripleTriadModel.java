@@ -225,8 +225,8 @@ public class TripleTriadModel implements ITripleTriadModel {
 
   @Override
   public boolean isGameWon() {
-    return this.gameStatus == GameStatus.PLAYER_ONE_WIN ||
-      this.gameStatus == GameStatus.PLAYER_TWO_WIN;
+    return this.gameStatus == GameStatus.PLAYER_ONE_WIN
+            || this.gameStatus == GameStatus.PLAYER_TWO_WIN;
   }
 
   @Override
@@ -333,7 +333,7 @@ public class TripleTriadModel implements ITripleTriadModel {
 
   @Override
   public boolean haveBot() {
-    return !(this.bot == null);
+    return this.bot != null;
   }
 
   /**

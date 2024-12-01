@@ -1,7 +1,9 @@
-package cs3500.threetrios.controller;
+package cs3500.threetrios;
 
 import java.io.IOException;
 
+import cs3500.threetrios.controller.ITripleTriadController;
+import cs3500.threetrios.controller.TripleTriadController;
 import cs3500.threetrios.model.DefaultCombatRule;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ITripleTriadModel;
@@ -16,8 +18,8 @@ public class TripleTriadPaogram {
 
   public static void main(String[] args) throws IOException {
 
-    String boardConfigPath = "src/docs/SimpleBoard.txt";
-    String cardConfigPath = "src/docs/SimpleDeck.txt";
+    String boardConfigPath = loadResourceFile("/SimpleBoard.txt");
+    String cardConfigPath = loadResourceFile("/SimpleDeck.txt");
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath, cardConfigPath, "A", "B", false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());

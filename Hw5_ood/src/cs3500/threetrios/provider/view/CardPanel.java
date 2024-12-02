@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import model.GameCard;
+import cs3500.threetrios.provider.model.GameCard;
 
 /**
  * A graphical representation of a card in the game of ThreeTrios.

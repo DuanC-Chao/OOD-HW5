@@ -1,6 +1,6 @@
 package cs3500.threetrios.provider.view;
 
-import model.PlayerColor;
+import cs3500.threetrios.provider.model.PlayerColor;
 
 /**
  * Behaviors for rendering a GUI of a ThreeTrios model.

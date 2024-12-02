@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
-import model.GameCard;
+import cs3500.threetrios.provider.model.GameCard;
 
 /**
  * A graphical representation of a player's hand in a game of ThreeTrios.

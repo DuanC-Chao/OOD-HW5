@@ -7,9 +7,9 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.MouseInputAdapter;
 
-import model.GameCard;
-import model.PlayerColor;
-import model.ReadOnlyThreeTriosModel;
+import cs3500.threetrios.provider.model.ReadOnlyThreeTriosModel;
+import cs3500.threetrios.provider.model.PlayerColor;
+import cs3500.threetrios.provider.model.GameCard;
 
 /**
  * Graphical representation of the grid in a game of ThreeTrios.

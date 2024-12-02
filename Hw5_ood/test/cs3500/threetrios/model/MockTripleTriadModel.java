@@ -115,6 +115,11 @@ public class MockTripleTriadModel implements ITripleTriadModel {
   }
 
   @Override
+  public EPlayer getTurn() {
+    return null;
+  }
+
+  @Override
   public void startGame(String player1, String player2, String player1Deck, String player2Deck, boolean shuffled, ICombatRule combatRule, IBot bot) {
     methodLog.add("startGame called with player1: " + player1 + ", player2: " + player2 + ", shuffled: " + shuffled);
     this.player1Name = player1;

@@ -1,6 +1,6 @@
 package cs3500.threetrios.provider.model;
 
-import controller.ThreeTriosController;
+import cs3500.threetrios.provider.controller.ThreeTriosController;
 
 /**
  * Behaviors for a game of ThreeTrios. Includes both observations and operations.

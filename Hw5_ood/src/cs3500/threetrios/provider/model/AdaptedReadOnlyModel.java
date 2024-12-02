@@ -1,9 +1,11 @@
 package cs3500.threetrios.provider.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.EPlayer;
+import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
 
 /**
@@ -44,7 +46,21 @@ public class AdaptedReadOnlyModel implements ReadOnlyThreeTriosModel {
 
   @Override
   public List<GameCard> getPlayerHand(PlayerColor color) {
-    return
+
+    int playerIdx = 0;
+    if (color == PlayerColor.RED) {
+      playerIdx = 1;
+    } else if (color == PlayerColor.BLUE) {
+      playerIdx = 2;
+    }
+
+    List<ICard> playerHand = innerModel.getPlayerHand(playerIdx);
+
+    List<GameCard> hand = new ArrayList<>(playerHand.size());
+    for (ICard card : playerHand) {
+      hand.add(new GameCard(card));
+    }
+    return hand;
   }
 
   @Override
@@ -59,7 +75,12 @@ public class AdaptedReadOnlyModel implements ReadOnlyThreeTriosModel {
 
   @Override
   public GameCard getCardAt(int row, int col) {
-    return null;
+    ICard preCard = innerModel.getGridClone().getCard(col, row);
+
+    if (preCard == null) {
+      return null;
+    }
+    return new GameCard(preCard);
   }
 
   @Override
@@ -73,7 +94,11 @@ public class AdaptedReadOnlyModel implements ReadOnlyThreeTriosModel {
 
   @Override
   public PlayerColor cardOwner(GameCard card) {
-    return null;
+    if (card.getCardOwner() == EPlayer.PLAYER_ONE) {
+      return PlayerColor.RED;
+    } else {
+      return PlayerColor.BLUE;
+    }
   }
 
   @Override

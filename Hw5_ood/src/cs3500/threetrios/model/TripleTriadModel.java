@@ -336,6 +336,11 @@ public class TripleTriadModel implements ITripleTriadModel {
     return this.bot != null;
   }
 
+  @Override
+  public EPlayer getTurn() {
+    return currentTurn;
+  }
+
   /**
    * This method check if any of the player won the game, and change gamestatus.
    *

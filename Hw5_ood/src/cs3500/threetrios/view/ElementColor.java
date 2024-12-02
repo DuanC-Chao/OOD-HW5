@@ -5,8 +5,8 @@ package cs3500.threetrios.view;
  */
 public enum ElementColor {
 
-  PLAYER_ONE_COLOR("#41bfda"),
-  PLAYER_TWO_COLOR("#ff9994"),
+  PLAYER_ONE_COLOR("#ff9994"), // RED
+  PLAYER_TWO_COLOR("#41bfda"), // BLUE
   HOLE_COLOR("#2C5269"),
   EMPTY_CELL_COLOR("#FFFCF6"),
   GRID_BACKGROUND_COLOR("#2C5269"),

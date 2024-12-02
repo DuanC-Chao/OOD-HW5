@@ -4,8 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import model.PlayerColor;
-import model.ReadOnlyThreeTriosModel;
+import cs3500.threetrios.provider.model.PlayerColor;
+import cs3500.threetrios.provider.model.ReadOnlyThreeTriosModel;
 
 /**
  * Represents a Graphical user interface for a classic game of ThreeTrios.

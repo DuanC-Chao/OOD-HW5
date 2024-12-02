@@ -126,4 +126,10 @@ public interface ReadOnlyTripleTriadModel {
    * @return A boolean.
    */
   boolean haveBot();
+
+  /**
+   * Return the player of current turn, as an EPlayer.
+   * @return The player at the current turn.
+   */
+  EPlayer getTurn();
 }

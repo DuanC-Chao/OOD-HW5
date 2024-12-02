@@ -1,7 +1,7 @@
 package cs3500.threetrios.provider.controller;
 
-import model.ModelFeatures;
-import view.PlayerActions;
+import cs3500.threetrios.provider.model.ModelFeatures;
+import cs3500.threetrios.provider.view.PlayerActions;
 
 /**
  * A controller interface for a player in a game of Three Trios.

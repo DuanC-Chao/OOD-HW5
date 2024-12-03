@@ -1,10 +1,17 @@
 package cs3500.threetrios.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.ContainerOrderFocusTraversalPolicy;
+
 import java.io.IOException;
 import java.util.function.Consumer;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import cs3500.threetrios.model.EPlayer;

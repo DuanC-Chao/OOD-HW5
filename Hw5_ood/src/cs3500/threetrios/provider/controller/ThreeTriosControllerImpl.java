@@ -1,13 +1,23 @@
 package cs3500.threetrios.provider.controller;
 
 import cs3500.threetrios.provider.model.ThreeTriosModel;
-import cs3500.threetrios.provider.view.PlayerActions;
 import cs3500.threetrios.provider.view.ThreeTriosGUI;
 
+/**
+ * Implementation of the {@link ThreeTriosController} interface. This class
+ * handles interactions between the {@link ThreeTriosModel} and the {@link ThreeTriosGUI}.
+ */
 public class ThreeTriosControllerImpl implements ThreeTriosController {
-  private ThreeTriosGUI view;
-  private ThreeTriosModel model;
+  private final ThreeTriosGUI view;
+  private final ThreeTriosModel model;
 
+  /**
+   * Constructs a {@code ThreeTriosControllerImpl} with the given model and view.
+   *
+   * @param model the model to use for game logic
+   * @param view  the view to use for displaying the game
+   * @throws IllegalArgumentException if the view is null
+   */
   public ThreeTriosControllerImpl(ThreeTriosModel model, ThreeTriosGUI view) {
     if (view == null) {
       throw new IllegalArgumentException("View cannot be null");

@@ -7,21 +7,22 @@ import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.ITripleTriadModel;
-import cs3500.threetrios.model.TripleTriadModel;
 import cs3500.threetrios.provider.controller.ThreeTriosController;
 
 /**
- * A model class, which adapt from Provided ReadOnlyThreeTriosModel with our own model.
+ * A model class that adapts the provided {@link ThreeTriosModel} to work with our
+ * own {@link ITripleTriadModel} implementation.
  */
 public class AdaptedModel implements ThreeTriosModel {
 
   /**
-   * The inner model kept, which is our own model implementation.
+   * The inner model being adapted, which is our own model implementation.
    */
   private final ITripleTriadModel innerModel;
 
   /**
-   * The constructor, takes a original model, as innerModel of the adapted model.
+   * Constructs an {@code AdaptedModel} using the given original model as its inner model.
+   *
    * @param innerModel The original model to be adapted.
    */
   public AdaptedModel(ITripleTriadModel innerModel) {
@@ -127,6 +128,7 @@ public class AdaptedModel implements ThreeTriosModel {
 
   @Override
   public void playToGrid(int cardIdxInHand, int row, int col) {
-    this.innerModel.playToGrid(innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2, cardIdxInHand, col, row);
+    this.innerModel.playToGrid(innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2, cardIdxInHand,
+            col, row);
   }
 }

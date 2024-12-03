@@ -4,7 +4,6 @@ import cs3500.threetrios.controller.TripleTriadController;
 import cs3500.threetrios.model.DefaultCombatRule;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ITripleTriadModel;
-import cs3500.threetrios.model.PredefinedBot;
 import cs3500.threetrios.model.TripleTriadModel;
 import cs3500.threetrios.provider.controller.ThreeTriosController;
 import cs3500.threetrios.provider.controller.ThreeTriosControllerImpl;
@@ -18,7 +17,19 @@ import cs3500.threetrios.view.TripleTriadView;
 
 import static cs3500.threetrios.view.ViewUtils.loadResourceFile;
 
+/**
+ * A test program that demonstrates the integration of the Triple Triad game
+ * with the provider's ThreeTrios adaptations.
+ */
 public class TestProvidedProgram {
+
+  /**
+   * The main entry point for the test program. This method sets up the game
+   * configuration, initializes models, views, and controllers, and starts
+   * the graphical user interface (GUI).
+   *
+   * @param args command-line arguments (not used in this program)
+   */
   public static void main(String[] args) {
 
     String boardConfigPath = loadResourceFile("/SimpleBoard.txt");
@@ -34,7 +45,8 @@ public class TestProvidedProgram {
     ThreeTriosGUI viewTwo = new ClassicThreeTriosGUI(adaptedModel);
     TripleTriadView reverseAdaptedViewTwo = new ReverseAdaptedView(viewTwo);
 
-    TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model, viewOne, reverseAdaptedViewTwo);
+    TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model,
+            viewOne, reverseAdaptedViewTwo);
     ThreeTriosController controllerTwo = new ThreeTriosControllerImpl(adaptedModel, viewTwo);
 
     viewTwo.setFeatureListeners(controllerTwo);

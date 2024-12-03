@@ -1,15 +1,20 @@
 package cs3500.threetrios.provider;
 
+import cs3500.threetrios.controller.TripleTriadController;
 import cs3500.threetrios.model.DefaultCombatRule;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ITripleTriadModel;
 import cs3500.threetrios.model.PredefinedBot;
 import cs3500.threetrios.model.TripleTriadModel;
-import cs3500.threetrios.provider.model.AdaptedReadOnlyModel;
-import cs3500.threetrios.provider.model.ReadOnlyThreeTriosModel;
+import cs3500.threetrios.provider.controller.ThreeTriosController;
+import cs3500.threetrios.provider.controller.ThreeTriosControllerImpl;
+import cs3500.threetrios.provider.model.AdaptedModel;
+import cs3500.threetrios.provider.model.ThreeTriosModel;
 import cs3500.threetrios.provider.view.ClassicThreeTriosGUI;
+import cs3500.threetrios.provider.view.ReverseAdaptedView;
 import cs3500.threetrios.provider.view.ThreeTriosGUI;
 import cs3500.threetrios.view.TripleTriadGraphicView;
+import cs3500.threetrios.view.TripleTriadView;
 
 import static cs3500.threetrios.view.ViewUtils.loadResourceFile;
 
@@ -21,12 +26,18 @@ public class TestProvidedProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath, cardConfigPath, "A", "B",
-      false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
+      false, new DefaultCombatRule(), null);
 
-    ReadOnlyThreeTriosModel adaptedModel = new AdaptedReadOnlyModel(model);
+    ThreeTriosModel adaptedModel = new AdaptedModel(model);
 
-    TripleTriadGraphicView viewOne = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
+    TripleTriadView viewOne = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
     ThreeTriosGUI viewTwo = new ClassicThreeTriosGUI(adaptedModel);
+    TripleTriadView reverseAdaptedViewTwo = new ReverseAdaptedView(viewTwo);
+
+    TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model, viewOne, reverseAdaptedViewTwo);
+    ThreeTriosController controllerTwo = new ThreeTriosControllerImpl(adaptedModel, viewTwo);
+
+    viewTwo.setFeatureListeners(controllerTwo);
     viewTwo.display(true);
   }
 }

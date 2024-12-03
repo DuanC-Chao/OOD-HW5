@@ -1,6 +1,7 @@
 package cs3500.threetrios.provider.controller;
 
 import cs3500.threetrios.provider.model.ThreeTriosModel;
+import cs3500.threetrios.provider.view.PlayerActions;
 import cs3500.threetrios.provider.view.ThreeTriosGUI;
 
 public class ThreeTriosControllerImpl implements ThreeTriosController {
@@ -14,7 +15,6 @@ public class ThreeTriosControllerImpl implements ThreeTriosController {
     this.view = view;
     this.model = model;
   }
-
 
   @Override
   public void startGUI() {

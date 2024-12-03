@@ -6,23 +6,25 @@ import java.util.List;
 import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
-import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
+import cs3500.threetrios.model.ITripleTriadModel;
+import cs3500.threetrios.model.TripleTriadModel;
+import cs3500.threetrios.provider.controller.ThreeTriosController;
 
 /**
  * A model class, which adapt from Provided ReadOnlyThreeTriosModel with our own model.
  */
-public class AdaptedReadOnlyModel implements ReadOnlyThreeTriosModel {
+public class AdaptedModel implements ThreeTriosModel {
 
   /**
    * The inner model kept, which is our own model implementation.
    */
-  private final ReadOnlyTripleTriadModel innerModel;
+  private final ITripleTriadModel innerModel;
 
   /**
    * The constructor, takes a original model, as innerModel of the adapted model.
    * @param innerModel The original model to be adapted.
    */
-  public AdaptedReadOnlyModel(ReadOnlyTripleTriadModel innerModel) {
+  public AdaptedModel(ITripleTriadModel innerModel) {
     this.innerModel = innerModel;
   }
 
@@ -116,5 +118,15 @@ public class AdaptedReadOnlyModel implements ReadOnlyThreeTriosModel {
   @Override
   public boolean isValidMove(int cardIdxInHand, int row, int col) {
     return innerModel.isLegalMove(col, row);
+  }
+
+  @Override
+  public void startGame(ThreeTriosController player1, ThreeTriosController player2) {
+    return;
+  }
+
+  @Override
+  public void playToGrid(int cardIdxInHand, int row, int col) {
+    this.innerModel.playToGrid(innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2, cardIdxInHand, col, row);
   }
 }

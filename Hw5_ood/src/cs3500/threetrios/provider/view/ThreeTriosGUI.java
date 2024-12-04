@@ -36,7 +36,7 @@ public interface ThreeTriosGUI {
   void setFrameTitle(String msg);
 
   /**
-   * Creates a pop-up with the given message
+   * Creates a pop-up with the given message.
    * @param msg the message to be displayed by the pop-up
    */
   void popUpMsg(String msg);

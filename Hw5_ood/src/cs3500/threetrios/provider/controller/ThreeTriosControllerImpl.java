@@ -22,7 +22,8 @@ public class ThreeTriosControllerImpl implements ThreeTriosController {
    * @param view  the view to use for displaying the game
    * @throws IllegalArgumentException if the view is null
    */
-  public ThreeTriosControllerImpl(ThreeTriosModel model, ThreeTriosGUI view, TripleTriadView secondaryView) {
+  public ThreeTriosControllerImpl(ThreeTriosModel model, ThreeTriosGUI view, TripleTriadView
+          secondaryView) {
     if (view == null) {
       throw new IllegalArgumentException("View cannot be null");
     }
@@ -45,15 +46,15 @@ public class ThreeTriosControllerImpl implements ThreeTriosController {
 
   @Override
   public void notifyStateUpdate() {
-    switch (model.getCurrentPlayer()) {
-      case RED:
-        view.popUpMsg("Blue made a move.");
-        break;
-      case BLUE:
-        view.setFrameTitle("Red made a move.");
-        break;
+    String currentPlayer = model.getCurrentPlayer().toString();
+
+    if ("RED".equals(currentPlayer)) {
+      view.popUpMsg("Blue made a move.");
+    } else if ("BLUE".equals(currentPlayer)) {
+      view.setFrameTitle("Red made a move.");
     }
   }
+
 
   @Override
   public void currentPlayerMakeMove(int cardIdxInHand, int row, int col) {

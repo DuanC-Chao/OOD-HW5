@@ -2,8 +2,19 @@ package cs3500.threetrios.model;
 
 import java.io.IOException;
 
+import cs3500.threetrios.controller.TripleTriadController;
+import cs3500.threetrios.provider.controller.ThreeTriosController;
+import cs3500.threetrios.provider.controller.ThreeTriosControllerImpl;
+import cs3500.threetrios.provider.model.AdaptedModel;
+import cs3500.threetrios.provider.model.ThreeTriosModel;
+import cs3500.threetrios.provider.view.ClassicThreeTriosGUI;
+import cs3500.threetrios.provider.view.ReverseAdaptedView;
+import cs3500.threetrios.provider.view.ThreeTriosGUI;
+import cs3500.threetrios.view.TripleTriadGraphicView;
 import cs3500.threetrios.view.TripleTriadTextView;
 import cs3500.threetrios.view.TripleTriadView;
+
+import static cs3500.threetrios.view.ViewUtils.loadResourceFile;
 
 /**
  * The main class.
@@ -17,28 +28,22 @@ public class TripleTriadProgram {
    */
   public static void main(String[] args) {
 
-    String boardConfigPath_Simple = "src/docs/SimpleBoard.txt";
-    String boardConfigPath_Big = "src/docs/UnreachableHoleBoard.txt";
-    String cardConfigPath = "src/docs/SimpleDeck.txt";
+    String boardConfigPath = loadResourceFile("/SimpleBoard.txt");
+    String cardConfigPath = loadResourceFile("/SevenCardsDeck.txt");
 
     ITripleTriadModel model = new TripleTriadModel();
-    TripleTriadView view = new TripleTriadTextView(model);
-    model.startGame(boardConfigPath_Big, cardConfigPath, "A", "B",
-            false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
 
-    System.out.println("Grid Col: " + model.getGrid().length);
-    System.out.println("Grid Row: " + model.getGrid()[0].length);
+    ICombatRule baseRule = new DefaultCombatRule();
+    ICombatRule falledAceRule = new FallenAceCombatRule(baseRule);
+    ICombatRule reverseRule = new ReverseCombatRule(falledAceRule);
 
-    try {
-      view.render(System.out);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    model.playToGrid(1, 0, 0, 0);
-    try {
-      view.render(System.out);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    model.startGame(boardConfigPath, cardConfigPath, "A", "B",
+      false, reverseRule, null);
+
+    TripleTriadView viewOne = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
+    TripleTriadView viewTwo = new TripleTriadGraphicView(model, EPlayer.PLAYER_TWO);
+
+    TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model, viewOne, viewTwo);
+    TripleTriadController constrllerTwo = new TripleTriadController(EPlayer.PLAYER_TWO, model, viewTwo, viewOne);
   }
 }

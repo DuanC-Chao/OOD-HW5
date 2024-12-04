@@ -1,7 +1,7 @@
 CaptainNutButter A 5 7 8
-RottenBanana 3 4 6 7
-CupMonster 1 5 4 8
-Troy 8 6 7 4
-Dracula A 8 7 7
-ElfMan 9 A 8 A
-Bill 1 1 A 1
+MorningStar 3 A 6 7
+Alamak_XII 1 5 4 8
+ButMan 8 6 7 A
+OneTrillion A 8 7 7
+Camelopardalis 1 A 1 A
+Pontifex's_Atonement 1 1 A 1

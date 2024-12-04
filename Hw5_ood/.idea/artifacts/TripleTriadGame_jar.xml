@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TripleTriadGame:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TripleTriadGame_jar</output-path>
+    <root id="archive" name="Hw5_ood.jar">
+      <element id="module-output" name="Hw5_ood" />
+    </root>
+  </artifact>
+</component>

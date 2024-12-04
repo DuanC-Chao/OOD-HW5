@@ -7,8 +7,10 @@ import cs3500.threetrios.controller.TripleTriadController;
 import cs3500.threetrios.model.DefaultCombatRule;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.FallenAceCombatRule;
+import cs3500.threetrios.model.IBot;
 import cs3500.threetrios.model.ICombatRule;
 import cs3500.threetrios.model.ITripleTriadModel;
+import cs3500.threetrios.model.PredefinedBot;
 import cs3500.threetrios.model.ReverseCombatRule;
 import cs3500.threetrios.model.TripleTriadModel;
 import cs3500.threetrios.provider.controller.ThreeTriosController;
@@ -41,14 +43,8 @@ public class TestProvidedProgram {
     String boardConfigPath = loadResourceFile("/SimpleBoard.txt");
     String cardConfigPath = loadResourceFile("/SevenCardsDeck.txt");
 
-    ITripleTriadModel model = new TripleTriadModel();
-    model.startGame(boardConfigPath, cardConfigPath, "A", "B",
-      false, new DefaultCombatRule(), null);
-
-    ThreeTriosModel adaptedModel = new AdaptedModel(model);
-
     ICombatRule ruleToApply = null;
-    int currentIndex = 0;
+    int currentIndex = 1;
 
     // First, when no argument given, run the default scenario
     // No Bot, No provided view, base rule
@@ -56,22 +52,55 @@ public class TestProvidedProgram {
       baseScenario();
     } else {
       int ruleNumber = Integer.parseInt(args[0]);
+      currentIndex += ruleNumber;
       String[] rules = Arrays.copyOfRange(args, 1, 1 + ruleNumber);
       ruleToApply = loadRule(rules);
     }
 
+    System.out.println("BreakPoint#0 \n");
 
+    IBot bot = null;
+
+    if (args[currentIndex].equals("1")) {
+      bot = PredefinedBot.ADVANCED_BOT.getBot();
+      System.out.println("BreakPoint#1 \n");
+    }
+
+    currentIndex += 1;
+
+    ITripleTriadModel model = new TripleTriadModel();
+    model.startGame(boardConfigPath, cardConfigPath, "A", "B",
+      false, ruleToApply, bot);
+
+    ThreeTriosModel adaptedModel = new AdaptedModel(model);
+
+    boolean useProviderView = false;
+
+    if (args[currentIndex].equals("1")) {
+      useProviderView = true;
+      System.out.println("BreakPoint#2 \n");
+    }
 
     TripleTriadView viewOne = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
-    ThreeTriosGUI viewTwo = new ClassicThreeTriosGUI(adaptedModel);
-    TripleTriadView reverseAdaptedViewTwo = new ReverseAdaptedView(viewTwo);
+    TripleTriadView viewTwo = new TripleTriadGraphicView(model, EPlayer.PLAYER_TWO);
+
+    ThreeTriosGUI viewProvider = new ClassicThreeTriosGUI(adaptedModel);
+    TripleTriadView reverseAdaptedViewTwo = new ReverseAdaptedView(viewProvider);
 
     TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model,
-      viewOne, reverseAdaptedViewTwo);
-    ThreeTriosController controllerTwo = new ThreeTriosControllerImpl(adaptedModel, viewTwo, viewOne);
+      viewOne, viewTwo);
+    TripleTriadController controllerTwo = null;
 
-    viewTwo.setFeatureListeners(controllerTwo);
-    viewTwo.display(true);
+    ThreeTriosController controllerProvider = new ThreeTriosControllerImpl(adaptedModel, viewProvider,
+      viewOne);
+
+    if (useProviderView) {
+      viewProvider.setFeatureListeners(controllerProvider);
+      viewProvider.display(true);
+    } else {
+      controllerTwo = new TripleTriadController(EPlayer.PLAYER_TWO, model,
+        viewTwo, viewOne);
+    }
   }
 
   private static void baseScenario() {
@@ -90,8 +119,10 @@ public class TestProvidedProgram {
     TripleTriadView viewOne = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
     TripleTriadView viewTwo = new TripleTriadGraphicView(model, EPlayer.PLAYER_TWO);
 
-    TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model, viewOne, viewTwo);
-    TripleTriadController constrllerTwo = new TripleTriadController(EPlayer.PLAYER_TWO, model, viewTwo, viewOne);
+    TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model,
+      viewOne, viewTwo);
+    TripleTriadController constrllerTwo = new TripleTriadController(EPlayer.PLAYER_TWO, model,
+      viewTwo, viewOne);
   }
 
   private static ICombatRule loadRule(String[] rules) {
@@ -109,18 +140,23 @@ public class TestProvidedProgram {
     ICombatRule reversedBaseRule = new ReverseCombatRule(baseRule);
     ICombatRule reversedFalledAceRule = new FallenAceCombatRule(falledAceRule);
 
-    if (loRule.contains("base") && !loRule.contains("falledAce") && !loRule.contains("reverse")) {
+    if (loRule.contains("base") && !loRule.contains("fallenAce") && !loRule.contains("reverse")) {
+      System.out.println("Base Rule Apply");
       return baseRule;
-    } else if (loRule.contains("base") && loRule.contains("falledAce") && !loRule.contains("reverse")) {
+    } else if (loRule.contains("base") && loRule.contains("fallenAce") &&
+      !loRule.contains("reverse")) {
+      System.out.println("FallenAce Rule Apply");
       return falledAceRule;
-    } else if (loRule.contains("base") && loRule.contains("falledAce") && loRule.contains("reverse")) {
+    } else if (loRule.contains("base") && loRule.contains("fallenAce") &&
+      loRule.contains("reverse")) {
+      System.out.println("ReversedFA Rule Apply");
       return reversedFalledAceRule;
-    } else if (loRule.contains("base") && !loRule.contains("falledAce") && loRule.contains("reverse")) {
+    } else if (loRule.contains("base") && !loRule.contains("fallenAce") &&
+      loRule.contains("reverse")) {
+      System.out.println("Reversed Base Rule Apply");
       return reversedBaseRule;
     } else {
       throw new IllegalArgumentException("Illegal combination of rules");
     }
-
-
   }
 }

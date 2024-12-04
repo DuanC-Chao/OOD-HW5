@@ -1,7 +1,10 @@
 package cs3500.threetrios.provider.controller;
 
+import java.io.IOException;
+
 import cs3500.threetrios.provider.model.ThreeTriosModel;
 import cs3500.threetrios.provider.view.ThreeTriosGUI;
+import cs3500.threetrios.view.TripleTriadView;
 
 /**
  * Implementation of the {@link ThreeTriosController} interface. This class
@@ -9,6 +12,7 @@ import cs3500.threetrios.provider.view.ThreeTriosGUI;
  */
 public class ThreeTriosControllerImpl implements ThreeTriosController {
   private final ThreeTriosGUI view;
+  private final TripleTriadView secondaryView;
   private final ThreeTriosModel model;
 
   /**
@@ -18,12 +22,13 @@ public class ThreeTriosControllerImpl implements ThreeTriosController {
    * @param view  the view to use for displaying the game
    * @throws IllegalArgumentException if the view is null
    */
-  public ThreeTriosControllerImpl(ThreeTriosModel model, ThreeTriosGUI view) {
+  public ThreeTriosControllerImpl(ThreeTriosModel model, ThreeTriosGUI view, TripleTriadView secondaryView) {
     if (view == null) {
       throw new IllegalArgumentException("View cannot be null");
     }
     this.view = view;
     this.model = model;
+    this.secondaryView = secondaryView;
   }
 
   @Override
@@ -59,6 +64,12 @@ public class ThreeTriosControllerImpl implements ThreeTriosController {
       view.popUpMsg(e.getMessage());
     }
     view.refresh();
+
+    try {
+      secondaryView.render(null);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

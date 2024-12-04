@@ -20,7 +20,7 @@ public class ReverseAdaptedView implements TripleTriadView {
 
   @Override
   public void render(Appendable out) throws IOException {
-    innerView.display(true);
+    innerView.refresh();
   }
 
   @Override

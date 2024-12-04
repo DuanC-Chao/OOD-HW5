@@ -7,6 +7,7 @@ import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.ITripleTriadModel;
+import cs3500.threetrios.model.Tuple;
 import cs3500.threetrios.provider.controller.ThreeTriosController;
 
 /**
@@ -76,15 +77,35 @@ public class AdaptedModel implements ThreeTriosModel {
     return innerModel.getGridClone().getColNumber();
   }
 
+  /**
+   * Convert col and row to our model's standard.
+   * @param col The col to convert.
+   * @param row The row to convert.
+   * @return The converted coord.
+   */
+  private Tuple<Integer, Integer> convertCoord(int col, int row) {
+    int totalRows = innerModel.getGridClone().getRowNumber();
+    int newRow = totalRows - 1 - row;
+    int newCol = col;
+    return new Tuple<>(newCol, newRow);
+  }
+
   @Override
   public GameCard getCardAt(int row, int col) {
-    ICard preCard = innerModel.getGridClone().getCard(col, row);
+
+    Tuple<Integer, Integer> convertedCoord = convertCoord(col, row);
+    int newCol = convertedCoord.getFirst();
+    int newRow = convertedCoord.getSecond();
+
+    ICard preCard = innerModel.getGridClone().getCard(newCol, newRow);
 
     if (preCard == null) {
       return null;
     }
+
     return new GameCard(preCard);
   }
+
 
   @Override
   public PlayerColor getCurrentPlayer() {
@@ -106,19 +127,28 @@ public class AdaptedModel implements ThreeTriosModel {
 
   @Override
   public boolean isHole(int row, int col) {
-    return innerModel.getGridClone().getCell(col, row).getType() == CellType.HOLE;
+    Tuple<Integer, Integer> convertedCoord = convertCoord(col, row);
+    int newCol = convertedCoord.getFirst();
+    int newRow = convertedCoord.getSecond();
+    return innerModel.getGridClone().getCell(newCol, newRow).getType() == CellType.HOLE;
   }
 
   @Override
   public int howManyFlips(int cardIdxInHand, int row, int col) {
+    Tuple<Integer, Integer> convertedCoord = convertCoord(col, row);
+    int newCol = convertedCoord.getFirst();
+    int newRow = convertedCoord.getSecond();
     return innerModel.calculateFlips(innerModel.getTurn(),
       innerModel.getPlayerHand(
-        innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2).get(cardIdxInHand), col, row);
+        innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2).get(cardIdxInHand), newCol, newRow);
   }
 
   @Override
   public boolean isValidMove(int cardIdxInHand, int row, int col) {
-    return innerModel.isLegalMove(col, row);
+    Tuple<Integer, Integer> convertedCoord = convertCoord(col, row);
+    int newCol = convertedCoord.getFirst();
+    int newRow = convertedCoord.getSecond();
+    return innerModel.isLegalMove(newCol, newRow);
   }
 
   @Override
@@ -128,7 +158,10 @@ public class AdaptedModel implements ThreeTriosModel {
 
   @Override
   public void playToGrid(int cardIdxInHand, int row, int col) {
+    Tuple<Integer, Integer> convertedCoord = convertCoord(col, row);
+    int newCol = convertedCoord.getFirst();
+    int newRow = convertedCoord.getSecond();
     this.innerModel.playToGrid(innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2, cardIdxInHand,
-            col, row);
+      newCol, newRow);
   }
 }

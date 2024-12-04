@@ -37,7 +37,7 @@ public class TestProvidedProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath, cardConfigPath, "A", "B",
-      false, new DefaultCombatRule(), null);
+            false, new DefaultCombatRule(), null);
 
     ThreeTriosModel adaptedModel = new AdaptedModel(model);
 
@@ -47,7 +47,8 @@ public class TestProvidedProgram {
 
     TripleTriadController controllerOne = new TripleTriadController(EPlayer.PLAYER_ONE, model,
             viewOne, reverseAdaptedViewTwo);
-    ThreeTriosController controllerTwo = new ThreeTriosControllerImpl(adaptedModel, viewTwo, viewOne);
+    ThreeTriosController controllerTwo = new ThreeTriosControllerImpl(adaptedModel, viewTwo,
+            viewOne);
 
     viewTwo.setFeatureListeners(controllerTwo);
     viewTwo.display(true);

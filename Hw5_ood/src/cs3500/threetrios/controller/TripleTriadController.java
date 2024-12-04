@@ -126,7 +126,7 @@ public class TripleTriadController implements ITripleTriadController {
       }
 
       if (!botTurn || pIdx == 2) {
-        if(secondaryView != null) {
+        if (secondaryView != null) {
           this.secondaryView.showPopUp("Your Turn, " + playerSubject);
         }
       }

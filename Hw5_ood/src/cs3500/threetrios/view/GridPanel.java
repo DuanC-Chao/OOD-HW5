@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import cs3500.threetrios.model.ICell;
 import cs3500.threetrios.model.IGrid;

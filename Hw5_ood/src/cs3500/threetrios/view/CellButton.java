@@ -17,6 +17,7 @@ import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.UIDefaults;
+
 /**
  * The class represents a CellButton.
  * A CellButton represent a logical Cell.

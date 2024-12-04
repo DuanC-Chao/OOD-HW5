@@ -162,6 +162,6 @@ public class AdaptedModel implements ThreeTriosModel {
     int newCol = convertedCoord.getFirst();
     int newRow = convertedCoord.getSecond();
     this.innerModel.playToGrid(innerModel.getTurn() == EPlayer.PLAYER_ONE ? 1 : 2, cardIdxInHand,
-      newCol, newRow);
+            newCol, newRow);
   }
 }

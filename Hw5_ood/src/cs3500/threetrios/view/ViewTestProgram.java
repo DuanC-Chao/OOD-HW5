@@ -1,10 +1,5 @@
 package cs3500.threetrios.view;
 
-import java.io.InputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Scanner;
-
 import cs3500.threetrios.model.DefaultCombatRule;
 import cs3500.threetrios.model.ITripleTriadModel;
 import cs3500.threetrios.model.PredefinedBot;
@@ -32,7 +27,7 @@ public class ViewTestProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath, cardConfigPath, "A", "B",
-      false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
+            false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
     TripleTriadGraphicView view = new TripleTriadGraphicView(model, null);
 
     //model.playToGrid(1, 0, 0, 0);

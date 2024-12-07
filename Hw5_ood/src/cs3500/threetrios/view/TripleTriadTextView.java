@@ -101,4 +101,9 @@ public class TripleTriadTextView implements TripleTriadView {
   public void showPopUp(String message) {
     return;
   }
+
+  @Override
+  public void setHintsEnabled(boolean enabled) {
+    return;
+  }
 }

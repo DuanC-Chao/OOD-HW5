@@ -22,7 +22,7 @@ public interface ITripleTriadModel extends ReadOnlyTripleTriadModel {
    * @throws IllegalArgumentException If any of config name is null or empty String.
    */
   void startGame(String boardConfigPath, String cardConfigPath, String playerOneName,
-                 String playerTwoName, boolean shuffle, ICombatRule rule, IBot bot);
+                 String playerTwoName, boolean shuffle, ICombatRule rule, IPreCombatRule preCombatRule, IBot bot);
 
   /**
    * Play A card from player's hand to a position on the grid.

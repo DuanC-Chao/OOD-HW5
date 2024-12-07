@@ -47,4 +47,23 @@ public class TripleTriadUtilities {
         throw new IllegalArgumentException("Invalid direction");
     }
   }
+
+  /**
+   * The helper method utilized by flip method.
+   * @param col The col to flip.
+   * @param row The row to flip.
+   * @param grid The grid as ICell[][].
+   * @param startCard The startCard to be assigned with value.
+   */
+  public static void flipHelperOne(int col, int row, ICell[][] grid, ICard startCard) {
+    //Check if variables legal
+    if (col < 0 || row < 0 || col >= grid.length || row >= grid[0].length) {
+      throw new IllegalArgumentException("Row or col out of bounds.");
+    }
+
+    startCard = grid[col][row].getCard();
+    if (startCard == null) {
+      throw new IllegalStateException("No card exists on the given col and row.");
+    }
+  }
 }

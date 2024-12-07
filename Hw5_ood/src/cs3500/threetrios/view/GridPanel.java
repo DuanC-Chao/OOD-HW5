@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.util.function.Supplier;
 
 import javax.swing.JPanel;
 
@@ -26,6 +27,11 @@ public class GridPanel extends JPanel implements IGridPanel {
    * The delegate to be dispatched.
    */
   private Consumer<Move> delegateToDispatch;
+
+  /**
+   * Whether hints are enabled in this view.
+   */
+  private boolean hintsEnabled;
 
   /**
    * The Method to refresh the view.
@@ -79,7 +85,14 @@ public class GridPanel extends JPanel implements IGridPanel {
       int col = tuple.getSecond().getFirst();
       int row = tuple.getSecond().getSecond();
 
-      ICellButton cellButton = new CellButton(cell, col, row);
+      ICellButton cellButton;
+      if (hintsEnabled) {
+//        int playAtCellResult = model.calculateFlips(model)
+        cellButton = new HintedCellButton(cell, col, row);
+      }
+      else {
+        cellButton = new CellButton(cell, col, row);
+      }
       // Dispatch delegate
       cellButton.passMoveDelegate(delegateToDispatch, this.viewRefresh);
       this.add((Component) cellButton);
@@ -109,5 +122,10 @@ public class GridPanel extends JPanel implements IGridPanel {
     this.delegateToDispatch = delegate;
     this.viewRefresh = viewRefreshDelegate;
     updateGrid();
+  }
+
+  @Override
+  public void setHintsEnabled(boolean hintsEnabled) {
+    this.hintsEnabled = hintsEnabled;
   }
 }

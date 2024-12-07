@@ -39,9 +39,19 @@ public class TripleTriadController implements ITripleTriadController {
   private TripleTriadView view;
 
   /**
+   * Whether the primary game has hints enabled.
+   */
+  private boolean viewHintsEnabled;
+
+  /**
    * The view of another player.
    */
   private TripleTriadView secondaryView;
+
+  /**
+   * Whether the secondary game has hints enabled.
+   */
+  private boolean secondaryViewHintsEnabled;
 
   /**
    * The default constructor for controller.
@@ -155,8 +165,8 @@ public class TripleTriadController implements ITripleTriadController {
    */
   private void refreshView() {
     try {
-      this.view.render(null);
-      this.secondaryView.render(null);
+      this.view.render(null, viewHintsEnabled);
+      this.secondaryView.render(null, secondaryViewHintsEnabled);
     } catch (IOException e) {
       e.printStackTrace();
     }

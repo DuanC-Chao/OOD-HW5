@@ -60,6 +60,8 @@ public class CellButton extends JButton implements ICellButton {
    * The Default constructor.
    *
    * @param cell The logical cell to be assigned.
+   * @param cellCol The column of the cell
+   * @param cellRow The row of the cell
    */
   public CellButton(ICell cell, int cellCol, int cellRow) {
     this.logicalCell = cell;

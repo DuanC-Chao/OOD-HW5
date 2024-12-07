@@ -8,7 +8,7 @@ import cs3500.threetrios.view.Pick;
 import cs3500.threetrios.view.TripleTriadView;
 
 /**
- * This class adapt provider's view to our view.
+ * This class adapt provider's view to our view. Does not implement hints.
  */
 public class ReverseAdaptedView implements TripleTriadView {
 
@@ -31,5 +31,10 @@ public class ReverseAdaptedView implements TripleTriadView {
   @Override
   public void showPopUp(String message) {
     innerView.popUpMsg(message);
+  }
+
+  @Override
+  public void setHintsEnabled(boolean enabled) {
+    return;
   }
 }

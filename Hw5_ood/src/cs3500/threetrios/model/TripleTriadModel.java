@@ -58,7 +58,7 @@ public class TripleTriadModel implements ITripleTriadModel {
   @Override
   public void startGame(String boardConfigPath, String cardConfigPath,
                         String playerOneName, String playerTwoName,
-                        boolean shuffle, ICombatRule rule, IBot bot) {
+                        boolean shuffle, ICombatRule rule, IPreCombatRule preCombatRule, IBot bot) {
 
     // Make sure game is not started.
     assertGameNotStarted();
@@ -121,6 +121,9 @@ public class TripleTriadModel implements ITripleTriadModel {
 
     // Set rule
     this.rule = rule;
+
+    // Set pre-combat rule for the combat rule
+    this.rule.takePreCombatRule(preCombatRule);
 
     // Set the turn as Player one's turn
     this.currentTurn = EPlayer.PLAYER_ONE;

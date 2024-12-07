@@ -18,6 +18,11 @@ public abstract class ACombatRule implements ICombatRule {
   protected ICombatRule innerCombatRule;
 
   /**
+   * The pre-combat rule, takes action before the actual flipping.
+   */
+  protected IPreCombatRule preCombatRule;
+
+  /**
    * The default constructor, takes an ICombatRule and assign value as innerCombatRule.
    * @param innerCombatRule The inner combat rule to assign.
    */
@@ -26,16 +31,21 @@ public abstract class ACombatRule implements ICombatRule {
   }
 
   @Override
+  public void takePreCombatRule(IPreCombatRule preCombatRule) {
+    this.preCombatRule = preCombatRule;
+  }
+
+  @Override
   public void flip(ICell[][] grid, int col, int row) {
-    //Check if variables legal
-    if (col < 0 || row < 0 || col >= grid.length || row >= grid[0].length) {
-      throw new IllegalArgumentException("Row or col out of bounds.");
+
+    // If has any pre-combat rule, use it to flip first.
+    if (preCombatRule != null) {
+      preCombatRule.flip(grid, col, row);
     }
 
-    ICard startCard = grid[col][row].getCard();
-    if (startCard == null) {
-      throw new IllegalStateException("No card exists on the given col and row.");
-    }
+    ICard startCard = null;
+
+    TripleTriadUtilities.flipHelperOne(col, row, grid, startCard);
 
     // Get owner of start card.
     EPlayer player = startCard.getOwner();

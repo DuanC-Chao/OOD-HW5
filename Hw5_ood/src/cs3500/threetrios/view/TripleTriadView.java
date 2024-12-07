@@ -30,4 +30,10 @@ public interface TripleTriadView {
    * @param message The message wished to show.
    */
   void showPopUp(String message);
+
+  /**
+   * Sets whether hints are enabled in this view.
+   * @param enabled If hints are enabled.
+   */
+  void setHintsEnabled(boolean enabled);
 }

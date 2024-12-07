@@ -27,6 +27,8 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   private IGridPanel gridPanel;
 
+  private boolean hintsEnabled;
+
   /**
    * Constructs a graphical view for the Triple Triad game, which includes panels for both players'
    * hands, a central grid panel, and dynamic adjustments for window size and aspect ratio.
@@ -109,7 +111,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
     // Refresh rendering for the first time
     try {
-      this.render(null);
+      this.render(null, false);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -134,6 +136,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
   private void refresh() {
     this.playerOneHandPanel.refresh();
     this.playerTwoHandPanel.refresh();
+    this.gridPanel.setHintsEnabled(hintsEnabled);
     this.gridPanel.refresh();
     System.out.println("View Refreshed");
   }
@@ -142,7 +145,9 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
   public void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate) {
     this.playerOneHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
     this.playerTwoHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
-    this.gridPanel.takeToBeDispatchedDelegate(cellDelegate, this::refresh);
+    this.gridPanel.takeToBeDispatchedDelegate(cellDelegate, () -> {
+      this.refresh(this.hintsEnabled);
+    });
   }
 
 
@@ -178,5 +183,10 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
   public void showPopUp(String message) {
     JOptionPane.showMessageDialog(this, message, "Player Turn Notification",
             JOptionPane.INFORMATION_MESSAGE);
+  }
+
+  @Override
+  public void setHintsEnabled(boolean enabled) {
+    this.hintsEnabled = enabled;
   }
 }

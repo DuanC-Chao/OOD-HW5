@@ -1,0 +1,46 @@
+
+About Advanced Bot:
+ABot will store a play possibility as a Play, a possibility is basically "Play card on index X to Column Y and Row Z"
+ABot will calculate each Play's Score, and choose the most Scored Play to play
+
+About Advantage Sides:
+For Example:
+
+    5
+A       3
+    9
+
+West and South are Advantage Sides, If card was on Down-Left corner, then Advantage side is considered hidden by corner
+
+About Adjacent Identifier:
+AI is a system, that takes a Rule (Inner class of AdvancedBot class), and analyze neighbors of that Rule (A Rule holes a card and a coordinate)
+And come up with a Normalized 'Expectation Value', which is between (-15, 15) <= Open Interval
+And EV will be used to adjust a Play's Score
+EV is determined by status of 4 neighbors of the Play (Boundary is condidered a special type of neighbor)
+
+See this chart: (Greater means Other > Self, for example: "FriendCard > Self", Vise Versa)
+
+        ----- Hole -------- Empty Cell -------- Boundary -------- FriendCard -------- EnemyCard -----------------
+Greater:    Score + 5       Score + 0           Score + 5         Score - 10          Score + 0
+Smaller:    Score + 5       Score + 0           Score + 5         Score - 10          Score + 5
+Equals:     Score + 5       Score + 0           Score + 5         Score + 5           Score + 5
+
+Details about the predefined Bot by me:
+Any one could config their own AdvancedBot with Strategies
+//--------------------------------------------------------------------------------------------------
+
+Base Score: 10pts
+
+On Corner: 10pts
+    If Advantage Side hide on corner: -10pts
+
+Adjacent Identifier Expectation Value: (-15, 15) pts
+
+Possible Flip Number: For each card flipped: Score *= 1.2
+
+//--------------------------------------------------------------------------------------------------
+
+
+
+
+

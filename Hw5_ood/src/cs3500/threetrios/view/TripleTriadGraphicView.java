@@ -24,12 +24,12 @@ import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
  */
 public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
-  private IHandPanel playerOneHandPanel;
-  private IHandPanel playerTwoHandPanel;
+  private final IHandPanel playerOneHandPanel;
+  private final IHandPanel playerTwoHandPanel;
 
-  private IGridPanel gridPanel;
+  private final IGridPanel gridPanel;
 
-  private EPlayer player;
+  private final EPlayer player;
 
   private boolean hintsEnabled;
 
@@ -55,10 +55,6 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
     // Set Feel and Look
     configFeelAndLook();
-
-    /**
-     * The read-only model, stored as a field in view.
-     */
 
     this.player = viewPlayer;
 

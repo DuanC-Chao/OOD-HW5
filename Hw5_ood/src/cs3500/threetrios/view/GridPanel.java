@@ -89,8 +89,6 @@ public class GridPanel extends JPanel implements IGridPanel {
     // Remove all components before updating grid panel.
     removeAll();
 
-    System.out.println("Hints enabled for grid: " + hintsEnabled);
-
     for (Tuple<ICell, Tuple<Integer, Integer>> tuple : loICell) {
       ICell cell = tuple.getFirst();
       int col = tuple.getSecond().getFirst();
@@ -106,8 +104,7 @@ public class GridPanel extends JPanel implements IGridPanel {
         ICard selectedCard = model.getPlayerHand(this.player == EPlayer.PLAYER_ONE ? 1 : 2)
           .get(selectedCardIndex);
         int playAtCellResult = model.calculateFlips(player, selectedCard, col, row);
-        System.out.println("Play at cell result: " + playAtCellResult + " for (" + row + ", " + col + ")");
-        cellButton = new HintedCellButton(cell, col, row, playAtCellResult);
+        cellButton = new HintedCellButton(cell, col, row, playAtCellResult - 1);
       }
       else {
         cellButton = new CellButton(cell, col, row);

@@ -21,7 +21,6 @@ public class HintedCellButton extends CellButton {
   public HintedCellButton(ICell cell, int cellCol, int cellRow, int hint) {
     super(cell, cellCol, cellRow);
 
-    System.out.println("Rendering hinted cell (" + cellRow + ", " + cellCol + ")");
     hintLabel = new JLabel(hint + "", SwingConstants.CENTER);
     hintLabel.setFont(new Font("Arial", Font.BOLD, 16));
     hintLabel.setForeground(Color.BLACK);

@@ -247,24 +247,15 @@ public class TripleTriadModel implements ITripleTriadModel {
     //First, make a copy of gameGrid for a simulated flip
     IGrid gridCopy = this.gameGrid.makeClone();
 
+    int initialScore = calculateScoreForGrid(gridCopy, player);
+
     //Then, put card into that copy grid, and flip
     gridCopy.placeCard(col, row, card);
     gridCopy.flip(col, row, this.rule);
 
-    int result = 0;
-    ICell[][] innerGridCopy = gridCopy.getGrid();
-    ICell[][] innerCurrentGrid = this.getGrid();
+    int finalScore = calculateScoreForGrid(gridCopy, player);
 
-    //Then, calculate how many cards in flipped copy grid is different from the original grid
-    for (int column = 0; column < innerGridCopy.length; column++) {
-      for (int row_ = 0; row_ < innerGridCopy[0].length; row_++) {
-        if (!innerGridCopy[column][row_].myCompare(innerCurrentGrid[column][row_])) {
-          result++;
-        }
-      }
-    }
-
-    return result;
+    return finalScore - initialScore;
   }
 
   @Override
@@ -435,5 +426,23 @@ public class TripleTriadModel implements ITripleTriadModel {
     if (this.gameStatus != GameStatus.GAME_IN_PROGRESS) {
       throw new IllegalStateException("Game Not in progress, game status: " + this.gameStatus);
     }
+  }
+
+  /**
+   * Helper method to calculate score for a specific grid.
+   * @param grid The grid to calculate score for
+   * @param player The player to calculate score for
+   * @return The number of cards owned by the player
+   */
+  private int calculateScoreForGrid(IGrid grid, EPlayer player) {
+    int score = 0;
+    for (int col = 0; col < grid.getColNumber(); col++) {
+      for (int row = 0; row < grid.getRowNumber(); row++) {
+        if (grid.getCardOwner(col, row) == player) {
+          score++;
+        }
+      }
+    }
+    return score;
   }
 }

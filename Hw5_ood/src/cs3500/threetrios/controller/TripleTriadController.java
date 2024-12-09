@@ -49,10 +49,6 @@ public class TripleTriadController implements ITripleTriadController {
    */
   private final TripleTriadView secondaryView;
 
-  /**
-   * Whether the secondary game has hints enabled.
-   */
-  private boolean secondaryViewHintsEnabled;
 
   /**
    * The default constructor for controller.
@@ -80,10 +76,15 @@ public class TripleTriadController implements ITripleTriadController {
     }
     if (pick.player == EPlayer.PLAYER_ONE && this.player == EPlayer.PLAYER_ONE) {
       this.playerOnePickBuffer = pick.cardIdx;
-      System.out.println("Current player one pick buffer is: " + this.playerOnePickBuffer);
+      System.out.println("Controller" + this.player + ": " + "Current player one pick buffer is: " + this.playerOnePickBuffer);
     } else if (pick.player == EPlayer.PLAYER_TWO && this.player == EPlayer.PLAYER_TWO) {
       this.playerTwoPickBuffer = pick.cardIdx;
-      System.out.println("Current player two pick buffer is: " + this.playerTwoPickBuffer);
+      System.out.println("Controller" + this.player + ": " + "Current player two pick buffer is: " + this.playerTwoPickBuffer);
+    }
+    try {
+      this.view.render(null);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
@@ -107,6 +108,11 @@ public class TripleTriadController implements ITripleTriadController {
     try {
       this.model.playToGrid(pIdx, pIdx == 1 ? this.playerOnePickBuffer : this.playerTwoPickBuffer,
               move.playToCol, move.playToRow);
+      if (pIdx == 1) {
+        this.playerOnePickBuffer = 0;
+      } else {
+        this.playerTwoPickBuffer = 0;
+      }
     } catch (IllegalArgumentException e) {
       System.out.println("Not your turn, Player: " + this.player.toString());
     }
@@ -167,14 +173,8 @@ public class TripleTriadController implements ITripleTriadController {
   @Override
   public void keyHandler(KeyPress press) {
     if (press.key == 'h') {
-      if (press.player == EPlayer.PLAYER_ONE) {
-        this.viewHintsEnabled = !this.viewHintsEnabled;
-        this.view.setHintsEnabled(this.viewHintsEnabled);
-      }
-      else {
-        this.secondaryViewHintsEnabled = !this.secondaryViewHintsEnabled;
-        this.secondaryView.setHintsEnabled(this.secondaryViewHintsEnabled);
-      }
+      this.viewHintsEnabled = !this.viewHintsEnabled;
+      this.view.setHintsEnabled(this.viewHintsEnabled);
     }
   }
 

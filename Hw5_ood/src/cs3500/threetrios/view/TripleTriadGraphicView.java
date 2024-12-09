@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.ContainerOrderFocusTraversalPolicy;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -27,26 +29,24 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   private IGridPanel gridPanel;
 
+  private EPlayer player;
+
   private boolean hintsEnabled;
 
   /**
-   * Constructs a graphical view for the Triple Triad game, which includes panels for both players'
-   * hands, a central grid panel, and dynamic adjustments for window size and aspect ratio.
-   *
-   * @param model         the read-only model of the Triple Triad game, providing game state and grid
-   *                      information
+   * The default constructor. Sets up the Frame and the Panels, and runs an initial rendering.
+   * @param model The model to be assigned to the view.
+   * @param viewPlayer The player of the view.
    * @param currentPlayer the player currently taking a turn (either PLAYER_ONE or PLAYER_TWO);
-   *                      must not be null
+   *     must not be null
    * @throws IllegalArgumentException if the currentPlayer is null
    */
-  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model, EPlayer currentPlayer) {
+  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model, EPlayer viewPlayer, EPlayer
+                                currentPlayer) {
 
     if (currentPlayer == null) {
       throw new IllegalArgumentException("Current player cannot be null");
     }
-    /**
-     * Represent the current player of the view.
-     */
 
     // Set title of the window
     setTitle("Triple Triad Game");
@@ -59,6 +59,8 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     /**
      * The read-only model, stored as a field in view.
      */
+
+    this.player = viewPlayer;
 
     // Dynamically decide the width
     int width = model.getGridClone().getColNumber() * 100 + 400;
@@ -102,7 +104,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     });
 
     // Use ScrollPane to wrap GridPanel.
-    gridPanel = new GridPanel(model);
+    gridPanel = new GridPanel(model, viewPlayer);
     FixSizerPanel<IGridPanel> fixSizerPanel = new FixSizerPanel<>(gridPanel,
             width - 400, height, ElementColor.GRID_BACKGROUND_COLOR);
     SwingUtilities.invokeLater(() -> {
@@ -111,7 +113,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
     // Refresh rendering for the first time
     try {
-      this.render(null, false);
+      this.render(null);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -145,11 +147,28 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
   public void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate) {
     this.playerOneHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
     this.playerTwoHandPanel.takeToBeDispatchedDelegate(handCardDelegate);
-    this.gridPanel.takeToBeDispatchedDelegate(cellDelegate, () -> {
-      this.refresh(this.hintsEnabled);
-    });
+    this.gridPanel.takeToBeDispatchedDelegate(cellDelegate, this::refresh);
   }
 
+  @Override
+  public void setKeyHandler(Consumer<KeyPress> keyHandler) {
+    this.addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+        keyHandler.accept(new KeyPress(e.getKeyChar(), player));
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        // Do nothing
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+        // Do nothing
+      }
+    });
+  }
 
   /**
    * Display the Frame.

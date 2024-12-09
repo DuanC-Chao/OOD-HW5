@@ -7,10 +7,11 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.util.function.Supplier;
 
 import javax.swing.JPanel;
 
+import cs3500.threetrios.model.EPlayer;
+import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.ICell;
 import cs3500.threetrios.model.IGrid;
 import cs3500.threetrios.model.ReadOnlyTripleTriadModel;
@@ -41,19 +42,24 @@ public class GridPanel extends JPanel implements IGridPanel {
   /**
    * The model.
    */
-  private ReadOnlyTripleTriadModel model;
+  private final ReadOnlyTripleTriadModel model;
+
+  private final EPlayer player;
 
   /**
    * The default constructor.
    *
    * @param model The model of the game.
+   * @param player The player of the view, used to show hints for that specific player
    */
-  public GridPanel(ReadOnlyTripleTriadModel model) {
+  public GridPanel(ReadOnlyTripleTriadModel model, EPlayer player) {
     this.model = model;
     IGrid logicalGrid = model.getGridClone();
 
     int cols = logicalGrid.getColNumber();
     int rows = logicalGrid.getRowNumber();
+
+    this.player = player;
 
     this.setPreferredSize(new Dimension(cols * 102, rows
             * (Size.CARD_HEIGHT.getSize() + 2)));
@@ -87,8 +93,9 @@ public class GridPanel extends JPanel implements IGridPanel {
 
       ICellButton cellButton;
       if (hintsEnabled) {
-//        int playAtCellResult = model.calculateFlips(model)
-        cellButton = new HintedCellButton(cell, col, row);
+        ICard card = model.getGrid()[row][col].getCard();
+        int playAtCellResult = model.calculateFlips(player, card, col, row);
+        cellButton = new HintedCellButton(cell, col, row, playAtCellResult);
       }
       else {
         cellButton = new CellButton(cell, col, row);

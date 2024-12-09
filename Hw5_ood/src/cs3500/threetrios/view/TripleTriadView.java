@@ -25,6 +25,12 @@ public interface TripleTriadView {
   void setMoveEventHandler(Consumer<Pick> handCardDelegate, Consumer<Move> cellDelegate);
 
   /**
+   * Sets the key handler for this view.
+   * @param keyHandler The key handler.
+   */
+  void setKeyHandler(Consumer<KeyPress> keyHandler);
+
+  /**
    * A method, to create a popup window and show a certain message.
    *
    * @param message The message wished to show.

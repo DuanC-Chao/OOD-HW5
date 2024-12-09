@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import cs3500.threetrios.model.EPlayer;
 import cs3500.threetrios.model.ITripleTriadModel;
+import cs3500.threetrios.view.KeyPress;
 import cs3500.threetrios.view.Move;
 import cs3500.threetrios.view.Pick;
 import cs3500.threetrios.view.TripleTriadView;
@@ -67,6 +68,7 @@ public class TripleTriadController implements ITripleTriadController {
     this.view = view;
     this.secondaryView = secondaryView;
     view.setMoveEventHandler(this::pickHandler, this::moveHandler);
+    view.setKeyHandler(this::keyHandler);
   }
 
   @Override
@@ -160,13 +162,27 @@ public class TripleTriadController implements ITripleTriadController {
     }
   }
 
+  @Override
+  public void keyHandler(KeyPress press) {
+    if (press.key == 'h') {
+      if (press.player == EPlayer.PLAYER_ONE) {
+        this.viewHintsEnabled = !this.viewHintsEnabled;
+        this.view.setHintsEnabled(this.viewHintsEnabled);
+      }
+      else {
+        this.secondaryViewHintsEnabled = !this.secondaryViewHintsEnabled;
+        this.secondaryView.setHintsEnabled(this.secondaryViewHintsEnabled);
+      }
+    }
+  }
+
   /**
    * The method to refresh the view.
    */
   private void refreshView() {
     try {
-      this.view.render(null, viewHintsEnabled);
-      this.secondaryView.render(null, secondaryViewHintsEnabled);
+      this.view.render(null);
+      this.secondaryView.render(null);
     } catch (IOException e) {
       e.printStackTrace();
     }

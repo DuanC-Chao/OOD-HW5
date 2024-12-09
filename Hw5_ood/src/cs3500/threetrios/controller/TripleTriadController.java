@@ -17,7 +17,7 @@ public class TripleTriadController implements ITripleTriadController {
   /**
    * Which player's controller it is.
    */
-  private EPlayer player;
+  private final EPlayer player;
 
   /**
    * A buffer, which represent the card picked by player One view.
@@ -32,12 +32,12 @@ public class TripleTriadController implements ITripleTriadController {
   /**
    * The game's model.
    */
-  private ITripleTriadModel model;
+  private final ITripleTriadModel model;
 
   /**
    * The game's view.
    */
-  private TripleTriadView view;
+  private final TripleTriadView view;
 
   /**
    * Whether the primary game has hints enabled.
@@ -47,7 +47,7 @@ public class TripleTriadController implements ITripleTriadController {
   /**
    * The view of another player.
    */
-  private TripleTriadView secondaryView;
+  private final TripleTriadView secondaryView;
 
   /**
    * Whether the secondary game has hints enabled.
@@ -144,7 +144,7 @@ public class TripleTriadController implements ITripleTriadController {
       }
 
     } else {
-      int winningPlayerNum = 0;
+      int winningPlayerNum;
       String playerSubject;
       if (this.model.getWinningPlayer() == EPlayer.PLAYER_ONE) {
         winningPlayerNum = 1;

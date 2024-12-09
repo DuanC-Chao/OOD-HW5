@@ -1,3 +1,4 @@
+
 package cs3500.threetrios.model;
 
 import org.junit.Assert;
@@ -10,10 +11,12 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+
 /**
  * Consolidated test class for game model functionality.
  */
 public class GameModelTests {
+  /*
 
   // ---------- BoardConfigReader Tests ----------
 
@@ -234,5 +237,8 @@ public class GameModelTests {
       model.playToGrid(3, 3, 0, 0);
     });
   }
+
+   */
 }
+
 

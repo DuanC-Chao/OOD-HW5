@@ -3,6 +3,7 @@ package cs3500.threetrios.view;
 import java.io.IOException;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * The interface for TripleTriad game View.
@@ -42,4 +43,6 @@ public interface TripleTriadView {
    * @param enabled If hints are enabled.
    */
   void setHintsEnabled(boolean enabled);
+
+  void setSelectedCardSupplier(Supplier<Integer> getSelectedCard);
 }

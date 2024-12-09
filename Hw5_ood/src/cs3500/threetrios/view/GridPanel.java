@@ -2,6 +2,7 @@ package cs3500.threetrios.view;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import java.awt.Dimension;
 import java.awt.Color;
@@ -46,6 +47,8 @@ public class GridPanel extends JPanel implements IGridPanel {
 
   private final EPlayer player;
 
+  private Supplier<Integer> getSelectedCard;
+
   /**
    * The default constructor.
    *
@@ -86,15 +89,24 @@ public class GridPanel extends JPanel implements IGridPanel {
     // Remove all components before updating grid panel.
     removeAll();
 
+    System.out.println("Hints enabled for grid: " + hintsEnabled);
+
     for (Tuple<ICell, Tuple<Integer, Integer>> tuple : loICell) {
       ICell cell = tuple.getFirst();
       int col = tuple.getSecond().getFirst();
       int row = tuple.getSecond().getSecond();
 
       ICellButton cellButton;
-      if (hintsEnabled) {
-        ICard card = model.getGrid()[row][col].getCard();
-        int playAtCellResult = model.calculateFlips(player, card, col, row);
+      ICard card = model.getGrid()[row][col].getCard();
+      Integer selectedCardIndex = null;
+      if (getSelectedCard != null) {
+        selectedCardIndex = getSelectedCard.get();
+      }
+      if (hintsEnabled && card == null && selectedCardIndex != null) {
+        ICard selectedCard = model.getPlayerHand(this.player == EPlayer.PLAYER_ONE ? 1 : 2)
+          .get(selectedCardIndex);
+        int playAtCellResult = model.calculateFlips(player, selectedCard, col, row);
+        System.out.println("Play at cell result: " + playAtCellResult + " for (" + row + ", " + col + ")");
         cellButton = new HintedCellButton(cell, col, row, playAtCellResult);
       }
       else {
@@ -134,5 +146,10 @@ public class GridPanel extends JPanel implements IGridPanel {
   @Override
   public void setHintsEnabled(boolean hintsEnabled) {
     this.hintsEnabled = hintsEnabled;
+  }
+
+  @Override
+  public void setSelectedCardSupplier(Supplier<Integer> getSelectedCard) {
+    this.getSelectedCard = getSelectedCard;
   }
 }

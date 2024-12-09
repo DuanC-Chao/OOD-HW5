@@ -3,15 +3,7 @@ package cs3500.threetrios.model;
 import java.io.IOException;
 
 import cs3500.threetrios.controller.TripleTriadController;
-import cs3500.threetrios.provider.controller.ThreeTriosController;
-import cs3500.threetrios.provider.controller.ThreeTriosControllerImpl;
-import cs3500.threetrios.provider.model.AdaptedModel;
-import cs3500.threetrios.provider.model.ThreeTriosModel;
-import cs3500.threetrios.provider.view.ClassicThreeTriosGUI;
-import cs3500.threetrios.provider.view.ReverseAdaptedView;
-import cs3500.threetrios.provider.view.ThreeTriosGUI;
 import cs3500.threetrios.view.TripleTriadGraphicView;
-import cs3500.threetrios.view.TripleTriadTextView;
 import cs3500.threetrios.view.TripleTriadView;
 
 import static cs3500.threetrios.view.ViewUtils.loadResourceFile;
@@ -38,7 +30,7 @@ public class TripleTriadProgram {
     ICombatRule reverseRule = new ReverseCombatRule(falledAceRule);
 
     model.startGame(boardConfigPath, cardConfigPath, "A", "B",
-      false, reverseRule, null);
+      false, reverseRule, null, null);
 
     TripleTriadView viewOne = new TripleTriadGraphicView(model, EPlayer.PLAYER_ONE);
     TripleTriadView viewTwo = new TripleTriadGraphicView(model, EPlayer.PLAYER_TWO);

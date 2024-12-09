@@ -40,12 +40,11 @@ public abstract class ACombatRule implements ICombatRule {
 
     // If has any pre-combat rule, use it to flip first.
     if (preCombatRule != null) {
+      preCombatRule.getCombatRule(this);
       preCombatRule.flip(grid, col, row);
     }
 
-    ICard startCard = null;
-
-    TripleTriadUtilities.flipHelperOne(col, row, grid, startCard);
+    ICard startCard = TripleTriadUtilities.flipHelperOne(col, row, grid);
 
     // Get owner of start card.
     EPlayer player = startCard.getOwner();

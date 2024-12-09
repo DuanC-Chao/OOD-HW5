@@ -27,7 +27,7 @@ public class ViewTestProgram {
 
     ITripleTriadModel model = new TripleTriadModel();
     model.startGame(boardConfigPath, cardConfigPath, "A", "B",
-            false, new DefaultCombatRule(), PredefinedBot.ADVANCED_BOT.getBot());
+            false, new DefaultCombatRule(), null, PredefinedBot.ADVANCED_BOT.getBot());
     TripleTriadGraphicView view = new TripleTriadGraphicView(model, null);
 
     //model.playToGrid(1, 0, 0, 0);

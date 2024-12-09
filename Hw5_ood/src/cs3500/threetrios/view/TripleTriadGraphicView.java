@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -31,20 +32,15 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   private final EPlayer player;
 
-  private boolean hintsEnabled;
-
   /**
    * The default constructor. Sets up the Frame and the Panels, and runs an initial rendering.
    * @param model The model to be assigned to the view.
    * @param viewPlayer The player of the view.
-   * @param currentPlayer the player currently taking a turn (either PLAYER_ONE or PLAYER_TWO);
-   *     must not be null
    * @throws IllegalArgumentException if the currentPlayer is null
    */
-  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model, EPlayer viewPlayer, EPlayer
-                                currentPlayer) {
+  public TripleTriadGraphicView(ReadOnlyTripleTriadModel model, EPlayer viewPlayer) {
 
-    if (currentPlayer == null) {
+    if (viewPlayer == null) {
       throw new IllegalArgumentException("Current player cannot be null");
     }
 
@@ -80,7 +76,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     setLayout(new BorderLayout());
 
     // Add the first HandPanel.
-    if (currentPlayer == EPlayer.PLAYER_ONE) {
+    if (viewPlayer == EPlayer.PLAYER_ONE) {
       playerOneHandPanel = new HandPanel(EPlayer.PLAYER_ONE, model, true);
     } else {
       playerOneHandPanel = new HandPanel(EPlayer.PLAYER_ONE, model, false);
@@ -90,7 +86,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
     });
 
     // Add the second HandPanel.
-    if (currentPlayer == EPlayer.PLAYER_TWO) {
+    if (viewPlayer == EPlayer.PLAYER_TWO) {
       playerTwoHandPanel = new HandPanel(EPlayer.PLAYER_TWO, model, true);
     } else {
       playerTwoHandPanel = new HandPanel(EPlayer.PLAYER_TWO, model, false);
@@ -114,7 +110,7 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
       throw new RuntimeException(e);
     }
 
-    if (currentPlayer == EPlayer.PLAYER_ONE) {
+    if (viewPlayer == EPlayer.PLAYER_ONE) {
       showPopUp("Your Turn, Player One");
     }
   }
@@ -134,7 +130,6 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
   private void refresh() {
     this.playerOneHandPanel.refresh();
     this.playerTwoHandPanel.refresh();
-    this.gridPanel.setHintsEnabled(hintsEnabled);
     this.gridPanel.refresh();
     System.out.println("View Refreshed");
   }
@@ -202,6 +197,12 @@ public class TripleTriadGraphicView extends JFrame implements TripleTriadView {
 
   @Override
   public void setHintsEnabled(boolean enabled) {
-    this.hintsEnabled = enabled;
+    this.gridPanel.setHintsEnabled(enabled);
+    this.refresh();
+  }
+
+  @Override
+  public void setSelectedCardSupplier(Supplier<Integer> getSelectedCard) {
+    this.gridPanel.setSelectedCardSupplier(getSelectedCard);
   }
 }

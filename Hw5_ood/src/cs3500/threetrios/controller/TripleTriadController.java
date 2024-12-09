@@ -69,6 +69,8 @@ public class TripleTriadController implements ITripleTriadController {
     this.secondaryView = secondaryView;
     view.setMoveEventHandler(this::pickHandler, this::moveHandler);
     view.setKeyHandler(this::keyHandler);
+    view.setSelectedCardSupplier(() -> player == EPlayer.PLAYER_ONE
+      ? playerOnePickBuffer : playerTwoPickBuffer);
   }
 
   @Override

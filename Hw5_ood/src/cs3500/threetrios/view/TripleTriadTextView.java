@@ -2,6 +2,7 @@ package cs3500.threetrios.view;
 
 import java.io.IOException;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import cs3500.threetrios.model.ICard;
 import cs3500.threetrios.model.CellType;
@@ -98,12 +99,22 @@ public class TripleTriadTextView implements TripleTriadView {
   }
 
   @Override
+  public void setKeyHandler(Consumer<KeyPress> keyHandler) {
+    return;
+  }
+
+  @Override
   public void showPopUp(String message) {
     return;
   }
 
   @Override
   public void setHintsEnabled(boolean enabled) {
+    return;
+  }
+
+  @Override
+  public void setSelectedCardSupplier(Supplier<Integer> getSelectedCard) {
     return;
   }
 }
